@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TB Math Prep — SAT Math Tutoring</title>
+<meta name="description" content="Expert SAT Math tutoring by Tobias Velez (790+ SAT Math) and Bryan. 100+ free practice problems, full exams, personalized coaching."/>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #f5f0e8; min-height: 100vh; padding: 24px 0 80px; }
+#root { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+input, select, textarea, button { font-family: inherit; }
+</style>
+</head>
+<body>
+<div id="root"><div style="text-align:center;padding:60px;color:#6b6457;font-size:16px;">Loading TB Math Prep...</div></div>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script>
+const { useState } = React;
+
+const TOPICS = [
+  { name: "Linear Equations & Inequalities", count: 120, tag: "Algebra" },
+  { name: "Systems of Equations", count: 110, tag: "Algebra" },
+  { name: "Quadratic Equations", count: 130, tag: "Advanced Math" },
+  { name: "Polynomials & Expressions", count: 115, tag: "Advanced Math" },
+  { name: "Ratios, Rates & Proportions", count: 105, tag: "Problem Solving" },
+  { name: "Percentages & Unit Conversions", count: 100, tag: "Problem Solving" },
+  { name: "Statistics & Data Analysis", count: 125, tag: "Data" },
+  { name: "Scatterplots & Data Interpretation", count: 110, tag: "Data" },
+  { name: "Geometry & Trigonometry", count: 120, tag: "Geometry" },
+  { name: "Functions & Graphs", count: 115, tag: "Advanced Math" },
+  { name: "Word Problems & Modeling", count: 130, tag: "All Topics" },
+  { name: "Calculator Strategy & Desmos", count: 100, tag: "Strategy" },
+];
+
+const PROBLEMS = [
+  [
+    { q: "If 3x + 7 = 22, what is the value of x?", choices: ["3", "5", "6", "7"], correct: 1, exp: "Subtract 7 from both sides: 3x = 15. Divide by 3: x = 5.", formula: "3x + 7 = 22 → 3x = 15 → x = 5" },
+    { q: "Solve 2(x − 4) = 10", choices: ["7", "9", "3", "11"], correct: 1, exp: "Distribute: 2x − 8 = 10. Add 8: 2x = 18. Divide by 2: x = 9.", formula: "2x − 8 = 10 → x = 9" },
+    { q: "If 5x − 3 > 12, which satisfies the inequality?", choices: ["x = 2", "x = 3", "x = 4", "x = 1"], correct: 2, exp: "Add 3: 5x > 15. Divide by 5: x > 3. Only x = 4 works.", formula: "5x > 15 → x > 3" },
+    { q: "What is the y-intercept of y = 3x − 2?", choices: ["3", "2", "−2", "0"], correct: 2, exp: "In y = mx + b, b is the y-intercept. Here b = −2.", formula: "y = mx + b → b = −2" },
+    { q: "Solve (x/4) + 3 = 7", choices: ["12", "16", "10", "8"], correct: 1, exp: "Subtract 3: x/4 = 4. Multiply by 4: x = 16.", formula: "x/4 = 4 → x = 16" },
+    { q: "Solve 7 − 2x = 1", choices: ["3", "4", "2", "6"], correct: 0, exp: "Subtract 7: −2x = −6. Divide by −2: x = 3.", formula: "−2x = −6 → x = 3" },
+    { q: "Which has slope 4 and y-intercept −1?", choices: ["y = −x + 4", "y = 4x − 1", "y = x − 4", "y = −4x + 1"], correct: 1, exp: "Slope-intercept form y = mx + b: m = 4, b = −1.", formula: "y = 4x − 1" },
+    { q: "Solve 3(2x + 1) = 21", choices: ["3", "4", "2", "5"], correct: 0, exp: "Distribute: 6x + 3 = 21. Subtract 3: 6x = 18. Divide: x = 3.", formula: "6x + 3 = 21 → x = 3" },
+    { q: "What is the x-intercept of y = 2x − 8?", choices: ["4", "8", "2", "−4"], correct: 0, exp: "Set y = 0: 2x − 8 = 0 → x = 4.", formula: "0 = 2x − 8 → x = 4" },
+    { q: "Solve −3x + 9 = 0", choices: ["3", "9", "−3", "0"], correct: 0, exp: "Subtract 9: −3x = −9. Divide: x = 3.", formula: "−3x = −9 → x = 3" },
+  ],
+  [
+    { q: "x + y = 10 and x − y = 4. What is x?", choices: ["3", "7", "6", "4"], correct: 1, exp: "Add equations: 2x = 14 → x = 7.", formula: "2x = 14 → x = 7" },
+    { q: "2x + y = 11 and x + y = 7. What is x?", choices: ["2", "3", "4", "5"], correct: 2, exp: "Subtract: x = 4.", formula: "(2x+y)−(x+y) = 4" },
+    { q: "3x + 2y = 12 and x = 2. What is y?", choices: ["2", "3", "4", "6"], correct: 1, exp: "Substitute x = 2: 6 + 2y = 12 → y = 3.", formula: "2y = 6 → y = 3" },
+    { q: "A system with no solution has lines that are...", choices: ["Identical", "Perpendicular", "Parallel", "Intersecting"], correct: 2, exp: "Parallel lines never intersect → no solution.", formula: "Same slope, different y-intercept → parallel" },
+    { q: "y = x + 3 and y = 2x − 1. Find x.", choices: ["2", "3", "4", "5"], correct: 2, exp: "Set equal: x + 3 = 2x − 1 → x = 4.", formula: "x + 3 = 2x − 1 → x = 4" },
+    { q: "x + y = 5 and 2x + 2y = 10. How many solutions?", choices: ["0", "1", "2", "Infinitely many"], correct: 3, exp: "Second equation = 2 × first. Same line → infinitely many.", formula: "Same line → infinite solutions" },
+    { q: "x − 2y = −1 and 3x + 2y = 13. Find x + y.", choices: ["4", "5", "6", "7"], correct: 1, exp: "Add: 4x = 12 → x = 3. Sub back: y = 2. x+y = 5.", formula: "x = 3, y = 2 → x+y = 5" },
+    { q: "Two numbers sum to 20, one is 4 more. What are they?", choices: ["8 & 12", "9 & 11", "7 & 13", "10 & 10"], correct: 0, exp: "y + 4 + y = 20 → y = 8, x = 12.", formula: "2y + 4 = 20 → y = 8" },
+    { q: "4x − y = 6 and y = 2x. Find x.", choices: ["1", "2", "3", "4"], correct: 2, exp: "Substitute: 4x − 2x = 6 → x = 3.", formula: "2x = 6 → x = 3" },
+    { q: "y = 3x and x + y = 8. Find y.", choices: ["2", "4", "6", "8"], correct: 2, exp: "4x = 8 → x = 2, y = 6.", formula: "4x = 8 → y = 6" },
+  ],
+  [
+    { q: "Solve x² − 5x + 6 = 0", choices: ["x=1,6", "x=2,3", "x=−2,−3", "x=3,4"], correct: 1, exp: "Factor: (x−2)(x−3) = 0 → x = 2 or 3.", formula: "(x−2)(x−3) = 0" },
+    { q: "Vertex of y = x² − 4x + 7?", choices: ["(2,3)", "(2,7)", "(−2,3)", "(4,7)"], correct: 0, exp: "x = −b/2a = 2. y = 4−8+7 = 3.", formula: "x = 4/2 = 2, y = 3" },
+    { q: "Solve x² − 9 = 0", choices: ["x=±9", "x=±3", "x=3 only", "x=9"], correct: 1, exp: "x² = 9 → x = ±3.", formula: "x = ±√9 = ±3" },
+    { q: "How many real solutions does x² + 4 = 0 have?", choices: ["0", "1", "2", "Infinite"], correct: 0, exp: "x² = −4 has no real solutions.", formula: "Discriminant < 0 → no real roots" },
+    { q: "Discriminant of 2x² − 3x + 1 = 0?", choices: ["1", "9", "7", "17"], correct: 0, exp: "b²−4ac = 9−8 = 1.", formula: "(−3)²−4(2)(1) = 1" },
+    { q: "Which k makes x² + kx + 9 a perfect square?", choices: ["3", "6", "9", "18"], correct: 1, exp: "(x+3)² = x²+6x+9, so k = 6.", formula: "k = 2√9 = 6" },
+    { q: "y = x² + 2x − 3 crosses x-axis at...", choices: ["x=1,−3", "x=−1,3", "x=1,3", "x=−1,−3"], correct: 0, exp: "(x+3)(x−1) = 0 → x = 1, −3.", formula: "(x+3)(x−1) = 0" },
+    { q: "Solve 2x² − 8 = 0", choices: ["x=±4", "x=±2", "x=2", "x=4"], correct: 1, exp: "x² = 4 → x = ±2.", formula: "x² = 4 → x = ±2" },
+    { q: "Axis of symmetry for y = −x² + 6x − 5?", choices: ["x=3", "x=−3", "x=6", "x=1"], correct: 0, exp: "x = −b/2a = 6/2 = 3.", formula: "x = −6/−2 = 3" },
+    { q: "Zeros of f(x) = x² − 6x + 5?", choices: ["x=1,5", "x=−1,−5", "x=2,3", "x=−2,3"], correct: 0, exp: "(x−1)(x−5) = 0 → x = 1, 5.", formula: "(x−1)(x−5) = 0" },
+  ],
+  [
+    { q: "Simplify (x²+3x)+(2x²−x+4)", choices: ["3x²+2x+4","3x²+4x+4","x²+2x+4","3x²+2x"], correct: 0, exp: "x²+2x²=3x², 3x−x=2x, +4.", formula: "3x²+2x+4" },
+    { q: "Degree of 4x³−2x²+7x−1?", choices: ["1","2","3","4"], correct: 2, exp: "Highest power is 3.", formula: "Highest exponent = 3" },
+    { q: "Expand (x+3)(x−2)", choices: ["x²+x−6","x²−x−6","x²+x+6","x²−6"], correct: 0, exp: "FOIL: x²−2x+3x−6 = x²+x−6.", formula: "x²+x−6" },
+    { q: "Factor 2x²+6x completely", choices: ["2(x²+3x)","x(2x+6)","2x(x+3)","(2x+1)(x+3)"], correct: 2, exp: "GCF is 2x: 2x(x+3).", formula: "GCF = 2x → 2x(x+3)" },
+    { q: "Expand (2x−1)²", choices: ["4x²−1","4x²+1","4x²−4x+1","4x²+4x−1"], correct: 2, exp: "(a−b)²=a²−2ab+b²: 4x²−4x+1.", formula: "4x²−4x+1" },
+    { q: "Simplify (3x³)(2x²)", choices: ["5x⁵","6x⁶","6x⁵","5x⁶"], correct: 2, exp: "3×2=6, x³⁺²=x⁵.", formula: "6x⁵" },
+    { q: "Polynomial with roots 0, 2, −1?", choices: ["x(x−2)(x+1)","x(x+2)(x−1)","(x−2)(x+1)","x²(x−2)(x+1)"], correct: 0, exp: "Roots r give factors (x−r).", formula: "x(x−2)(x+1)" },
+    { q: "Divide (x²+5x+6)÷(x+2)", choices: ["x+3","x+2","x−3","x+6"], correct: 0, exp: "(x+2)(x+3)/(x+2) = x+3.", formula: "x+3" },
+    { q: "Sum of coefficients of 3x²−2x+5?", choices: ["6","5","8","1"], correct: 0, exp: "Substitute x=1: 3−2+5=6.", formula: "f(1)=6" },
+    { q: "Simplify (x²−4)/(x−2)", choices: ["x−2","x+2","x²+2","x+4"], correct: 1, exp: "(x−2)(x+2)/(x−2) = x+2.", formula: "x+2" },
+  ],
+  [
+    { q: "Car travels 150 miles in 3 hours. Speed?", choices: ["45","50","55","60"], correct: 1, exp: "150÷3=50 mph.", formula: "speed = distance/time = 50" },
+    { q: "2 cups flour per 3 cups sugar. For 6 cups sugar, flour needed?", choices: ["3","4","6","9"], correct: 1, exp: "2/3 = x/6 → x = 4.", formula: "2/3 = x/6 → x = 4" },
+    { q: "30 students, boys:girls = 2:3. Girls?", choices: ["10","12","15","18"], correct: 3, exp: "3/5 × 30 = 18.", formula: "3/5 × 30 = 18" },
+    { q: "8 workers finish in 6 days. 12 workers take?", choices: ["3","4","6","9"], correct: 1, exp: "8×6=12×d → d=4.", formula: "48=12d → d=4" },
+    { q: "Map: 1 inch = 50 miles. 3.5 inches = ?", choices: ["150","175","200","250"], correct: 1, exp: "3.5×50=175 miles.", formula: "3.5 × 50 = 175" },
+    { q: "Red:blue = 3:5, 40 marbles. Red?", choices: ["8","12","15","24"], correct: 2, exp: "3/8 × 40 = 15.", formula: "3/8 × 40 = 15" },
+    { q: "If a/b = 4/5, what is 5a−4b?", choices: ["0","1","4","5"], correct: 0, exp: "a=4k, b=5k: 20k−20k=0.", formula: "5(4k)−4(5k) = 0" },
+    { q: "Train: 240 miles in 4 hrs. Time for 360 miles?", choices: ["5 hrs","6 hrs","7 hrs","8 hrs"], correct: 1, exp: "Speed=60mph. 360/60=6.", formula: "360÷60=6 hours" },
+    { q: "3:4 is equivalent to?", choices: ["9:16","6:8","15:16","12:20"], correct: 1, exp: "3×2:4×2 = 6:8.", formula: "6:8" },
+    { q: "x varies directly with y. x=12, y=4. x when y=7?", choices: ["14","18","21","28"], correct: 2, exp: "k=3. x=3(7)=21.", formula: "k=3 → x=21" },
+  ],
+  [
+    { q: "35% of 200?", choices: ["60","65","70","75"], correct: 2, exp: "0.35×200=70.", formula: "0.35×200=70" },
+    { q: "$80 jacket, 25% off. Sale price?", choices: ["$55","$60","$65","$70"], correct: 1, exp: "80×0.75=$60.", formula: "80×0.75=60" },
+    { q: "$50 to $65. Percent increase?", choices: ["20%","25%","30%","35%"], correct: 2, exp: "(15/50)×100=30%.", formula: "15/50 × 100 = 30%" },
+    { q: "0.045 as a percentage?", choices: ["0.45%","4.5%","45%","450%"], correct: 1, exp: "0.045×100=4.5%.", formula: "×100 = 4.5%" },
+    { q: "40% of n = 28. n = ?", choices: ["11.2","40","70","112"], correct: 2, exp: "n=28/0.4=70.", formula: "28÷0.4=70" },
+    { q: "60% markup on $25 item. Price?", choices: ["$35","$38","$40","$45"], correct: 2, exp: "25×1.6=$40.", formula: "25×1.6=40" },
+    { q: "What percent of 80 is 20?", choices: ["4%","20%","25%","40%"], correct: 2, exp: "20/80×100=25%.", formula: "25%" },
+    { q: "3/8 as a percentage?", choices: ["33.3%","37.5%","38%","40%"], correct: 1, exp: "3÷8=0.375=37.5%.", formula: "37.5%" },
+    { q: "After 20% decrease, value is 160. Original?", choices: ["128","180","200","192"], correct: 2, exp: "160÷0.8=200.", formula: "160÷0.8=200" },
+    { q: "15% failed, 51 passed. Total?", choices: ["58","60","65","68"], correct: 1, exp: "51÷0.85=60.", formula: "51÷0.85=60" },
+  ],
+  [
+    { q: "Mean of 4,7,3,8,8?", choices: ["6","7","8","5"], correct: 0, exp: "30÷5=6.", formula: "30÷5=6" },
+    { q: "Median of 3,7,9,1,5?", choices: ["5","6","7","3"], correct: 0, exp: "Sorted: 1,3,5,7,9. Middle=5.", formula: "Median=5" },
+    { q: "Mode of 2,4,4,6,7,4,9?", choices: ["2","4","6","7"], correct: 1, exp: "4 appears 3 times.", formula: "Mode=4" },
+    { q: "Range of 5,13,7,2,10?", choices: ["8","9","11","15"], correct: 2, exp: "13−2=11.", formula: "max−min=11" },
+    { q: "Mean=median=mode means distribution is?", choices: ["Skewed right","Skewed left","Symmetric","Bimodal"], correct: 2, exp: "Equal mean/median/mode → symmetric.", formula: "Symmetric distribution" },
+    { q: "Most affected by an outlier?", choices: ["Median","Mode","Mean","Range"], correct: 2, exp: "Mean uses every value in its sum.", formula: "Mean sensitive to outliers" },
+    { q: "Mean of 600,650,700,750,800?", choices: ["680","700","720","750"], correct: 1, exp: "3500÷5=700.", formula: "3500÷5=700" },
+    { q: "Adding value equal to mean — what happens to mean?", choices: ["Increases","Decreases","Stays same","Doubles"], correct: 2, exp: "Adding the mean doesn't change it.", formula: "Mean unchanged" },
+    { q: "Which action increases standard deviation?", choices: ["Add value near mean","Remove outlier","Add extreme value","Multiply by 1"], correct: 2, exp: "Extreme values increase spread.", formula: "More spread → higher σ" },
+    { q: "200 students, 40 wear glasses. P(glasses)?", choices: ["20%","25%","40%","50%"], correct: 0, exp: "40/200=20%.", formula: "40/200=0.20" },
+  ],
+  [
+    { q: "Positive correlation means as x increases, y...", choices: ["Decreases","Stays same","Increases","Is random"], correct: 2, exp: "Positive = both move in same direction.", formula: "As x↑, y↑" },
+    { q: "Line of best fit: y=2x+5. Predict y when x=10.", choices: ["15","20","25","30"], correct: 2, exp: "2(10)+5=25.", formula: "y=25" },
+    { q: "Strongest correlation coefficient?", choices: ["r=0.2","r=−0.9","r=0.5","r=−0.3"], correct: 1, exp: "|−0.9|=0.9 is closest to 1.", formula: "|r| closest to 1 → strongest" },
+    { q: "No pattern → correlation is approximately?", choices: ["1","−1","0","0.5"], correct: 2, exp: "No relationship → r ≈ 0.", formula: "r ≈ 0" },
+    { q: "Line y=−3x+20. As x increases by 1, y changes by?", choices: ["−3","3","20","−20"], correct: 0, exp: "Slope = −3.", formula: "slope = −3" },
+    { q: "A point far above best-fit line is a(n)...", choices: ["Intercept","Slope","Outlier","Average"], correct: 2, exp: "Far from trend line = outlier.", formula: "Outlier" },
+    { q: "y-intercept of y=0.5x+10?", choices: ["0.5","5","10","15"], correct: 2, exp: "x=0: y=10.", formula: "y-intercept=10" },
+    { q: "Hours studied vs test scores: type of correlation?", choices: ["Negative","Causation","Positive","None"], correct: 2, exp: "Both increase together → positive.", formula: "Positive correlation" },
+    { q: "Data points form a curve. Association is?", choices: ["Linear","Nonlinear","Negative","Uniform"], correct: 1, exp: "Curve = nonlinear.", formula: "Nonlinear" },
+    { q: "Best-fit passes through (0,4) and (5,14). Slope?", choices: ["2","4","10","18"], correct: 0, exp: "(14−4)/(5−0)=2.", formula: "m=10/5=2" },
+  ],
+  [
+    { q: "Area of triangle, base 10 height 8?", choices: ["40","80","18","20"], correct: 0, exp: "½×10×8=40.", formula: "A=½bh=40" },
+    { q: "Circle radius 5. Area? (π≈3.14)", choices: ["15.7","31.4","78.5","157"], correct: 2, exp: "π×25=78.5.", formula: "A=πr²=78.5" },
+    { q: "Right triangle legs 3 and 4. Hypotenuse?", choices: ["5","6","7","9"], correct: 0, exp: "√(9+16)=5.", formula: "a²+b²=c² → c=5" },
+    { q: "Sum of interior angles in a triangle?", choices: ["90°","180°","270°","360°"], correct: 1, exp: "Always 180°.", formula: "180°" },
+    { q: "Rectangle 12×5. Perimeter?", choices: ["17","34","60","24"], correct: 1, exp: "2(12+5)=34.", formula: "P=2(l+w)=34" },
+    { q: "Volume of box 4×3×2?", choices: ["9","18","24","36"], correct: 2, exp: "4×3×2=24.", formula: "V=lwh=24" },
+    { q: "sin(30°) = ?", choices: ["0.5","√2/2","√3/2","1"], correct: 0, exp: "sin(30°)=0.5.", formula: "sin(30°)=1/2" },
+    { q: "Supplementary to 65°?", choices: ["25°","115°","125°","155°"], correct: 1, exp: "180−65=115°.", formula: "180−65=115°" },
+    { q: "Circle diameter 10. Circumference? (π≈3.14)", choices: ["15.7","31.4","62.8","78.5"], correct: 1, exp: "π×10=31.4.", formula: "C=πd=31.4" },
+    { q: "Area of square, side 9?", choices: ["18","36","72","81"], correct: 3, exp: "9²=81.", formula: "A=81" },
+  ],
+  [
+    { q: "f(x)=2x+3. Find f(4).", choices: ["8","10","11","14"], correct: 2, exp: "2(4)+3=11.", formula: "f(4)=11" },
+    { q: "Which is NOT a function?", choices: ["{(1,2),(2,3)}","y=x²","y=3x−1","{(1,2),(1,3)}"], correct: 3, exp: "x=1 has two outputs → not a function.", formula: "Each x must have exactly one y" },
+    { q: "g(x)=x²−1. Find g(−3).", choices: ["8","10","−8","7"], correct: 0, exp: "(−3)²−1=8.", formula: "9−1=8" },
+    { q: "f(x)=x² shifted up 3 units.", choices: ["x²−3","(x+3)²","x²+3","(x−3)²"], correct: 2, exp: "Vertical shift up k → add k.", formula: "f(x)=x²+3" },
+    { q: "Domain of f(x)=1/x?", choices: ["All reals","All except 0","x>0","x≥0"], correct: 1, exp: "x≠0 (division by zero).", formula: "x≠0" },
+    { q: "f(x)=3x, g(x)=x+2. Find f(g(1)).", choices: ["5","6","9","7"], correct: 2, exp: "g(1)=3. f(3)=9.", formula: "f(3)=9" },
+    { q: "Slope 5, passes (0,−2). Find f(3).", choices: ["10","12","13","15"], correct: 2, exp: "5(3)−2=13.", formula: "f(3)=13" },
+    { q: "Shift f(x) right 4 units.", choices: ["f(x+4)","f(x−4)","f(x)+4","f(x)−4"], correct: 1, exp: "Right shift h: f(x−h).", formula: "f(x−4)" },
+    { q: "f(x)=5 is a __ function.", choices: ["Linear","Constant","Quadratic","Exponential"], correct: 1, exp: "Same output regardless of x.", formula: "Constant function" },
+    { q: "y-intercept of f(x)=4x−9?", choices: ["4","−9","9","0"], correct: 1, exp: "f(0)=−9.", formula: "f(0)=−9" },
+  ],
+  [
+    { q: "Notebooks $3, pens $1. 4 notebooks + 5 pens?", choices: ["$12","$15","$17","$20"], correct: 2, exp: "4(3)+5(1)=17.", formula: "$17" },
+    { q: "Earns $15/hr. $120 total. Hours worked?", choices: ["6","7","8","9"], correct: 2, exp: "120÷15=8.", formula: "h=8" },
+    { q: "500 gal tank, drains 25 gal/min. Empty in?", choices: ["15 min","20 min","25 min","30 min"], correct: 1, exp: "500÷25=20.", formula: "20 minutes" },
+    { q: "Two trains 300 mi apart, 60+90 mph. Meet in?", choices: ["1 hr","2 hrs","3 hrs","4 hrs"], correct: 1, exp: "300÷150=2.", formula: "2 hours" },
+    { q: "Rectangle perimeter 54, length = 2×width. Width?", choices: ["6","9","12","18"], correct: 1, exp: "6w=54 → w=9.", formula: "w=9" },
+    { q: "$30/day + $0.20/mi. 3 days, 150 mi. Cost?", choices: ["$110","$120","$130","$90"], correct: 1, exp: "90+30=120.", formula: "$120" },
+    { q: "Two consecutive integers sum to 47. Larger?", choices: ["22","23","24","25"], correct: 2, exp: "n+(n+1)=47 → n=23, n+1=24.", formula: "24" },
+    { q: "1200 gal pool fills at 40 gal/hr. Hours to fill?", choices: ["20","25","30","35"], correct: 2, exp: "1200÷40=30.", formula: "30 hours" },
+    { q: "Maria is 3× sister's age. In 5 yrs, 2× sister. Maria now?", choices: ["10","12","15","18"], correct: 2, exp: "3s+5=2(s+5) → s=5, M=15.", formula: "M=15" },
+    { q: "$20/mo + $0.05/text = $32. Texts sent?", choices: ["120","200","240","320"], correct: 2, exp: "0.05t=12 → t=240.", formula: "240" },
+  ],
+  [
+    { q: "Graph y=x²−4 and y=0. Intersect at?", choices: ["x=±4","x=±2","x=2","x=0"], correct: 1, exp: "x²=4 → x=±2.", formula: "x=±2" },
+    { q: "Graph y=2x+3 and y=5. x at intersection?", choices: ["1","2","3","5"], correct: 0, exp: "2x+3=5 → x=1.", formula: "x=1" },
+    { q: "sin(45°)≈0.707. Exact value?", choices: ["√2/2","√3/2","1/2","1"], correct: 0, exp: "√2/2≈0.707.", formula: "sin(45°)=√2/2" },
+    { q: "Table: (1,5),(2,8),(3,11). Rule?", choices: ["y=2x+3","y=3x+2","y=3x−3","y=5x"], correct: 1, exp: "3(1)+2=5, 3(2)+2=8 ✓.", formula: "y=3x+2" },
+    { q: "Calculator best for which SAT question?", choices: ["Grammar","Finding zeros","Essays","Reading"], correct: 1, exp: "Graphing calculators excel at finding zeros visually.", formula: "Graph f(x), find y=0" },
+    { q: "Desmos 'slider' helps you explore?", choices: ["Typing speed","Parameter effects on graph","Colors","Internet"], correct: 1, exp: "Sliders let you change parameters dynamically.", formula: "Slide a in y=ax²" },
+    { q: "To find where y=x³−3x²+2 crosses x-axis, you should...", choices: ["Table only","Graph & find intercepts","Use ruler","Divide by x"], correct: 1, exp: "Graph then click x-intercepts.", formula: "Graph → x-intercepts" },
+    { q: "3! (factorial) = ?", choices: ["6","9","3","12"], correct: 0, exp: "3×2×1=6.", formula: "3!=6" },
+    { q: "√50 ≈ 7.07 equals?", choices: ["5√2","7√2","10√5","2√5"], correct: 0, exp: "√(25×2)=5√2.", formula: "5√2" },
+    { q: "Find vertex of y=x²−6x+8 in Desmos by...", choices: ["Delete equation","Graph, find minimum","Type 'vertex'","Multiply by 2"], correct: 1, exp: "Graph → minimum point = vertex = (3,−1).", formula: "Vertex=(3,−1)" },
+  ],
+];
+
+const EXAMS = [
+  { name: "Exam 1 — Foundations", difficulty: "Beginner", questions: [
+    {q:"Solve 2x+5=17",choices:["3","5","6","7"],correct:2,exp:"2x=12, x=6."},
+    {q:"40% of 150?",choices:["50","55","60","65"],correct:2,exp:"0.4×150=60."},
+    {q:"Slope of y=3x−7?",choices:["3","7","−7","−3"],correct:0,exp:"Slope=coefficient of x=3."},
+    {q:"x+y=14, x−y=4. Find x.",choices:["5","7","9","10"],correct:2,exp:"Add: 2x=18, x=9."},
+    {q:"Area of square side 6?",choices:["12","24","36","48"],correct:2,exp:"6²=36."},
+    {q:"Simplify 3(x+4)−2(x−1)",choices:["x+14","x+10","5x+14","5x+10"],correct:0,exp:"3x+12−2x+2=x+14."},
+    {q:"15% of 80?",choices:["10","12","15","20"],correct:1,exp:"0.15×80=12."},
+    {q:"f(x)=x+5. Find f(7).",choices:["10","11","12","13"],correct:2,exp:"7+5=12."},
+    {q:"Solve x/3=9",choices:["3","9","27","18"],correct:2,exp:"x=27."},
+    {q:"Rectangle 8×5. Perimeter?",choices:["13","26","40","20"],correct:1,exp:"2(8+5)=26."},
+  ]},
+  { name: "Exam 2 — Core Skills", difficulty: "Intermediate", questions: [
+    {q:"Solve x²−16=0",choices:["x=±4","x=4","x=±8","x=16"],correct:0,exp:"x²=16, x=±4."},
+    {q:"Mean of 10,14,8,12,16?",choices:["10","11","12","13"],correct:2,exp:"60÷5=12."},
+    {q:"Cats:dogs=3:5, 40 animals. Cats?",choices:["12","15","18","20"],correct:1,exp:"3/8×40=15."},
+    {q:"Factor x²+7x+12",choices:["(x+3)(x+4)","(x+2)(x+6)","(x+1)(x+12)","(x−3)(x−4)"],correct:0,exp:"3×4=12, 3+4=7."},
+    {q:"10% tip on $45?",choices:["$3.50","$4.00","$4.50","$5.00"],correct:2,exp:"0.10×45=$4.50."},
+    {q:"y=x+2, y=3x−4. Find x.",choices:["x=2","x=3","x=1","x=4"],correct:1,exp:"x+2=3x−4, x=3."},
+    {q:"Median of 3,8,1,9,5?",choices:["3","5","7","8"],correct:1,exp:"Sorted: 1,3,5,8,9. Middle=5."},
+    {q:"Slope −2, y-int 5. Equation?",choices:["y=2x+5","y=−2x+5","y=5x−2","y=−5x+2"],correct:1,exp:"y=−2x+5."},
+    {q:"Expand (x−4)²",choices:["x²−8x+16","x²+16","x²−16","x²−4x+16"],correct:0,exp:"x²−8x+16."},
+    {q:"Circumference of circle r=7? (π≈3.14)",choices:["21.98","43.96","78.5","153.9"],correct:1,exp:"2π(7)≈43.96."},
+  ]},
+  { name: "Exam 3 — Advanced Math", difficulty: "Advanced", questions: [
+    {q:"Zeros of f(x)=x²−x−6?",choices:["x=2,−3","x=−2,3","x=3,2","x=−2,−3"],correct:1,exp:"(x−3)(x+2)=0, x=3,−2."},
+    {q:"Simplify (x³·x⁴)/x²",choices:["x⁵","x⁶","x⁹","x¹²"],correct:0,exp:"x^(3+4−2)=x⁵."},
+    {q:"Vertex of y=(x−3)²+2?",choices:["(3,2)","(−3,2)","(2,3)","(3,−2)"],correct:0,exp:"Vertex form: (h,k)=(3,2)."},
+    {q:"Solve 2x²+5x−3=0",choices:["x=½,−3","x=−½,3","x=1,−3","x=2,−1"],correct:0,exp:"(2x−1)(x+3)=0."},
+    {q:"x^(−2) equals?",choices:["x²","1/x²","−x²","√x"],correct:1,exp:"Negative exponent → 1/x²."},
+    {q:"f(x)=2^x is which type?",choices:["Linear","Quadratic","Exponential","Constant"],correct:2,exp:"Variable in exponent → exponential."},
+    {q:"Sum of roots of x²−5x+6=0?",choices:["5","6","11","−5"],correct:0,exp:"Sum=−b/a=5."},
+    {q:"f(x)=x²−4, g(x)=x+2. Find f(g(−1)).",choices:["−3","0","−4","1"],correct:0,exp:"g(−1)=1, f(1)=−3."},
+    {q:"Simplify √48",choices:["4√3","6√2","3√16","2√12"],correct:0,exp:"√(16×3)=4√3."},
+    {q:"Range of f(x)=x²?",choices:["All reals","y≥0","y>0","y≤0"],correct:1,exp:"x² is always ≥ 0."},
+  ]},
+  { name: "Exam 4 — Data & Stats", difficulty: "Intermediate", questions: [
+    {q:"Mean of 5 values is 12. Sum?",choices:["60","5","17","12"],correct:0,exp:"12×5=60."},
+    {q:"r=−0.95 indicates?",choices:["Weak positive","Strong positive","Strong negative","No correlation"],correct:2,exp:"r close to −1 = strong negative."},
+    {q:"2,4,4,6,8. Standard deviation closest to?",choices:["1","2","3","4"],correct:1,exp:"Moderate spread ≈ 2."},
+    {q:"y=1.5x+3. Predict y when x=8.",choices:["12","15","14","9"],correct:1,exp:"1.5(8)+3=15."},
+    {q:"Mean 50, margin of error 5. Interval?",choices:["45−55","40−60","50−55","45−50"],correct:0,exp:"50±5=(45,55)."},
+    {q:"Best graph for single variable distribution?",choices:["Scatterplot","Line graph","Histogram","Bar chart"],correct:2,exp:"Histogram shows frequency distribution."},
+    {q:"Roll a die. P(4)?",choices:["1/4","1/3","1/6","1/2"],correct:2,exp:"1/6."},
+    {q:"Median preferred over mean when data has?",choices:["Few values","No zeros","Outliers","Equal values"],correct:2,exp:"Outliers distort the mean."},
+    {q:"P(A or B)=P(A)+P(B) when?",choices:["Dependent","Independent","Mutually exclusive","Complementary"],correct:2,exp:"Mutually exclusive events."},
+    {q:"35 of 100 prefer tea. Relative frequency?",choices:["0.035","0.35","35","3.5"],correct:1,exp:"35/100=0.35."},
+  ]},
+];
+
+const LETTERS = ["A","B","C","D"];
+
+function App() {
+  const [view, setView] = useState("home");
+  const [activeTopic, setActiveTopic] = useState(null);
+  const [probIdx, setProbIdx] = useState(0);
+  const [answered, setAnswered] = useState(false);
+  const [chosen, setChosen] = useState(null);
+  const [score, setScore] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [done, setDone] = useState(false);
+  const [activeExam, setActiveExam] = useState(null);
+  const [examAnswers, setExamAnswers] = useState({});
+  const [examSubmitted, setExamSubmitted] = useState(false);
+  const [formData, setFormData] = useState({name:"",email:"",grade:"",message:""});
+  const [formSent, setFormSent] = useState(false);
+
+  const s = { fontFamily:"system-ui,sans-serif", maxWidth:900, margin:"0 auto", padding:"0 1rem" };
+
+  const tag = (label,color="#e05c2a") => (
+    <span style={{background:color+"22",color,fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:100,border:`1px solid ${color}44`,letterSpacing:0.5}}>{label}</span>
+  );
+
+  // HOME
+  if (view === "home") return (
+    <div style={{...s, paddingTop:8}}>
+      {/* Hero */}
+      <div style={{background:"#0e0e0e",borderRadius:16,padding:"48px 40px",marginBottom:16,position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:0,right:0,width:400,height:400,background:"radial-gradient(circle,rgba(26,58,107,0.5) 0%,transparent 70%)",pointerEvents:"none"}}/>
+        <div style={{position:"absolute",bottom:0,left:0,width:300,height:300,background:"radial-gradient(circle,rgba(224,92,42,0.12) 0%,transparent 70%)",pointerEvents:"none"}}/>
+        <div style={{position:"relative",zIndex:1}}>
+          {tag("🎉 First Session 100% Free")}
+          <h1 style={{fontFamily:"Georgia,serif",fontSize:44,fontWeight:900,color:"#fff",margin:"16px 0 12px",lineHeight:1.1}}>
+            TB <span style={{color:"#e05c2a"}}>Math Prep</span>
+          </h1>
+          <p style={{color:"rgba(255,255,255,0.6)",fontSize:16,lineHeight:1.7,maxWidth:520,marginBottom:20}}>
+            Expert SAT Math tutoring by <strong style={{color:"rgba(255,255,255,0.85)"}}>Tobias Velez (790+ SAT Math)</strong> & Bryan. 100+ free practice problems per topic, 4 full practice exams, and personalized coaching.
+          </p>
+          <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+            <button onClick={()=>setView("practice")} style={{background:"#e05c2a",color:"#fff",border:"none",padding:"12px 24px",borderRadius:8,fontSize:15,fontWeight:700,cursor:"pointer"}}>Try Free Problems →</button>
+            <button onClick={()=>setView("booking")} style={{background:"transparent",color:"rgba(255,255,255,0.8)",border:"1.5px solid rgba(255,255,255,0.25)",padding:"12px 24px",borderRadius:8,fontSize:15,fontWeight:600,cursor:"pointer"}}>Book Free Session</button>
+            <button onClick={()=>setView("exams")} style={{background:"transparent",color:"rgba(255,255,255,0.7)",border:"1.5px solid rgba(255,255,255,0.15)",padding:"12px 24px",borderRadius:8,fontSize:15,fontWeight:600,cursor:"pointer"}}>Practice Exams</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:12,marginBottom:16}}>
+        {[["790+","Tobias SAT Math"],["100+","Free problems/topic"],["4","Full practice exams"],["Free","First session"]].map(([v,l])=>(
+          <div key={l} style={{background:"#fff",border:"1.5px solid #e8e0d0",borderRadius:12,padding:"16px",textAlign:"center"}}>
+            <div style={{fontFamily:"Georgia,serif",fontSize:28,fontWeight:900,color:"#e05c2a"}}>{v}</div>
+            <div style={{fontSize:12,color:"#6b6457",marginTop:4}}>{l}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Tutors */}
+      <div style={{background:"#1a3a6b",borderRadius:16,padding:"28px 32px",marginBottom:16}}>
+        <div style={{fontSize:12,fontWeight:800,letterSpacing:2,textTransform:"uppercase",color:"rgba(255,255,255,0.4)",marginBottom:16}}>Meet Your Tutors</div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20}}>
+          {[["T","Tobias Velez","Co-founder · Algebra, Advanced Math, Desmos Strategy","790+ SAT Math"],["B","Bryan","Co-founder · Geometry, Data Analysis, Timed Practice","SAT Math Expert"]].map(([init,name,bio,badge])=>(
+            <div key={name} style={{display:"flex",gap:14,alignItems:"flex-start"}}>
+              <div style={{width:48,height:48,borderRadius:"50%",background:"rgba(255,255,255,0.1)",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"Georgia,serif",fontSize:18,fontWeight:900,color:"#f0a500",flexShrink:0}}>{init}</div>
+              <div>
+                <div style={{color:"#fff",fontWeight:700,marginBottom:3}}>{name}</div>
+                <div style={{color:"rgba(255,255,255,0.55)",fontSize:13,lineHeight:1.4,marginBottom:6}}>{bio}</div>
+                {tag(badge,"#f0a500")}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Nav cards */}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12}}>
+        {[
+          {icon:"📚",title:"Practice Problems",desc:"100+ problems in all 12 SAT Math topics with detailed explanations",btn:"Start Practicing",v:"practice",color:"#e05c2a"},
+          {icon:"📝",title:"Practice Exams",desc:"4 full-length timed exams with instant scoring and answer review",btn:"Take an Exam",v:"exams",color:"#1a3a6b"},
+          {icon:"💸",title:"Pricing & Booking",desc:"First session free! Then $30/hr group, $50/hr private. Book online.",btn:"Book Now",v:"booking",color:"#22c55e"},
+        ].map(({icon,title,desc,btn,v:tv,color})=>(
+          <div key={title} style={{background:"#fff",border:"1.5px solid #e8e0d0",borderRadius:14,padding:"24px 20px"}}>
+            <div style={{fontSize:24,marginBottom:10}}>{icon}</div>
+            <div style={{fontFamily:"Georgia,serif",fontSize:17,fontWeight:700,marginBottom:8}}>{title}</div>
+            <div style={{color:"#6b6457",fontSize:13,lineHeight:1.6,marginBottom:16}}>{desc}</div>
+            <button onClick={()=>setView(tv)} style={{background:color,color:"#fff",border:"none",padding:"9px 18px",borderRadius:7,fontSize:13,fontWeight:700,cursor:"pointer",width:"100%"}}>{btn}</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  // PRACTICE TOPICS
+  if (view === "practice" && activeTopic === null) return (
+    <div style={{...s,paddingTop:8}}>
+      <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20}}>
+        <button onClick={()=>setView("home")} style={{background:"none",border:"1px solid #d4cbbf",borderRadius:6,padding:"6px 14px",cursor:"pointer",fontSize:13,color:"#6b6457"}}>← Home</button>
+        <div>
+          <h2 style={{fontFamily:"Georgia,serif",fontSize:26,fontWeight:900,margin:0}}>Free Practice Problems</h2>
+          <p style={{color:"#6b6457",fontSize:13,margin:"4px 0 0"}}>Click a topic to start. Every answer includes a detailed explanation.</p>
+        </div>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12}}>
+        {TOPICS.map((t,i)=>(
+          <div key={i} onClick={()=>{setActiveTopic(i);setProbIdx(0);setAnswered(false);setChosen(null);setScore(0);setTotal(0);setDone(false);}}
+            style={{background:"#fff",border:"1.5px solid #e8e0d0",borderRadius:14,padding:"20px",cursor:"pointer",transition:"all 0.2s",position:"relative",overflow:"hidden"}}>
+            <div style={{fontSize:11,fontWeight:800,letterSpacing:1.5,textTransform:"uppercase",color:"#e05c2a",marginBottom:6}}>Topic {String(i+1).padStart(2,"0")}</div>
+            <div style={{fontFamily:"Georgia,serif",fontSize:15,fontWeight:700,lineHeight:1.3,marginBottom:8}}>{t.name}</div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+              <span style={{fontSize:12,color:"#6b6457"}}>{t.count} problems</span>
+              {tag(t.tag)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  // PROBLEM VIEW
+  if (view === "practice" && activeTopic !== null) {
+    const probs = PROBLEMS[activeTopic];
+    const p = probs[probIdx];
+    const pct = Math.round((probIdx / probs.length) * 100);
+
+    if (done) return (
+      <div style={{...s,paddingTop:8,textAlign:"center"}}>
+        <div style={{background:"#fff",border:"1.5px solid #e8e0d0",borderRadius:16,padding:"48px 32px",maxWidth:500,margin:"0 auto"}}>
+          <div style={{fontSize:40,marginBottom:16}}>🎉</div>
+          <h2 style={{fontFamily:"Georgia,serif",fontSize:28,fontWeight:900,marginBottom:8}}>Set Complete!</h2>
+          <div style={{fontFamily:"Georgia,serif",fontSize:52,fontWeight:900,color:"#e05c2a",margin:"16px 0 4px"}}>{score}/{total}</div>
+          <div style={{color:"#6b6457",marginBottom:24}}>Final score · {Math.round((score/total)*100)}% correct</div>
+          <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap"}}>
+            <button onClick={()=>{setProbIdx(0);setAnswered(false);setChosen(null);setScore(0);setTotal(0);setDone(false);}} style={{background:"#e05c2a",color:"#fff",border:"none",padding:"10px 22px",borderRadius:8,fontWeight:700,cursor:"pointer",fontSize:14}}>Try Again</button>
+            <button onClick={()=>setActiveTopic(null)} style={{background:"#f5f0e8",color:"#0e0e0e",border:"1px solid #d4cbbf",padding:"10px 22px",borderRadius:8,fontWeight:700,cursor:"pointer",fontSize:14}}>All Topics</button>
+            <button onClick={()=>setView("booking")} style={{background:"#1a3a6b",color:"#fff",border:"none",padding:"10px 22px",borderRadius:8,fontWeight:700,cursor:"pointer",fontSize:14}}>Book a Session</button>
+          </div>
+        </div>
+      </div>
+    );
+
+    return (
+      <div style={{...s,paddingTop:8}}>
+        <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
+          <button onClick={()=>setActiveTopic(null)} style={{background:"none",border:"1px solid #d4cbbf",borderRadius:6,padding:"6px 14px",cursor:"pointer",fontSize:13,color:"#6b6457"}}>← Topics</button>
+          <div style={{flex:1}}>
+            <div style={{fontFamily:"Georgia,serif",fontSize:17,fontWeight:700}}>{TOPICS[activeTopic].name}</div>
+            <div style={{fontSize:12,color:"#6b6457"}}>Problem {probIdx+1} of {probs.length} · Score: {score}/{total}</div>
+          </div>
+        </div>
+        {/* Progress bar */}
+        <div style={{height:4,background:"#e8e0d0",borderRadius:100,marginBottom:20}}>
+          <div style={{height:4,width:`${pct}%`,background:"linear-gradient(90deg,#e05c2a,#f0a500)",borderRadius:100,transition:"width 0.4s"}}/>
+        </div>
+        <div style={{background:"#fff",border:"1.5px solid #e8e0d0",borderRadius:16,padding:"28px 28px"}}>
+          <div style={{fontFamily:"Georgia,serif",fontSize:20,fontWeight:700,lineHeight:1.5,marginBottom:24,color:"#0e0e0e"}}>{p.q}</div>
+          <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:20}}>
+            {p.choices.map((c,i)=>{
+              let bg="#f5f0e8", border="#d4cbbf", textColor="#0e0e0e";
+              if(answered){
+                if(i===p.correct){bg="#f0fdf4";border="#22c55e";textColor="#15803d";}
+                else if(i===chosen){bg="#fef2f2";border="#ef4444";textColor="#dc2626";}
+              }
+              return (
+                <button key={i} disabled={answered} onClick={()=>{setAnswered(true);setChosen(i);setTotal(t=>t+1);if(i===p.correct)setScore(s=>s+1);}}
+                  style={{display:"flex",alignItems:"center",gap:12,background:bg,border:`1.5px solid ${border}`,borderRadius:10,padding:"13px 16px",cursor:answered?"default":"pointer",textAlign:"left",fontSize:15,color:textColor,fontWeight:i===p.correct&&answered?700:400,transition:"all 0.2s"}}>
+                  <span style={{width:28,height:28,borderRadius:"50%",background:answered&&i===p.correct?"#22c55e":answered&&i===chosen?"#ef4444":"#e8e0d0",display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:800,color:answered&&(i===p.correct||i===chosen)?"#fff":"#6b6457",flexShrink:0}}>{LETTERS[i]}</span>
+                  {c}
+                </button>
+              );
+            })}
+          </div>
+          {answered && (
+            <div style={{background:"#1a3a6b",borderRadius:12,padding:"20px 22px",marginBottom:20}}>
+              <div style={{fontSize:11,fontWeight:800,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(255,255,255,0.4)",marginBottom:8}}>📖 Explanation</div>
+              <div style={{color:"rgba(255,255,255,0.85)",fontSize:14,lineHeight:1.7,marginBottom:8}}>{p.exp}</div>
+              <div style={{background:"rgba(255,255,255,0.07)",borderRadius:8,padding:"8px 14px",fontFamily:"monospace",fontSize:13,color:"#f0a500"}}>{p.formula}</div>
+            </div>
+          )}
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <button onClick={()=>{if(probIdx<probs.length-1){setProbIdx(i=>i+1);setAnswered(false);setChosen(null);}else{setDone(true);}}} disabled={!answered}
+              style={{background:answered?"#0e0e0e":"#d4cbbf",color:"#fff",border:"none",padding:"10px 24px",borderRadius:8,fontWeight:700,fontSize:14,cursor:answered?"pointer":"default"}}>
+              {probIdx<probs.length-1?"Next Problem →":"Finish Set →"}
+            </button>
+            <button onClick={()=>{if(probIdx<probs.length-1){setProbIdx(i=>i+1);setAnswered(false);setChosen(null);}else setDone(true);}}
+              style={{background:"none",border:"1px solid #d4cbbf",color:"#6b6457",padding:"10px 18px",borderRadius:8,fontSize:13,cursor:"pointer"}}>Skip</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // EXAMS LIST
+  if (view === "exams" && activeExam === null) return (
+    <div style={{...s,paddingTop:8}}>
+      <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20}}>
+        <button onClick={()=>setView("home")} style={{background:"none",border:"1px solid #d4cbbf",borderRadius:6,padding:"6px 14px",cursor:"pointer",fontSize:13,color:"#6b6457"}}>← Home</button>
+        <div>
+          <h2 style={{fontFamily:"Georgia,serif",fontSize:26,fontWeight:900,margin:0}}>SAT Math Practice Exams</h2>
+          <p style={{color:"#6b6457",fontSize:13,margin:"4px 0 0"}}>Full-length timed exams with instant scoring and full answer explanations.</p>
+        </div>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}}>
+        {EXAMS.map((e,i)=>(
+          <div key={i} style={{background:"#0e0e0e",borderRadius:14,padding:"24px",border:"1px solid rgba(255,255,255,0.06)"}}>
+            <div style={{fontSize:24,marginBottom:10}}>📋</div>
+            <div style={{color:"#fff",fontFamily:"Georgia,serif",fontSize:17,fontWeight:700,marginBottom:6}}>{e.name}</div>
+            <div style={{color:"rgba(255,255,255,0.4)",fontSize:13,marginBottom:12}}>{e.questions.length} questions · Timed</div>
+            {tag(e.difficulty)}
+            <button onClick={()=>{setActiveExam(i);setExamAnswers({});setExamSubmitted(false);}}
+              style={{display:"block",width:"100%",marginTop:16,background:"#e05c2a",color:"#fff",border:"none",padding:"10px",borderRadius:8,fontWeight:700,fontSize:14,cursor:"pointer"}}>Start Exam →</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  // EXAM ACTIVE
+  if (view === "exams" && activeExam !== null) {
+    const exam = EXAMS[activeExam];
+    if (examSubmitted) {
+      const correct = exam.questions.filter((q,i)=>examAnswers[i]===q.correct).length;
+      const pct = Math.round((correct/exam.questions.length)*100);
+      const est = Math.round(200+(correct/exam.questions.length)*600);
+      return (
+        <div style={{...s,paddingTop:8}}>
+          <div style={{background:"#fff",border:"1.5px solid #e8e0d0",borderRadius:16,padding:"40px",textAlign:"center",maxWidth:560,margin:"0 auto"}}>
+            <div style={{fontFamily:"Georgia,serif",fontSize:64,fontWeight:900,color:"#f0a500",lineHeight:1}}>{correct}/{exam.questions.length}</div>
+            <div style={{color:"#6b6457",fontSize:13,letterSpacing:1.5,textTransform:"uppercase",margin:"8px 0 12px"}}>Your Score</div>
+            <div style={{fontFamily:"Georgia,serif",fontSize:22,fontStyle:"italic",fontWeight:300,marginBottom:24}}>{pct>=80?"Outstanding work! 🏆":pct>=60?"Good effort — review explanations 📖":"Keep practicing — you've got this! 💪"}</div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12,marginBottom:28}}>
+              {[[`${pct}%`,"Accuracy"],[`~${est}`,"Est. SAT Score"],[`${exam.questions.length-correct}`,"To Review"]].map(([v,l])=>(
+                <div key={l} style={{background:"#f5f0e8",borderRadius:10,padding:"14px"}}>
+                  <div style={{fontFamily:"Georgia,serif",fontSize:24,fontWeight:900,color:"#1a3a6b"}}>{v}</div>
+                  <div style={{fontSize:12,color:"#6b6457"}}>{l}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{textAlign:"left",marginBottom:24}}>
+              {exam.questions.map((q,i)=>{
+                const ua=examAnswers[i];
+                const ok=ua===q.correct;
+                return (
+                  <div key={i} style={{padding:"12px",borderRadius:10,border:`1px solid ${ok?"#22c55e":"#ef4444"}`,marginBottom:8,background:ok?"#f0fdf4":"#fef2f2"}}>
+                    <div style={{fontSize:13,fontWeight:700,color:ok?"#15803d":"#dc2626",marginBottom:4}}>Q{i+1}: {ok?"✓ Correct":"✗ Incorrect"}</div>
+                    <div style={{fontSize:13,color:"#374151",marginBottom:4}}>{q.q}</div>
+                    {!ok&&<div style={{fontSize:12,color:"#6b7280"}}>Correct: <strong>{LETTERS[q.correct]}. {q.choices[q.correct]}</strong></div>}
+                    <div style={{fontSize:12,color:"#6b7280",marginTop:4,fontStyle:"italic"}}>{q.exp}</div>
+                  </div>
+                );
+              })}
+            </div>
+            <div style={{display:"flex",gap:10,justifyContent:"center"}}>
+              <button onClick={()=>{setExamAnswers({});setExamSubmitted(false);}} style={{background:"#e05c2a",color:"#fff",border:"none",padding:"10px 22px",borderRadius:8,fontWeight:700,cursor:"pointer",fontSize:14}}>Retake</button>
+              <button onClick={()=>{setActiveExam(null);}} style={{background:"#f5f0e8",color:"#0e0e0e",border:"1px solid #d4cbbf",padding:"10px 22px",borderRadius:8,fontWeight:700,cursor:"pointer",fontSize:14}}>All Exams</button>
+              <button onClick={()=>setView("booking")} style={{background:"#1a3a6b",color:"#fff",border:"none",padding:"10px 22px",borderRadius:8,fontWeight:700,cursor:"pointer",fontSize:14}}>Book Session</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div style={{...s,paddingTop:8}}>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:20,background:"#0e0e0e",borderRadius:12,padding:"14px 20px"}}>
+          <div style={{color:"#fff",fontFamily:"Georgia,serif",fontWeight:700}}>{exam.name}</div>
+          <div style={{color:"rgba(255,255,255,0.5)",fontSize:13}}>{Object.keys(examAnswers).length}/{exam.questions.length} answered</div>
+          <button onClick={()=>setActiveExam(null)} style={{background:"rgba(255,255,255,0.1)",border:"none",color:"#fff",padding:"6px 14px",borderRadius:6,cursor:"pointer",fontSize:13}}>Exit</button>
+        </div>
+        {exam.questions.map((q,qi)=>(
+          <div key={qi} style={{background:"#fff",border:"1.5px solid #e8e0d0",borderRadius:14,padding:"22px",marginBottom:14}}>
+            <div style={{fontSize:11,fontWeight:800,letterSpacing:1.5,textTransform:"uppercase",color:"#e05c2a",marginBottom:8}}>Question {qi+1}</div>
+            <div style={{fontFamily:"Georgia,serif",fontSize:16,fontWeight:700,lineHeight:1.5,marginBottom:14}}>{q.q}</div>
+            <div style={{display:"flex",flexDirection:"column",gap:8}}>
+              {q.choices.map((c,ci)=>(
+                <div key={ci} onClick={()=>setExamAnswers(a=>({...a,[qi]:ci}))}
+                  style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",borderRadius:8,border:`1.5px solid ${examAnswers[qi]===ci?"#1a3a6b":"#e8e0d0"}`,background:examAnswers[qi]===ci?"#e8f0fe":"#f5f0e8",cursor:"pointer",fontSize:14}}>
+                  <span style={{width:24,height:24,borderRadius:"50%",background:examAnswers[qi]===ci?"#1a3a6b":"#d4cbbf",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800,color:examAnswers[qi]===ci?"#fff":"#6b6457",flexShrink:0}}>{LETTERS[ci]}</span>
+                  {c}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+        <div style={{position:"sticky",bottom:0,background:"#f5f0e8",padding:"16px 0",borderTop:"1px solid #d4cbbf"}}>
+          <button onClick={()=>setExamSubmitted(true)} style={{width:"100%",background:"#e05c2a",color:"#fff",border:"none",padding:"14px",borderRadius:8,fontWeight:800,fontSize:16,cursor:"pointer"}}>
+            Submit Exam ({Object.keys(examAnswers).length}/{exam.questions.length} answered) →
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // BOOKING / PRICING
+  if (view === "booking") return (
+    <div style={{...s,paddingTop:8}}>
+      <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20}}>
+        <button onClick={()=>setView("home")} style={{background:"none",border:"1px solid #d4cbbf",borderRadius:6,padding:"6px 14px",cursor:"pointer",fontSize:13,color:"#6b6457"}}>← Home</button>
+        <h2 style={{fontFamily:"Georgia,serif",fontSize:26,fontWeight:900,margin:0}}>Pricing & Booking</h2>
+      </div>
+
+      {/* Free first session banner */}
+      <div style={{background:"linear-gradient(135deg,#16a34a,#15803d)",borderRadius:14,padding:"20px 24px",marginBottom:20,display:"flex",alignItems:"center",gap:16}}>
+        <div style={{fontSize:32}}>🎉</div>
+        <div>
+          <div style={{color:"#fff",fontWeight:800,fontSize:17,marginBottom:4}}>Your first session is completely FREE</div>
+          <div style={{color:"rgba(255,255,255,0.75)",fontSize:14}}>No credit card. No commitment. Just book and we'll reach out within 24 hours.</div>
+        </div>
+      </div>
+
+      {/* Pricing cards */}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:14,marginBottom:24}}>
+        {[
+          {tier:"Group",price:"$30",per:"per hour · per student",features:["Small group (2–5 students)","Focused topic each session","Practice problems included","In-person or Zoom"],featured:false},
+          {tier:"1-on-1",price:"$50",per:"per hour · private",features:["Private personalized session","Custom study plan","Progress tracking","Direct WhatsApp access","In-person or Zoom"],featured:true},
+          {tier:"Bundle",price:"$399",per:"10 sessions · save $100",features:["10 private sessions","Full diagnostic assessment","3 proctored practice exams","Score improvement guarantee","Priority scheduling"],featured:false},
+        ].map(({tier,price,per,features,featured})=>(
+          <div key={tier} style={{background:featured?"#1a3a6b":"#fff",border:`1.5px solid ${featured?"#1a3a6b":"#e8e0d0"}`,borderRadius:16,padding:"24px 20px",position:"relative"}}>
+            {featured&&<div style={{position:"absolute",top:-12,left:"50%",transform:"translateX(-50%)",background:"#e05c2a",color:"#fff",fontSize:10,fontWeight:800,padding:"3px 12px",borderRadius:100,whiteSpace:"nowrap",letterSpacing:0.5}}>MOST POPULAR</div>}
+            <div style={{fontSize:11,fontWeight:800,letterSpacing:1.5,textTransform:"uppercase",color:featured?"rgba(255,255,255,0.5)":"#6b6457",marginBottom:6}}>{tier}</div>
+            <div style={{fontFamily:"Georgia,serif",fontSize:36,fontWeight:900,color:featured?"#f0a500":"#0e0e0e",lineHeight:1}}>{price}</div>
+            <div style={{fontSize:12,color:featured?"rgba(255,255,255,0.5)":"#6b6457",marginBottom:4}}>{per}</div>
+            <div style={{fontSize:12,color:"#22c55e",fontWeight:700,marginBottom:14}}>✦ First session free</div>
+            <div style={{borderTop:`1px solid ${featured?"rgba(255,255,255,0.15)":"#e8e0d0"}`,marginBottom:14}}/>
+            <ul style={{listStyle:"none",padding:0,margin:"0 0 18px",display:"flex",flexDirection:"column",gap:7}}>
+              {features.map(f=>(
+                <li key={f} style={{display:"flex",gap:8,fontSize:13,color:featured?"rgba(255,255,255,0.75)":"#6b6457",lineHeight:1.4}}>
+                  <span style={{color:featured?"#86efac":"#22c55e",fontWeight:800,flexShrink:0}}>✓</span>{f}
+                </li>
+              ))}
+            </ul>
+            <button onClick={()=>{const el=document.getElementById("bookingForm");if(el)el.scrollIntoView({behavior:"smooth"});}}
+              style={{width:"100%",background:featured?"#e05c2a":"transparent",color:featured?"#fff":featured?"#fff":"#0e0e0e",border:`1.5px solid ${featured?"#e05c2a":"#0e0e0e"}`,padding:"10px",borderRadius:8,fontWeight:700,fontSize:13,cursor:"pointer"}}>
+              Book Free Session
+            </button>
+          </div>
+        ))}
+      </div>
+
+      {/* Desmos course */}
+      <div style={{background:"linear-gradient(135deg,#1a3a6b,#0a1a3a)",borderRadius:16,padding:"28px 32px",marginBottom:24}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr auto",gap:24,alignItems:"center"}}>
+          <div>
+            {tag("💰 Paid Course · One-Time","#f0a500")}
+            <h3 style={{fontFamily:"Georgia,serif",fontSize:24,fontWeight:900,color:"#fff",margin:"12px 0 8px"}}>Desmos Mastery Course</h3>
+            <p style={{color:"rgba(255,255,255,0.6)",fontSize:14,lineHeight:1.7,marginBottom:12}}>Master the Desmos calculator for SAT Math. Save 30+ seconds per problem with strategic graphing tricks taught by Tobias.</p>
+            <ul style={{listStyle:"none",padding:0,margin:0,display:"grid",gridTemplateColumns:"1fr 1fr",gap:6}}>
+              {["Finding zeros instantly","Solving quadratics visually","Regression & scatterplots","Intersection of lines","Slider tricks","40+ practice problems"].map(f=>(
+                <li key={f} style={{display:"flex",gap:6,fontSize:13,color:"rgba(255,255,255,0.7)"}}>
+                  <span style={{color:"#f0a500",fontWeight:800}}>✓</span>{f}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.12)",borderRadius:14,padding:"24px",textAlign:"center",minWidth:160}}>
+            <div style={{fontFamily:"Georgia,serif",fontSize:44,fontWeight:900,color:"#f0a500",lineHeight:1}}>$25</div>
+            <div style={{color:"rgba(255,255,255,0.4)",fontSize:12,marginBottom:16}}>one-time · lifetime access</div>
+            <button style={{width:"100%",background:"#f0a500",color:"#0e0e0e",border:"none",padding:"10px",borderRadius:8,fontWeight:800,fontSize:14,cursor:"pointer"}}>Get Course →</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Booking form */}
+      <div id="bookingForm" style={{background:"#1a3a6b",borderRadius:16,padding:"32px"}}>
+        <h3 style={{fontFamily:"Georgia,serif",fontSize:22,fontWeight:900,color:"#fff",margin:"0 0 6px"}}>Book Your Free First Session</h3>
+        <p style={{color:"rgba(255,255,255,0.55)",fontSize:14,marginBottom:24}}>Fill this out and Tobias will email you at <strong style={{color:"#f0a500"}}>tobias.velez@icloud.com</strong> within 24 hours.</p>
+        {formSent ? (
+          <div style={{textAlign:"center",padding:"32px 0"}}>
+            <div style={{fontSize:48,marginBottom:12}}>🎉</div>
+            <h3 style={{color:"#fff",fontFamily:"Georgia,serif",fontSize:22,marginBottom:8}}>You're all set!</h3>
+            <p style={{color:"rgba(255,255,255,0.6)"}}>Tobias will reach out to <strong style={{color:"#f0a500"}}>{formData.email}</strong> within 24 hours.</p>
+          </div>
+        ) : (
+          <div style={{display:"grid",gap:14}}>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}}>
+              {[["Name","Your full name","name"],["Email","your@email.com","email"]].map(([l,ph,k])=>(
+                <div key={k}>
+                  <label style={{display:"block",fontSize:11,fontWeight:800,letterSpacing:0.5,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",marginBottom:6}}>{l}</label>
+                  <input value={formData[k]} onChange={e=>setFormData(d=>({...d,[k]:e.target.value}))} placeholder={ph}
+                    style={{width:"100%",background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.15)",borderRadius:8,padding:"10px 14px",color:"#fff",fontSize:14,boxSizing:"border-box",outline:"none"}}/>
+                </div>
+              ))}
+            </div>
+            <div>
+              <label style={{display:"block",fontSize:11,fontWeight:800,letterSpacing:0.5,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",marginBottom:6}}>Grade Level</label>
+              <select value={formData.grade} onChange={e=>setFormData(d=>({...d,grade:e.target.value}))}
+                style={{width:"100%",background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.15)",borderRadius:8,padding:"10px 14px",color:"#fff",fontSize:14,boxSizing:"border-box",outline:"none"}}>
+                <option value="">Select grade...</option>
+                {["6th","7th","8th","9th","10th","11th","12th"].map(g=><option key={g} value={g}>{g} Grade</option>)}
+              </select>
+            </div>
+            <div>
+              <label style={{display:"block",fontSize:11,fontWeight:800,letterSpacing:0.5,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",marginBottom:6}}>What are you struggling with?</label>
+              <textarea value={formData.message} onChange={e=>setFormData(d=>({...d,message:e.target.value}))} placeholder="e.g. Quadratics, word problems, running out of time..."
+                style={{width:"100%",background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.15)",borderRadius:8,padding:"10px 14px",color:"#fff",fontSize:14,minHeight:80,resize:"vertical",boxSizing:"border-box",outline:"none"}}/>
+            </div>
+            <button onClick={()=>{if(formData.name&&formData.email){setFormSent(true);}else alert("Please enter your name and email.");}}
+              style={{background:"#e05c2a",color:"#fff",border:"none",padding:"14px",borderRadius:8,fontWeight:800,fontSize:15,cursor:"pointer",letterSpacing:0.3}}>
+              Book My Free Session →
+            </button>
+            <p style={{color:"rgba(255,255,255,0.35)",fontSize:12,textAlign:"center",margin:0}}>This sends your info to tobias.velez@icloud.com · No spam, ever.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  return null;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+
+</script>
+</body>
+</html>
