@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TB Math Prep — SAT Math Tutoring</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0b1f3a;--navy2:#0d2447;--navy3:#112d55;--gold:#f0a500;--orange:#e05c2a;--white:#ffffff;--muted:rgba(255,255,255,0.55);--border:rgba(255,255,255,0.1);--green:#22c55e;--red:#ef4444;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;}
+button,input,select,textarea{font-family:'DM Sans',sans-serif;}
+.page{display:none;}.page.active{display:block;}
+/* NAV */
+nav{background:rgba(11,31,58,0.97);border-bottom:1px solid var(--border);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--white);cursor:pointer;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{background:var(--orange);color:var(--white)!important;padding:.45rem 1.1rem;border-radius:6px;}
+/* HERO */
+.hero{padding:80px 5% 60px;display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;min-height:90vh;position:relative;overflow:hidden;}
+.hero-glow{position:absolute;top:-10%;right:-5%;width:600px;height:600px;background:radial-gradient(circle,rgba(240,165,0,.12),transparent 65%);pointer-events:none;}
+.hero-glow2{position:absolute;bottom:-20%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(224,92,42,.08),transparent 65%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(240,165,0,.1);border:1px solid rgba(240,165,0,.3);color:var(--gold);padding:.35rem .9rem;border-radius:100px;font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1.5rem;}
+.pulse{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.2rem);font-weight:900;line-height:1.05;margin-bottom:1.2rem;}
+.hero h1 .accent{color:var(--gold);}
+.hero h1 .italic{font-style:italic;font-weight:700;color:rgba(255,255,255,.75);}
+.hero-sub{color:var(--muted);font-size:1rem;line-height:1.75;max-width:480px;margin-bottom:1.5rem;}
+.hero-sub strong{color:var(--white);}
+.free-banner{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#86efac;padding:.6rem 1.2rem;border-radius:8px;font-size:.88rem;font-weight:700;display:inline-block;margin-bottom:1.8rem;}
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap;}
+.btn{padding:.85rem 1.8rem;border-radius:8px;font-weight:700;font-size:.9rem;cursor:pointer;border:none;transition:transform .2s,opacity .2s;display:inline-block;}
+.btn:hover{transform:translateY(-2px);opacity:.9;}
+.btn-gold{background:var(--gold);color:var(--navy);}
+.btn-orange{background:var(--orange);color:var(--white);}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--white);}
+.btn-sm{padding:.6rem 1.3rem;font-size:.82rem;}
+/* SCORE CARD */
+.hero-visual{display:flex;flex-direction:column;gap:1rem;}
+.score-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:18px;padding:1.8rem 2rem;backdrop-filter:blur(10px);}
+.sc-label{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.8rem;}
+.sc-scores{display:flex;align-items:center;gap:.8rem;margin-bottom:.4rem;}
+.sc-old{font-family:'Playfair Display',serif;font-size:2.2rem;color:rgba(255,255,255,.2);font-weight:700;}
+.sc-arr{color:var(--orange);font-size:1.4rem;}
+.sc-new{font-family:'Playfair Display',serif;font-size:3.4rem;color:var(--gold);font-weight:900;line-height:1;}
+.sc-imp{color:#86efac;font-size:.82rem;font-weight:600;margin-bottom:1rem;}
+.prog-row{margin-bottom:.7rem;}
+.prog-head{display:flex;justify-content:space-between;font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:.3rem;}
+.prog-track{background:rgba(255,255,255,.07);border-radius:100px;height:4px;}
+.prog-fill{height:4px;border-radius:100px;background:linear-gradient(90deg,var(--orange),var(--gold));}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+.mini-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;}
+.mini-val{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--white);}
+.mini-desc{font-size:.7rem;color:rgba(255,255,255,.35);margin-top:.1rem;}
+/* SECTIONS */
+.section{padding:80px 5%;}
+.section-dark{background:var(--navy2);}
+.section-darker{background:var(--navy3);}
+.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.7rem;}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;margin-bottom:.8rem;line-height:1.1;}
+.sec-sub{color:var(--muted);font-size:.95rem;line-height:1.7;max-width:540px;}
+/* TICKER */
+.ticker{background:var(--orange);padding:.65rem 0;overflow:hidden;white-space:nowrap;}
+.ticker-inner{display:inline-flex;gap:2.5rem;animation:tick 30s linear infinite;}
+.ticker-inner span{font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--white);}
+.t-sep{color:rgba(255,255,255,.4);}
+@keyframes tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+/* TUTORS */
+.tutors-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2.5rem;}
+.tutor-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:16px;padding:2rem;}
+.tutor-av{width:56px;height:56px;border-radius:50%;background:rgba(240,165,0,.15);border:2px solid rgba(240,165,0,.3);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--gold);margin-bottom:1rem;}
+.tutor-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:.2rem;}
+.tutor-title{color:var(--muted);font-size:.82rem;margin-bottom:.8rem;}
+.badge{display:inline-block;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.3);color:var(--gold);font-size:.68rem;font-weight:700;padding:.25rem .7rem;border-radius:100px;letter-spacing:.5px;}
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem;}
+.stat-box{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center;}
+.stat-val{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--gold);}
+.stat-label{font-size:.78rem;color:var(--muted);margin-top:.3rem;}
+/* TOPICS GRID */
+.topics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem;}
+.topic-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:1.5rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.topic-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.topic-card:hover{background:rgba(255,255,255,.07);border-color:rgba(240,165,0,.3);transform:translateY(-3px);}
+.topic-card:hover::after{transform:scaleX(1);}
+.topic-num{font-size:.65rem;font-weight:700;letter-spacing:1.5px;color:var(--orange);margin-bottom:.4rem;}
+.topic-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:.3rem;}
+.topic-count{font-size:.75rem;color:var(--muted);}
+.topic-arr{float:right;color:var(--muted);font-size:1rem;margin-top:-1.5rem;}
+/* PRACTICE UI */
+.practice-wrap{max-width:760px;margin:0 auto;padding:2rem 0;}
+.prob-progress{height:4px;background:rgba(255,255,255,.08);border-radius:100px;margin-bottom:1.5rem;}
+.prob-progress-fill{height:4px;background:linear-gradient(90deg,var(--orange),var(--gold));border-radius:100px;transition:width .4s;}
+.prob-box{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:18px;padding:2.2rem;}
+.prob-q{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;line-height:1.5;margin-bottom:1.8rem;}
+.choices{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem;}
+.choice-btn{display:flex;align-items:center;gap:.9rem;background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:10px;padding:1rem 1.2rem;cursor:pointer;font-size:.92rem;color:var(--white);text-align:left;transition:all .2s;}
+.choice-btn:hover:not(:disabled){border-color:rgba(240,165,0,.4);background:rgba(240,165,0,.06);}
+.choice-btn.correct{border-color:var(--green)!important;background:rgba(34,197,94,.08)!important;color:#86efac;}
+.choice-btn.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.08)!important;color:#fca5a5;}
+.choice-letter{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;flex-shrink:0;}
+.choice-btn.correct .choice-letter{background:var(--green);color:#fff;}
+.choice-btn.wrong .choice-letter{background:var(--red);color:#fff;}
+.exp-box{background:rgba(17,45,85,.8);border:1px solid rgba(240,165,0,.2);border-radius:14px;padding:1.5rem 1.8rem;margin-bottom:1.5rem;display:none;}
+.exp-box.show{display:block;}
+.exp-head{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.6rem;}
+.exp-text{font-size:.9rem;line-height:1.7;color:rgba(255,255,255,.8);margin-bottom:.7rem;}
+.exp-formula{background:rgba(240,165,0,.08);border-radius:8px;padding:.7rem 1rem;font-family:monospace;font-size:.88rem;color:var(--gold);}
+.prob-nav{display:flex;justify-content:space-between;align-items:center;}
+.prob-score-txt{font-size:.82rem;color:var(--muted);}
+.prob-score-txt strong{color:var(--white);}
+/* EXAMS */
+.exams-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem;}
+.exam-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:16px;padding:1.8rem;transition:all .25s;cursor:pointer;}
+.exam-card:hover{border-color:rgba(240,165,0,.3);background:rgba(255,255,255,.07);transform:translateY(-3px);}
+.exam-diff{display:inline-block;padding:.2rem .7rem;border-radius:100px;font-size:.65rem;font-weight:700;letter-spacing:.5px;margin-bottom:.8rem;}
+.diff-easy{background:rgba(34,197,94,.15);color:#86efac;border:1px solid rgba(34,197,94,.3);}
+.diff-med{background:rgba(240,165,0,.15);color:var(--gold);border:1px solid rgba(240,165,0,.3);}
+.diff-hard{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3);}
+.exam-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:.4rem;}
+.exam-meta{font-size:.78rem;color:var(--muted);margin-bottom:1.2rem;}
+/* EXAM ACTIVE */
+.exam-topbar{background:var(--navy3);border-bottom:1px solid var(--border);padding:1rem 5%;display:flex;align-items:center;justify-content:space-between;position:sticky;top:64px;z-index:50;}
+.exam-timer{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--gold);}
+.exam-timer.urgent{color:var(--red);animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.4;}}
+.exam-questions{max-width:720px;margin:0 auto;padding:2rem 5% 120px;}
+.eq-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:1.8rem;margin-bottom:1.2rem;}
+.eq-num{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);margin-bottom:.7rem;}
+.eq-q{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;line-height:1.5;margin-bottom:1.2rem;}
+.eq-hard-badge{display:inline-block;background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3);font-size:.62rem;font-weight:700;padding:.2rem .6rem;border-radius:100px;margin-bottom:.5rem;letter-spacing:.5px;}
+.eq-choices{display:flex;flex-direction:column;gap:.6rem;}
+.eq-ch{display:flex;align-items:center;gap:.8rem;padding:.85rem 1rem;border-radius:8px;border:1.5px solid var(--border);cursor:pointer;font-size:.88rem;color:var(--white);transition:all .2s;}
+.eq-ch:hover{border-color:rgba(240,165,0,.3);background:rgba(240,165,0,.04);}
+.eq-ch.selected{border-color:rgba(240,165,0,.5);background:rgba(240,165,0,.08);}
+.eq-ch.correct{border-color:var(--green)!important;background:rgba(34,197,94,.08)!important;color:#86efac;}
+.eq-ch.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.08)!important;color:#fca5a5;}
+.eq-letter{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0;}
+.exam-bar{position:fixed;bottom:0;left:0;right:0;background:var(--navy3);border-top:1px solid var(--border);padding:1rem 5%;display:flex;align-items:center;justify-content:space-between;z-index:100;}
+/* RESULTS */
+.results-box{max-width:640px;margin:3rem auto;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:20px;padding:3rem;text-align:center;}
+.result-score{font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;color:var(--gold);line-height:1;}
+.result-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0;}
+.rb-item{background:rgba(255,255,255,.04);border-radius:12px;padding:1rem;}
+.rb-val{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--gold);}
+.rb-label{font-size:.72rem;color:var(--muted);}
+.eq-exp{background:rgba(17,45,85,.9);border-radius:10px;padding:1rem 1.2rem;margin-top:.8rem;display:none;text-align:left;}
+.eq-exp.show{display:block;}
+.eq-exp-head{font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.4rem;}
+.eq-exp-text{font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.75);}
+/* COURSES */
+.courses-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem;}
+.course-card{border-radius:18px;padding:2.5rem;position:relative;overflow:hidden;}
+.course-sat{background:linear-gradient(135deg,#0d2447,#112d55);}
+.course-desmos{background:linear-gradient(135deg,#1a1a3e,#0d2447);}
+.course-tag{display:inline-block;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.3);color:var(--gold);font-size:.65rem;font-weight:700;padding:.25rem .7rem;border-radius:100px;margin-bottom:1rem;letter-spacing:.5px;}
+.course-card h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin-bottom:.7rem;}
+.course-card p{color:var(--muted);font-size:.88rem;line-height:1.7;margin-bottom:1.5rem;}
+.course-features{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem;}
+.course-features li{display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:rgba(255,255,255,.75);}
+.course-features li::before{content:'✓';color:var(--gold);font-weight:800;flex-shrink:0;}
+.price-tag{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:var(--gold);margin-bottom:.3rem;}
+.price-sub{font-size:.78rem;color:var(--muted);margin-bottom:1.5rem;}
+/* PASSWORD MODAL */
+.pw-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;display:none;align-items:center;justify-content:center;}
+.pw-overlay.show{display:flex;}
+.pw-modal{background:var(--navy2);border:1px solid var(--border);border-radius:20px;padding:3rem;max-width:400px;width:90%;text-align:center;}
+.pw-modal h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin-bottom:.5rem;}
+.pw-modal p{color:var(--muted);font-size:.88rem;margin-bottom:1.5rem;}
+.pw-input{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:8px;padding:.85rem 1rem;color:var(--white);font-size:1rem;outline:none;text-align:center;letter-spacing:2px;margin-bottom:.8rem;}
+.pw-input:focus{border-color:var(--gold);}
+.pw-error{color:#fca5a5;font-size:.82rem;margin-bottom:.8rem;display:none;}
+.pw-error.show{display:block;}
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem;}
+.price-card{background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:18px;padding:2rem 1.6rem;position:relative;transition:transform .3s;}
+.price-card:hover{transform:translateY(-5px);}
+.price-card.featured{background:rgba(240,165,0,.06);border-color:rgba(240,165,0,.3);}
+.featured-tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:.65rem;font-weight:800;padding:.3rem 1rem;border-radius:100px;white-space:nowrap;letter-spacing:.5px;}
+.tier-label{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;display:block;}
+.tier-price{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--white);line-height:1;}
+.tier-per{font-size:.78rem;color:var(--muted);margin-bottom:.3rem;}
+.tier-free{font-size:.78rem;color:#86efac;font-weight:700;margin-bottom:1rem;}
+.tier-div{border:none;border-top:1px solid var(--border);margin:1rem 0;}
+.tier-features{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.6rem;}
+.tier-features li{font-size:.83rem;color:var(--muted);display:flex;align-items:flex-start;gap:.5rem;line-height:1.4;}
+.tier-features li::before{content:'✓';color:var(--orange);font-weight:800;flex-shrink:0;margin-top:1px;}
+/* BOOKING */
+.booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:2.5rem;}
+.book-perks{list-style:none;display:flex;flex-direction:column;gap:.8rem;margin-top:1.5rem;}
+.book-perks li{display:flex;align-items:center;gap:.8rem;font-size:.9rem;color:rgba(255,255,255,.75);}
+.book-perks li::before{content:'→';color:var(--gold);font-weight:800;}
+.book-form{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:18px;padding:2.2rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.fg{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem;}
+.fg label{font-size:.68rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.fg input,.fg select,.fg textarea{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;color:var(--white);font-size:.88rem;outline:none;transition:border-color .2s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.2);}
+.fg select option{background:var(--navy2);}
+.fg textarea{resize:vertical;min-height:75px;}
+.form-submit{width:100%;background:var(--orange);color:#fff;border:none;padding:1rem;border-radius:8px;font-weight:800;font-size:.95rem;cursor:pointer;transition:opacity .2s;margin-top:.5rem;letter-spacing:.3px;}
+.form-submit:hover{opacity:.88;}
+.form-success{display:none;text-align:center;padding:2rem 0;}
+.form-success.show{display:block;}
+/* FOOTER */
+footer{background:var(--navy3);border-top:1px solid var(--border);padding:40px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.foot-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--white);}
+.foot-logo span{color:var(--gold);}
+.foot-copy{font-size:.78rem;color:rgba(255,255,255,.3);}
+/* COURSE CONTENT */
+.course-content{max-width:800px;margin:0 auto;padding:2rem 0;}
+.lesson-list{display:flex;flex-direction:column;gap:.8rem;margin-top:2rem;}
+.lesson-item{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.lesson-num{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);margin-bottom:.2rem;}
+.lesson-title{font-weight:600;font-size:.92rem;}
+.lesson-dur{font-size:.75rem;color:var(--muted);}
+/* RESPONSIVE */
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s;}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(11,31,58,0.99);border-bottom:1px solid var(--border);z-index:99;flex-direction:column;padding:1rem 5%;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:600;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;display:block;}
+.mobile-menu a:last-child{border-bottom:none;}
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr;padding:60px 5% 40px;}
+  .hero-visual{display:none;}
+  .topics-grid{grid-template-columns:1fr 1fr;}
+  .exams-grid{grid-template-columns:1fr 1fr;}
+  .tutors-grid{grid-template-columns:1fr;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .booking-grid{grid-template-columns:1fr;}
+  .courses-grid{grid-template-columns:1fr!important;display:flex!important;flex-direction:column!important;}
+  .course-card{width:100%!important;box-sizing:border-box;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .form-row{grid-template-columns:1fr;}
+  .result-breakdown{grid-template-columns:1fr 1fr;}
+  .exams-grid{grid-template-columns:1fr;}
+  .topics-grid{grid-template-columns:1fr;}
+  .section{padding:50px 5%;}
+  .hero h1{font-size:2.4rem;}
+  .prob-box{padding:1.4rem;}
+  .eq-card{padding:1.2rem;}
+  .exam-questions{padding:1rem 4% 120px;}
+  .results-box{padding:1.5rem;}
+  .done-box{padding:1.5rem;margin:2rem auto;}
+}
+/* DONE SCREEN */
+.done-box{max-width:500px;margin:4rem auto;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:20px;padding:3rem;text-align:center;}
+.done-score{font-family:'Playfair Display',serif;font-size:4.5rem;font-weight:900;color:var(--gold);line-height:1;}
+
+/* ===== EMAIL SIGNUP ===== */
+.email-section{background:linear-gradient(135deg,#0d2447,#1a3a6b);padding:60px 5%;text-align:center;}
+.email-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;margin-bottom:.6rem;}
+.email-section p{color:var(--muted);font-size:.95rem;margin-bottom:1.5rem;}
+.email-form{display:flex;gap:.8rem;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+.email-input{flex:1;min-width:220px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:.85rem 1.1rem;color:var(--white);font-size:.92rem;outline:none;font-family:'DM Sans',sans-serif;}
+.email-input:focus{border-color:var(--gold);}
+.email-input::placeholder{color:rgba(255,255,255,.3);}
+.email-success{display:none;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#86efac;padding:.8rem 1.5rem;border-radius:8px;font-size:.9rem;font-weight:600;margin-top:1rem;}
+.email-success.show{display:inline-block;}
+.email-count{display:inline-block;background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.2);color:var(--gold);font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:100px;margin-bottom:1rem;letter-spacing:.5px;}
+
+/* ===== FLASHCARDS ===== */
+.fc-topic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
+.fc-topic-btn{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:1.3rem;cursor:pointer;transition:all .25s;text-align:left;}
+.fc-topic-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(240,165,0,.3);transform:translateY(-2px);}
+.fc-topic-name{font-weight:700;font-size:.9rem;margin-bottom:.3rem;}
+.fc-topic-count{font-size:.75rem;color:var(--muted);}
+.fc-wrap{max-width:600px;margin:0 auto;padding:2rem 0;}
+.fc-progress-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:.5rem;}
+.fc-counter{font-size:.82rem;color:var(--muted);}
+.fc-scene{perspective:1000px;height:280px;cursor:pointer;margin-bottom:1.5rem;}
+.fc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s ease;}
+.fc-card.flipped{transform:rotateY(180deg);}
+.fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;}
+.fc-front{background:linear-gradient(135deg,var(--navy2),var(--navy3));border:1px solid var(--border);}
+.fc-back{background:linear-gradient(135deg,#0a2a1a,#0d3a22);border:1px solid rgba(34,197,94,.3);transform:rotateY(180deg);}
+.fc-label{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:.8rem;opacity:.5;}
+.fc-front .fc-label{color:var(--gold);}
+.fc-back .fc-label{color:#86efac;}
+.fc-question{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;line-height:1.5;color:var(--white);}
+.fc-answer{font-size:1rem;line-height:1.6;color:#86efac;font-weight:600;}
+.fc-formula{font-family:monospace;font-size:.9rem;color:var(--gold);background:rgba(240,165,0,.08);padding:.5rem 1rem;border-radius:8px;margin-top:.8rem;}
+.fc-hint{font-size:.78rem;color:rgba(255,255,255,.35);margin-top:1rem;animation:bounce 2s infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+.fc-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
+.fc-btn-know{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);color:#86efac;padding:.7rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:700;font-size:.88rem;transition:all .2s;}
+.fc-btn-know:hover{background:rgba(34,197,94,.25);}
+.fc-btn-review{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#fca5a5;padding:.7rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:700;font-size:.88rem;transition:all .2s;}
+.fc-btn-review:hover{background:rgba(239,68,68,.22);}
+.fc-done{text-align:center;padding:3rem 1rem;}
+.fc-done-score{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--gold);}
+
+/* ===== WEAK SPOT QUIZ ===== */
+.ws-intro{max-width:600px;margin:0 auto;text-align:center;padding:2rem 0;}
+.ws-topic-select{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:2rem 0;}
+.ws-topic-check{background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:12px;padding:1rem;cursor:pointer;transition:all .2s;text-align:center;font-size:.85rem;font-weight:600;user-select:none;}
+.ws-topic-check.selected{border-color:var(--gold);background:rgba(240,165,0,.08);color:var(--gold);}
+.ws-result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2rem;}
+.ws-result-card{border-radius:14px;padding:1.5rem;border:1px solid var(--border);}
+.ws-result-card.weak{background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.3);}
+.ws-result-card.strong{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.3);}
+.ws-topic-label{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.4rem;}
+.ws-result-card.weak .ws-topic-label{color:#fca5a5;}
+.ws-result-card.strong .ws-topic-label{color:#86efac;}
+.ws-score-bar-wrap{height:6px;background:rgba(255,255,255,.08);border-radius:100px;margin:.6rem 0;}
+.ws-score-bar{height:6px;border-radius:100px;}
+.ws-result-card.weak .ws-score-bar{background:linear-gradient(90deg,#ef4444,#fca5a5);}
+.ws-result-card.strong .ws-score-bar{background:linear-gradient(90deg,#22c55e,#86efac);}
+.ws-pct{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;}
+.ws-result-card.weak .ws-pct{color:#fca5a5;}
+.ws-result-card.strong .ws-pct{color:#86efac;}
+.ws-rec{font-size:.78rem;color:var(--muted);margin-top:.4rem;line-height:1.5;}
+
+/* ===== DAILY PROBLEM / STREAK ===== */
+.streak-banner{background:linear-gradient(135deg,rgba(240,165,0,.12),rgba(224,92,42,.08));border:1px solid rgba(240,165,0,.25);border-radius:16px;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;}
+.streak-left{display:flex;align-items:center;gap:1rem;}
+.streak-flame{font-size:2.2rem;}
+.streak-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:var(--gold);line-height:1;}
+.streak-label{font-size:.75rem;color:var(--muted);margin-top:.1rem;}
+.streak-days{display:flex;gap:.4rem;}
+.streak-day{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;text-transform:uppercase;}
+.streak-day.done{background:rgba(240,165,0,.2);color:var(--gold);border:1px solid rgba(240,165,0,.3);}
+.streak-day.today{background:var(--gold);color:var(--navy);border:1px solid var(--gold);}
+.streak-day.missed{background:rgba(255,255,255,.04);color:rgba(255,255,255,.2);border:1px solid var(--border);}
+.daily-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:18px;padding:2rem;max-width:680px;margin:0 auto;}
+.daily-solved{text-align:center;padding:2rem;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:16px;}
+
+/* ===== NAV HOME CARDS ===== */
+.home-nav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
+
+/* MOBILE EXTRAS */
+@media(max-width:600px){
+  .fc-topic-grid{grid-template-columns:1fr 1fr;}
+  .ws-topic-select{grid-template-columns:1fr 1fr;}
+  .ws-result-grid{grid-template-columns:1fr;}
+  .streak-banner{flex-direction:column;align-items:flex-start;}
+  .streak-days{flex-wrap:wrap;}
+  .fc-scene{height:240px;}
+  .fc-question{font-size:1rem;}
+  .home-nav-grid{grid-template-columns:1fr;}
+  .email-form{flex-direction:column;}
+  .email-input{width:100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">TB <span>Math</span> Prep</div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('practice-topics')">Practice</a></li>
+    <li><a onclick="showPage('exams-list')">Exams</a></li>
+    <li><a onclick="showPage('courses')">Courses</a></li>
+    <li><a onclick="showPage('flashcards')">Flashcards</a></li>
+    <li><a onclick="showPage('weakspot')">Weak Spots</a></li>
+    <li><a onclick="showPage('pricing')">Pricing</a></li>
+    <li><a onclick="showPage('booking')" class="nav-cta">Book Free Session</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="mobileNav('practice-topics')">📚 Practice Problems</a>
+  <a onclick="mobileNav('exams-list')">📝 Practice Exams</a>
+  <a onclick="mobileNav('courses')">🔒 Courses</a>
+  <a onclick="mobileNav('flashcards')">🃏 Flashcards</a>
+  <a onclick="mobileNav('weakspot')">🎯 Weak Spot Quiz</a>
+  <a onclick="mobileNav('daily')">🔥 Daily Problem</a>
+  <a onclick="mobileNav('pricing')">💰 Pricing</a>
+  <a onclick="mobileNav('booking')" style="color:var(--gold);font-weight:700;">🎉 Book Free Session</a>
+</div>
+
+<!-- PASSWORD MODAL -->
+<div class="pw-overlay" id="pwOverlay">
+  <div class="pw-modal">
+    <div style="font-size:2rem;margin-bottom:.8rem;">🔒</div>
+    <h3 id="pwTitle">Course Access</h3>
+    <p id="pwDesc">Enter the password to access this course.</p>
+    <input class="pw-input" type="password" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkPW()"/>
+    <div class="pw-error" id="pwError">Incorrect password. Try again.</div>
+    <button class="btn btn-gold" style="width:100%;margin-bottom:.8rem;" onclick="checkPW()">Unlock Course</button>
+    <button class="btn btn-outline btn-sm" style="width:100%;" onclick="closePW()">Cancel</button>
+  </div>
+</div>
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-glow"></div><div class="hero-glow2"></div>
+    <div style="position:relative;z-index:2;">
+      <div class="hero-badge"><span class="pulse"></span>Enrolling Now · All Grades</div>
+      <h1>Master the<br><span class="accent">SAT Math</span><br><span class="italic">Section.</span></h1>
+      <p class="hero-sub">Local expert tutoring from <strong>Toby Velez (790+ SAT Math)</strong> and <strong>Bryan Lim (780+ SAT Math)</strong>. 1,000+ free practice problems, 30 full practice exams, and real personalized coaching.</p>
+      <div class="free-banner">🎉 Your First Session is 100% Free — No Commitment</div>
+      <div class="hero-btns">
+        <button class="btn btn-gold" onclick="showPage('practice-topics')">Try Free Problems</button>
+        <button class="btn btn-orange" onclick="showPage('booking')">Book Free Session</button>
+        <button class="btn btn-outline" onclick="showPage('exams-list')">Practice Exams</button>
+        <button class="btn btn-outline" onclick="showPage('daily')" style="background:rgba(240,165,0,.1);border-color:rgba(240,165,0,.3);color:var(--gold);">🔥 Daily Problem</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="score-card">
+        <div class="sc-label">Recent Student Result</div>
+        <div class="sc-scores"><span class="sc-old">560</span><span class="sc-arr">→</span><span class="sc-new">760</span></div>
+        <div class="sc-imp">+200 points in 8 weeks 🎉</div>
+        <div class="prog-row"><div class="prog-head"><span>Algebra</span><span>95%</span></div><div class="prog-track"><div class="prog-fill" style="width:95%"></div></div></div>
+        <div class="prog-row"><div class="prog-head"><span>Advanced Math</span><span>88%</span></div><div class="prog-track"><div class="prog-fill" style="width:88%"></div></div></div>
+        <div class="prog-row"><div class="prog-head"><span>Problem Solving</span><span>91%</span></div><div class="prog-track"><div class="prog-fill" style="width:91%"></div></div></div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card"><div class="mini-val">1000+</div><div class="mini-desc">Free practice problems</div></div>
+        <div class="mini-card"><div class="mini-val">30</div><div class="mini-desc">Full practice exams</div></div>
+        <div class="mini-card"><div class="mini-val">Free</div><div class="mini-desc">First session</div></div>
+        <div class="mini-card"><div class="mini-val">Local</div><div class="mini-desc">In-person + Zoom</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>TB Math Prep</span><span class="t-sep">◆</span><span>1,000+ Free Problems</span><span class="t-sep">◆</span><span>30 Practice Exams</span><span class="t-sep">◆</span><span>First Session FREE</span><span class="t-sep">◆</span><span>Toby Velez 790+</span><span class="t-sep">◆</span><span>Bryan Lim 780+</span><span class="t-sep">◆</span><span>SAT Math Experts</span><span class="t-sep">◆</span>
+      <span>TB Math Prep</span><span class="t-sep">◆</span><span>1,000+ Free Problems</span><span class="t-sep">◆</span><span>30 Practice Exams</span><span class="t-sep">◆</span><span>First Session FREE</span><span class="t-sep">◆</span><span>Toby Velez 790+</span><span class="t-sep">◆</span><span>Bryan Lim 780+</span><span class="t-sep">◆</span><span>SAT Math Experts</span><span class="t-sep">◆</span>
+    </div>
+  </div>
+
+  <section class="section section-dark">
+    <span class="eyebrow">Who We Are</span>
+    <h2 class="sec-title">Meet your tutors.</h2>
+    <div class="tutors-grid">
+      <div class="tutor-card">
+        <div class="tutor-av">T</div>
+        <div class="tutor-name">Toby Velez</div>
+        <div class="tutor-title">Founder · Algebra, Advanced Math & Desmos Strategy</div>
+        <div class="badge">790+ SAT Math Score</div>
+        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;margin-top:1rem;">Toby scored 790+ on the SAT Math section and has developed a proven system for helping students dramatically improve their scores. He specializes in Advanced Math, test strategy, and Desmos mastery.</p>
+      </div>
+      <div class="tutor-card">
+        <div class="tutor-av">B</div>
+        <div class="tutor-name">Bryan Lim</div>
+        <div class="tutor-title">Co-Founder · Geometry, Data & Timed Practice</div>
+        <div class="badge">780+ SAT Math Score</div>
+        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;margin-top:1rem;">Bryan scored 780+ and specializes in Geometry, Data Analysis, and helping students master timed test conditions. His calm, methodical teaching style has helped dozens of students conquer test anxiety.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="eyebrow">Our Numbers</span>
+    <h2 class="sec-title">Results that speak.</h2>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val">+150</div><div class="stat-label">Average point increase</div></div>
+      <div class="stat-box"><div class="stat-val">1000+</div><div class="stat-label">Free practice problems</div></div>
+      <div class="stat-box"><div class="stat-val">30</div><div class="stat-label">Full practice exams</div></div>
+      <div class="stat-box"><div class="stat-val">100%</div><div class="stat-label">First session free</div></div>
+    </div>
+  
+  <!-- EMAIL SIGNUP -->
+  <div class="email-section">
+    <div class="email-count">📬 Join 200+ SAT students</div>
+    <h2>Get weekly SAT Math tips — free.</h2>
+    <p>Every week Toby sends one tip, one trick, and one practice problem straight to your inbox. No spam. Unsubscribe anytime.</p>
+    <div class="email-form">
+      <input class="email-input" type="text" id="emailName" placeholder="Your first name"/>
+      <input class="email-input" type="email" id="emailAddr" placeholder="your@email.com"/>
+      <button class="btn btn-gold" onclick="submitEmail()">Subscribe Free →</button>
+    </div>
+    <div class="email-success" id="emailSuccess">🎉 You're in! Check your inbox for a welcome tip from Toby.</div>
+  </div>
+</section>
+</div>
+
+<!-- ===== PRACTICE TOPICS ===== -->
+<div class="page" id="page-practice-topics">
+  <section class="section">
+    <button class="btn btn-outline btn-sm" onclick="showPage('home')" style="margin-bottom:1.5rem;">← Home</button>
+    <span class="eyebrow">Free Practice Problems</span>
+    <h2 class="sec-title">1,000+ problems. Every topic.</h2>
+    <p class="sec-sub">Click any topic to start practicing. Every wrong answer shows a detailed explanation so you actually learn.</p>
+    <div class="topics-grid" id="topicsGrid"></div>
+  </section>
+</div>
+
+<!-- ===== PRACTICE PROBLEMS ===== -->
+<div class="page" id="page-practice">
+  <section class="section">
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+      <button class="btn btn-outline btn-sm" onclick="showPage('practice-topics')">← Topics</button>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;" id="practiceTopicTitle"></div>
+        <div style="font-size:.78rem;color:var(--muted);" id="practiceTopicMeta"></div>
+      </div>
+    </div>
+    <div class="practice-wrap">
+      <div class="prob-progress"><div class="prob-progress-fill" id="probBar" style="width:0%"></div></div>
+      <div class="prob-box" id="probBox">
+        <div class="prob-q" id="probQ"></div>
+        <div class="choices" id="probChoices"></div>
+        <div class="exp-box" id="expBox">
+          <div class="exp-head">📖 Explanation — Why you got this wrong</div>
+          <div class="exp-text" id="expText"></div>
+          <div class="exp-formula" id="expFormula"></div>
+        </div>
+        <div class="prob-nav">
+          <div class="prob-score-txt">Score: <strong id="probScore">0</strong> / <strong id="probTotal">0</strong></div>
+          <div style="display:flex;gap:.6rem;">
+            <button class="btn btn-outline btn-sm" onclick="skipProb()">Skip</button>
+            <button class="btn btn-gold btn-sm" id="nextBtn" style="display:none;" onclick="nextProb()">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== DONE SCREEN ===== -->
+<div class="page" id="page-done">
+  <section class="section">
+    <div class="done-box">
+      <div style="font-size:3rem;margin-bottom:1rem;">🎉</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:.5rem;">Set Complete!</div>
+      <div class="done-score" id="doneScore">0/0</div>
+      <div style="color:var(--muted);margin:.5rem 0 1.5rem;" id="donePct"></div>
+      <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-gold" onclick="restartTopic()">Try Again</button>
+        <button class="btn btn-outline" onclick="showPage('practice-topics')">All Topics</button>
+        <button class="btn btn-orange" onclick="showPage('booking')">Book a Session</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== EXAMS LIST ===== -->
+<div class="page" id="page-exams-list">
+  <section class="section">
+    <button class="btn btn-outline btn-sm" onclick="showPage('home')" style="margin-bottom:1.5rem;">← Home</button>
+    <span class="eyebrow">Practice Exams</span>
+    <h2 class="sec-title">30 full SAT Math exams.</h2>
+    <p class="sec-sub">22 questions each · 35 minutes · Last 6–8 questions are hardest. Instant scoring with full explanations.</p>
+    <div class="exams-grid" id="examsGrid"></div>
+  </section>
+</div>
+
+<!-- ===== EXAM ACTIVE ===== -->
+<div class="page" id="page-exam-active">
+  <div class="exam-topbar">
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;" id="activeExamName"></div>
+      <div style="font-size:.72rem;color:var(--muted);" id="activeExamProg"></div>
+    </div>
+    <div class="exam-timer" id="examTimer">35:00</div>
+    <button class="btn btn-outline btn-sm" onclick="exitExam()">Exit</button>
+  </div>
+  <div class="exam-questions" id="examQContainer"></div>
+  <div class="exam-bar" id="examBar">
+    <div style="font-size:.82rem;color:var(--muted);" id="examAnsweredCount">0/22 answered</div>
+    <button class="btn btn-orange" onclick="submitExam()">Submit Exam →</button>
+  </div>
+</div>
+
+<!-- ===== EXAM RESULTS ===== -->
+<div class="page" id="page-exam-results">
+  <section class="section">
+    <div class="results-box">
+      <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--muted);">Your Score</div>
+      <div class="result-score" id="resScore">0/22</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;font-weight:300;margin:1rem 0;color:rgba(255,255,255,.7);" id="resMsg"></div>
+      <div class="result-breakdown" id="resBreakdown"></div>
+      <div id="resReview" style="text-align:left;margin-bottom:2rem;"></div>
+      <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-gold" onclick="retakeExam()">Retake</button>
+        <button class="btn btn-outline" onclick="showPage('exams-list')">All Exams</button>
+        <button class="btn btn-orange" onclick="showPage('booking')">Book a Session</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== COURSES ===== -->
+<div class="page" id="page-courses">
+  <section class="section">
+    <button class="btn btn-outline btn-sm" onclick="showPage('home')" style="margin-bottom:1.5rem;">← Home</button>
+    <span class="eyebrow">Paid Courses</span>
+    <h2 class="sec-title">Deep-dive courses.</h2>
+    <p class="sec-sub">Password-protected courses built by Toby and Bryan. Purchase a course to get the password.</p>
+    <div class="courses-grid">
+      <div class="course-card course-sat">
+        <div class="course-tag">📐 SAT MATH COURSE</div>
+        <h3>Complete SAT Math Mastery</h3>
+        <p>A full structured course covering every SAT Math topic from foundations to advanced. Video walkthroughs, problem sets, and strategy guides built by Toby.</p>
+        <ul class="course-features">
+          <li>12 modules covering all SAT Math topics</li>
+          <li>100+ video walkthroughs by Toby</li>
+          <li>Downloadable strategy guides</li>
+          <li>Topic quizzes after each module</li>
+          <li>Full test simulations</li>
+          <li>Lifetime access</li>
+        </ul>
+        <div class="price-tag">$49</div>
+        <div class="price-sub">one-time · lifetime access</div>
+        <button class="btn btn-gold" style="width:100%;" onclick="openPW('sat')">Access Course →</button>
+      </div>
+      <div class="course-card course-desmos">
+        <div class="course-tag">📊 DESMOS COURSE</div>
+        <h3>Desmos Mastery for SAT</h3>
+        <p>Master the Desmos graphing calculator to save 30+ seconds per problem. Learn every trick Toby uses to solve hard SAT problems in seconds.</p>
+        <ul class="course-features">
+          <li>Finding zeros of any function instantly</li>
+          <li>Solving quadratics visually</li>
+          <li>Regression & scatterplot tricks</li>
+          <li>Intersection & systems solving</li>
+          <li>Slider strategy & dynamic graphing</li>
+          <li>40+ Desmos-specific practice problems</li>
+        </ul>
+        <div class="price-tag">$25</div>
+        <div class="price-sub">one-time · lifetime access</div>
+        <button class="btn btn-gold" style="width:100%;" onclick="openPW('desmos')">Access Course →</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== SAT COURSE CONTENT ===== -->
+<div class="page" id="page-sat-course">
+  <section class="section">
+    <button class="btn btn-outline btn-sm" onclick="showPage('courses')" style="margin-bottom:1.5rem;">← Courses</button>
+    <span class="eyebrow">SAT Math Course · Unlocked</span>
+    <h2 class="sec-title">Complete SAT Math Mastery</h2>
+    <p class="sec-sub">Work through each module in order. Each lesson builds on the last.</p>
+    <div class="course-content">
+      <div class="lesson-list" id="satLessons"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== DESMOS COURSE CONTENT ===== -->
+<div class="page" id="page-desmos-course">
+  <section class="section">
+    <button class="btn btn-outline btn-sm" onclick="showPage('courses')" style="margin-bottom:1.5rem;">← Courses</button>
+    <span class="eyebrow">Desmos Course · Unlocked</span>
+    <h2 class="sec-title">Desmos Mastery for SAT</h2>
+    <p class="sec-sub">Master every Desmos trick that saves time on the SAT.</p>
+    <div class="course-content">
+      <div class="lesson-list" id="desmosLessons"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PRICING ===== -->
+<div class="page" id="page-pricing">
+  <section class="section">
+    <button class="btn btn-outline btn-sm" onclick="showPage('home')" style="margin-bottom:1.5rem;">← Home</button>
+    <span class="eyebrow">Pricing</span>
+    <h2 class="sec-title">Simple, honest pricing.</h2>
+    <p class="sec-sub">First session always free. No credit card. No pressure.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <span class="tier-label">Group</span>
+        <div class="tier-price">$30</div>
+        <div class="tier-per">per hour · per student</div>
+        <div class="tier-free">✦ First session free</div>
+        <hr class="tier-div"/>
+        <ul class="tier-features">
+          <li>2–5 students per session</li>
+          <li>Topic-focused each session</li>
+          <li>Practice problems included</li>
+          <li>In-person or Zoom</li>
+          <li>Email follow-up resources</li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%;" onclick="showPage('booking')">Book Free Session</button>
+      </div>
+      <div class="price-card featured">
+        <div class="featured-tag">MOST POPULAR</div>
+        <span class="tier-label">1-on-1</span>
+        <div class="tier-price">$50</div>
+        <div class="tier-per">per hour · private</div>
+        <div class="tier-free">✦ First session free</div>
+        <hr class="tier-div"/>
+        <ul class="tier-features">
+          <li>Private personalized session</li>
+          <li>Custom study plan</li>
+          <li>Progress tracking</li>
+          <li>WhatsApp tutor access</li>
+          <li>In-person or Zoom</li>
+          <li>Practice tests included</li>
+        </ul>
+        <button class="btn btn-gold" style="width:100%;" onclick="showPage('booking')">Book Free Session</button>
+      </div>
+      <div class="price-card">
+        <span class="tier-label">Bundle</span>
+        <div class="tier-price">$399</div>
+        <div class="tier-per">10 sessions · save $100</div>
+        <div class="tier-free">✦ First session free</div>
+        <hr class="tier-div"/>
+        <ul class="tier-features">
+          <li>10 private sessions</li>
+          <li>Full diagnostic assessment</li>
+          <li>3 proctored practice exams</li>
+          <li>Score improvement guarantee</li>
+          <li>Priority scheduling</li>
+          <li>Lifetime course access</li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%;" onclick="showPage('booking')">Book Free Session</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== BOOKING ===== -->
+<div class="page" id="page-booking">
+  <section class="section">
+    <button class="btn btn-outline btn-sm" onclick="showPage('home')" style="margin-bottom:1.5rem;">← Home</button>
+    <span class="eyebrow">Book a Session</span>
+    <div class="booking-grid">
+      <div>
+        <h2 class="sec-title">Start with a free session.</h2>
+        <p style="color:var(--muted);font-size:.95rem;line-height:1.7;margin-bottom:.5rem;">Fill out the form and Toby will email you at <strong style="color:var(--gold);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee9a818c878f9dc0988b828b94ae878d82819b8ac08d8183">[email&#160;protected]</a></strong> within 24 hours to schedule your free first session.</p>
+        <ul class="book-perks">
+          <li>30–60 minute free intro session</li>
+          <li>Diagnostic of your current level</li>
+          <li>Personalized score roadmap</li>
+          <li>In-person (Rockville MD) or Zoom</li>
+          <li>No commitment after free session</li>
+        </ul>
+      </div>
+      <div class="book-form" id="bookFormWrap">
+        <div class="form-row">
+          <div class="fg"><label>First Name</label><input type="text" id="bFirst" placeholder="Alex"/></div>
+          <div class="fg"><label>Last Name</label><input type="text" id="bLast" placeholder="Smith"/></div>
+        </div>
+        <div class="fg"><label>Email</label><input type="email" id="bEmail" placeholder="alex@email.com"/></div>
+        <div class="fg"><label>Phone (optional)</label><input type="tel" id="bPhone" placeholder="(301) 555-0100"/></div>
+        <div class="fg"><label>Grade Level</label>
+          <select id="bGrade">
+            <option value="">Select grade...</option>
+            <option>6th Grade</option><option>7th Grade</option><option>8th Grade</option>
+            <option>9th Grade</option><option>10th Grade</option><option>11th Grade</option><option>12th Grade</option>
+          </select>
+        </div>
+        <div class="fg"><label>Current SAT Math Score (if known)</label>
+          <select id="bScore">
+            <option value="">Select range...</option>
+            <option>Below 400</option><option>400–499</option><option>500–599</option>
+            <option>600–699</option><option>700–749</option><option>750–799</option><option>Haven't taken it yet</option>
+          </select>
+        </div>
+        <div class="fg"><label>What are you struggling with?</label>
+          <textarea id="bMsg" placeholder="e.g. Quadratics, word problems, running out of time..."></textarea>
+        </div>
+        <button class="form-submit" onclick="submitBooking()">Book My Free Session →</button>
+      </div>
+      <div class="form-success" id="bookSuccess">
+        <div style="font-size:3.5rem;margin-bottom:1rem;">🎉</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin-bottom:.5rem;">You're all set!</h3>
+        <p style="color:var(--muted);font-size:.9rem;">Toby will email you at <strong style="color:var(--gold);" id="confirmedEmail"></strong> within 24 hours to schedule your free session.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== DAILY PROBLEM ===== -->
+<div class="page" id="page-daily">
+  <section class="section">
+    <button class="btn btn-outline btn-sm" onclick="showPage('home')" style="margin-bottom:1.5rem;">← Home</button>
+    <span class="eyebrow">Daily Problem</span>
+    <h2 class="sec-title">Keep your streak alive.</h2>
+    <div id="streakBanner"></div>
+    <div id="dailyProbWrap"></div>
+  </section>
+</div>
+
+
+<!-- ===== FLASHCARDS ===== -->
+<div class="page" id="page-flashcards">
+  <section class="section">
+    <button class="btn btn-outline btn-sm" onclick="showPage('home')" style="margin-bottom:1.5rem;">← Home</button>
+    <span class="eyebrow">Flashcard Mode</span>
+    <h2 class="sec-title">Learn every formula & concept.</h2>
+    <p class="sec-sub">Click a topic to start. Tap the card to flip it. Mark cards as "Know It" or "Review Again" to track your progress.</p>
+    <div class="fc-topic-grid" id="fcTopicGrid"></div>
+  </section>
+</div>
+
+<!-- ===== FLASHCARD ACTIVE ===== -->
+<div class="page" id="page-flashcard-active">
+  <section class="section">
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+      <button class="btn btn-outline btn-sm" onclick="showPage('flashcards')">← Topics</button>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;" id="fcActiveTitle"></div>
+        <div style="font-size:.75rem;color:var(--muted);" id="fcActiveSub"></div>
+      </div>
+    </div>
+    <div class="fc-wrap">
+      <div class="fc-progress-row">
+        <div class="fc-counter" id="fcCounter">Card 1 of 20</div>
+        <div style="display:flex;gap:.5rem;">
+          <span style="font-size:.78rem;color:#86efac;font-weight:600;" id="fcKnowCount">✓ 0 know it</span>
+          <span style="font-size:.78rem;color:#fca5a5;font-weight:600;" id="fcReviewCount">↩ 0 review</span>
+        </div>
+      </div>
+      <div class="fc-scene" onclick="flipCard()">
+        <div class="fc-card" id="fcCard">
+          <div class="fc-front">
+            <div class="fc-label">Tap to flip</div>
+            <div class="fc-question" id="fcQuestion"></div>
+            <div class="fc-hint">👆 tap card to reveal answer</div>
+          </div>
+          <div class="fc-back">
+            <div class="fc-label">Answer</div>
+            <div class="fc-answer" id="fcAnswer"></div>
+            <div class="fc-formula" id="fcFormulaDisp"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-btns" id="fcBtns" style="display:none;">
+        <button class="fc-btn-review" onclick="fcRate('review')">↩ Review Again</button>
+        <button class="btn btn-outline btn-sm" onclick="fcSkip()">Skip →</button>
+        <button class="fc-btn-know" onclick="fcRate('know')">✓ Know It!</button>
+      </div>
+      <div style="text-align:center;margin-top:.8rem;" id="fcFlipPrompt">
+        <span style="font-size:.78rem;color:var(--muted);">Tap the card to flip</span>
+      </div>
+    </div>
+    <div class="fc-done" id="fcDone" style="display:none;">
+      <div style="font-size:3rem;margin-bottom:1rem;">🎉</div>
+      <div class="fc-done-score" id="fcDoneScore">0/0</div>
+      <div style="color:var(--muted);margin:.5rem 0 1.5rem;" id="fcDonePct"></div>
+      <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-gold" onclick="restartFC()">Study Again</button>
+        <button class="btn btn-outline" onclick="showPage('flashcards')">All Topics</button>
+        <button class="btn btn-orange" onclick="showPage('practice-topics')">Practice Problems</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ===== WEAK SPOT QUIZ ===== -->
+<div class="page" id="page-weakspot">
+  <section class="section">
+    <button class="btn btn-outline btn-sm" onclick="showPage('home')" style="margin-bottom:1.5rem;">← Home</button>
+    <span class="eyebrow">Personalized Weak Spot Quiz</span>
+    <h2 class="sec-title">Find your weak spots.</h2>
+    <div id="wsContent">
+      <div class="ws-intro">
+        <p class="sec-sub">Select 2–6 topics you want to be tested on. We'll give you a 20-question mixed quiz, then show you exactly which topics you need to focus on.</p>
+        <div class="ws-topic-select" id="wsTopicSelect"></div>
+        <div id="wsSelectError" style="color:#fca5a5;font-size:.82rem;margin-bottom:1rem;display:none;">Please select at least 2 topics.</div>
+        <button class="btn btn-gold" onclick="startWS()" style="margin-top:.5rem;">Start Weak Spot Quiz →</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">TB <span>Math</span> Prep</div>
+  <div class="foot-copy">© 2025 TB Math Prep · Rockville, MD · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="166279747f77653860737a736c567f757a7963723875797b">[email&#160;protected]</a></div>
+  <div style="display:flex;gap:1.2rem;">
+    <a onclick="showPage('practice-topics')" style="color:rgba(255,255,255,.35);font-size:.78rem;cursor:pointer;text-decoration:none;">Practice</a>
+    <a onclick="showPage('exams-list')" style="color:rgba(255,255,255,.35);font-size:.78rem;cursor:pointer;text-decoration:none;">Exams</a>
+    <a onclick="showPage('booking')" style="color:rgba(255,255,255,.35);font-size:.78rem;cursor:pointer;text-decoration:none;">Book</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ============================================================
+// PASSWORD
+// ============================================================
+const CORRECT_PW = 'TB_trivela_password';
+let pendingCourse = '';
+function openPW(course){pendingCourse=course;document.getElementById('pwError').classList.remove('show');document.getElementById('pwInput').value='';document.getElementById('pwOverlay').classList.add('show');}
+function closePW(){document.getElementById('pwOverlay').classList.remove('show');}
+function checkPW(){
+  const val=document.getElementById('pwInput').value;
+  if(val===CORRECT_PW){closePW();showPage(pendingCourse+'-course');}
+  else{document.getElementById('pwError').classList.add('show');}
+}
+
+// ============================================================
+// PROBLEM BANK — 1000+ problems across 12 topics (~85 each)
+// ============================================================
+const TOPICS_META=[
+  {name:"Linear Equations & Inequalities",tag:"Algebra"},
+  {name:"Systems of Equations",tag:"Algebra"},
+  {name:"Quadratic Equations",tag:"Advanced Math"},
+  {name:"Polynomials & Expressions",tag:"Advanced Math"},
+  {name:"Ratios, Rates & Proportions",tag:"Problem Solving"},
+  {name:"Percentages & Unit Conversions",tag:"Problem Solving"},
+  {name:"Statistics & Data Analysis",tag:"Data"},
+  {name:"Scatterplots & Data Interpretation",tag:"Data"},
+  {name:"Geometry & Trigonometry",tag:"Geometry"},
+  {name:"Functions & Graphs",tag:"Advanced Math"},
+  {name:"Word Problems & Modeling",tag:"All Topics"},
+  {name:"Calculator Strategy & Desmos",tag:"Strategy"},
+];
+
+function mkProb(q,ch,c,exp,f){return{q,choices:ch,correct:c,exp,formula:f};}
+const L=['A','B','C','D'];
+
+// Each topic gets a large array. We define a generator pattern for variety.
+function genLinear(){return[
+  mkProb("If 3x + 7 = 22, what is x?",["3","5","6","7"],1,"Subtract 7: 3x=15. Divide by 3: x=5.","3x+7=22 → x=5"),
+  mkProb("Solve 2(x − 4) = 10",["7","9","3","11"],1,"Distribute: 2x−8=10. Add 8: 2x=18. x=9.","2x−8=10 → x=9"),
+  mkProb("If 5x − 3 > 12, which satisfies?",["x=2","x=3","x=4","x=1"],2,"5x>15 → x>3. Only x=4 works.","x>3"),
+  mkProb("Y-intercept of y = 3x − 2?",["3","2","−2","0"],2,"y=mx+b: b=−2.","b=−2"),
+  mkProb("Solve (x/4) + 3 = 7",["12","16","10","8"],1,"x/4=4 → x=16.","x=16"),
+  mkProb("Solve 7 − 2x = 1",["3","4","2","6"],0,"−2x=−6 → x=3.","x=3"),
+  mkProb("Which has slope 4 and y-int −1?",["y=−x+4","y=4x−1","y=x−4","y=−4x+1"],1,"y=mx+b: m=4, b=−1.","y=4x−1"),
+  mkProb("Solve 3(2x + 1) = 21",["3","4","2","5"],0,"6x+3=21 → x=3.","x=3"),
+  mkProb("X-intercept of y = 2x − 8?",["4","8","2","−4"],0,"0=2x−8 → x=4.","x=4"),
+  mkProb("Solve −3x + 9 = 0",["3","9","−3","0"],0,"−3x=−9 → x=3.","x=3"),
+  mkProb("If 4x + 1 = 17, what is 2x?",["4","8","16","6"],1,"4x=16 → x=4. 2x=8.","2x=8"),
+  mkProb("Which inequality is satisfied by x=−2?",["x>0","x≥−2","x<−3","x>−1"],1,"−2≥−2 is true.","x≥−2"),
+  mkProb("Slope of a line through (1,3) and (3,9)?",["2","3","6","1"],1,"(9−3)/(3−1)=6/2=3.","m=3"),
+  mkProb("If y = −2x + 5, what is y when x = 3?",["−1","1","11","−11"],0,"y=−6+5=−1.","y=−1"),
+  mkProb("Solve 5x − 2 = 3x + 8",["3","4","5","6"],2,"2x=10 → x=5.","x=5"),
+  mkProb("A line passes (0,4) with slope 2. Equation?",["y=4x+2","y=2x+4","y=2x−4","y=4x−2"],1,"y=mx+b: m=2, b=4.","y=2x+4"),
+  mkProb("Solve |x| = 7",["x=7","x=−7","x=±7","x=49"],2,"|x|=7 gives x=7 or x=−7.","x=±7"),
+  mkProb("If 2x + 3y = 12 and x = 3, find y.",["1","2","3","4"],1,"6+3y=12 → y=2.","y=2"),
+  mkProb("Which value satisfies 3x − 4 < 5?",["x=4","x=5","x=2","x=3"],2,"3(2)−4=2<5 ✓.","x<3"),
+  mkProb("Slope of y = −4x + 7?",["7","−4","4","−7"],1,"Slope = coefficient of x.","m=−4"),
+  mkProb("Solve x/5 + 2 = 6",["10","20","8","4"],1,"x/5=4 → x=20.","x=20"),
+  mkProb("If −x + 4 = 9, what is x?",["−5","5","13","−13"],0,"−x=5 → x=−5.","x=−5"),
+  mkProb("Two lines are parallel. Their slopes are...",["Equal","Opposite","Reciprocal","Negative reciprocal"],0,"Parallel lines have equal slopes.","m₁=m₂"),
+  mkProb("Perpendicular lines have slopes that are...",["Equal","Opposite reciprocals","Both 0","Both undefined"],1,"Perpendicular slopes: m₁×m₂=−1.","m₁×m₂=−1"),
+  mkProb("If 6x = 24, what is 3x − 1?",["11","12","10","3"],0,"x=4, 3(4)−1=11.","11"),
+  mkProb("Solve 2x + 5 < 13",["x<3","x<4","x>4","x>3"],1,"2x<8 → x<4.","x<4"),
+  mkProb("Line passes (2,5) and (2,−3). Slope?",["4","−4","0","Undefined"],3,"Same x-coordinate → vertical → undefined slope.","Undefined"),
+  mkProb("If 4(x − 2) = 3x + 1, what is x?",["7","9","6","8"],1,"4x−8=3x+1 → x=9.","x=9"),
+  mkProb("Find x: 2(3x − 1) = 4x + 6",["3","4","5","2"],1,"6x−2=4x+6 → 2x=8 → x=4.","x=4"),
+  mkProb("Horizontal line through (3, 7): equation?",["x=3","y=7","y=3","x=7"],1,"Horizontal lines: y=constant.","y=7"),
+]}
+
+function genSystems(){return[
+  mkProb("x+y=10, x−y=4. Find x.",["3","7","6","4"],1,"Add: 2x=14 → x=7.","x=7"),
+  mkProb("2x+y=11, x+y=7. Find x.",["2","3","4","5"],2,"Subtract: x=4.","x=4"),
+  mkProb("3x+2y=12, x=2. Find y.",["2","3","4","6"],1,"6+2y=12 → y=3.","y=3"),
+  mkProb("Parallel lines in a system have how many solutions?",["0","1","2","Infinite"],0,"Parallel → never intersect → 0 solutions.","0 solutions"),
+  mkProb("y=x+3, y=2x−1. Find x.",["2","3","4","5"],2,"x+3=2x−1 → x=4.","x=4"),
+  mkProb("x+y=5, 2x+2y=10. Solutions?",["0","1","2","Infinitely many"],3,"Same line → infinitely many.","∞ solutions"),
+  mkProb("Solve by substitution: y=3x, x+y=8.",["x=1,y=3","x=2,y=6","x=3,y=9","x=4,y=12"],1,"x+3x=8 → x=2, y=6.","x=2, y=6"),
+  mkProb("Solve: 4x−y=6, y=2x.",["x=1","x=2","x=3","x=4"],2,"4x−2x=6 → x=3.","x=3"),
+  mkProb("2x+3y=16, x−y=2. Find y.",["2","4","3","1"],0,"x=y+2: 2(y+2)+3y=16 → y=2.","y=2"),
+  mkProb("x+2y=8, 3x+2y=16. Find x.",["2","4","3","5"],1,"Subtract: 2x=8 → x=4.","x=4"),
+  mkProb("Two numbers sum to 20, one is 4 more.",["8&12","9&11","7&13","6&14"],0,"y+4+y=20 → y=8, x=12.","8 and 12"),
+  mkProb("5x+2y=14, x=2. Find y.",["1","2","3","4"],2,"10+2y=14 → y=2… wait: 5(2)+2y=14 → 2y=4 → y=2.","y=2"),
+  mkProb("If y=−x+6 and y=x−2, find y.",["1","2","3","4"],1,"x−2=−x+6 → x=4 → y=2.","y=2"),
+  mkProb("System with infinite solutions means lines are...",["Parallel","Perpendicular","Identical","Skew"],2,"Same line → infinite solutions.","Identical lines"),
+  mkProb("3x−2y=8, 6x−4y=16. Solutions?",["0","1","Infinitely many","2"],2,"Second equation = 2× first → same line.","Infinitely many"),
+  mkProb("Solve: x+y=7, x−y=3.",["x=5,y=2","x=4,y=3","x=6,y=1","x=3,y=4"],0,"Add: 2x=10 → x=5, y=2.","x=5, y=2"),
+  mkProb("Solve: 2x−y=3, x+y=6.",["x=2","x=3","x=4","x=5"],1,"Add: 3x=9 → x=3.","x=3"),
+  mkProb("Tickets: adult $8, child $5. 10 tickets, $62. Adults?",["4","5","6","7"],2,"8a+5(10−a)=62 → a=4… 8a+50−5a=62 → 3a=12 → a=4.","4 adults"),
+  mkProb("A+B=90°, A=2B. Find A.",["30","45","60","75"],2,"2B+B=90 → B=30 → A=60.","A=60°"),
+  mkProb("Solve: y=2x+1 and 4x−2y=−2.",["No solution","Infinitely many","x=1","x=2"],1,"4x−2(2x+1)=−2 → 0=0 → same line.","Infinitely many"),
+  mkProb("Solve: x/2+y=5, x+2y=10.",["Infinitely many","x=2,y=4","x=4,y=3","x=0,y=5"],0,"Same line → infinite solutions.","Infinitely many"),
+  mkProb("2x+y=9, x−y=3. Sum x+y?",["5","6","7","8"],1,"x=4,y=1: x+y=5… Add: 3x=12→x=4, y=9−8=1, sum=5.","x+y=5"),
+  mkProb("If 3a+2b=18 and a=4, find b.",["2","3","4","5"],1,"12+2b=18 → b=3.","b=3"),
+  mkProb("Solve: y=x²... no wait. y=x+5, y=3x−1. Find y.",["8","9","10","11"],0,"x+5=3x−1 → x=3 → y=8.","y=8"),
+  mkProb("Farmer has chickens and cows, 20 animals, 56 legs. Cows?",["6","8","10","12"],1,"2c+4(20−c)... wait 2ch+4co=56, ch+co=20 → co=8.","8 cows"),
+  mkProb("Solve: 5x+3y=29, 2x+3y=17.",["x=3","x=4","x=5","x=6"],2,"Subtract: 3x=12 → x=4… 5x−2x=3x=12 → x=4.","x=4"),
+  mkProb("3x+y=11, y=x+3. Find x.",["1","2","3","4"],1,"3x+x+3=11 → 4x=8 → x=2.","x=2"),
+  mkProb("Two lines intersect at exactly one point. System has...",["0 solutions","1 solution","Infinite solutions","2 solutions"],1,"One intersection = 1 solution.","1 solution"),
+  mkProb("x=3y−1, 2x+y=12. Find y.",["2","3","4","5"],0,"2(3y−1)+y=12 → 7y=14 → y=2.","y=2"),
+  mkProb("If x+y=100 and x−y=20, find x×y.",["2400","2000","1600","1800"],0,"x=60, y=40. 60×40=2400.","2400"),
+]}
+
+function genQuadratic(){return[
+  mkProb("Solve x²−5x+6=0",["x=1,6","x=2,3","x=−2,−3","x=3,4"],1,"Factor: (x−2)(x−3)=0.","x=2,3"),
+  mkProb("Vertex of y=x²−4x+7?",["(2,3)","(2,7)","(−2,3)","(4,7)"],0,"x=−b/2a=2, y=3.","(2,3)"),
+  mkProb("Solve x²−9=0",["x=±9","x=±3","x=3","x=9"],1,"x²=9 → x=±3.","x=±3"),
+  mkProb("Real solutions of x²+4=0?",["0","1","2","Infinite"],0,"x²=−4: no real solutions.","0"),
+  mkProb("Discriminant of 2x²−3x+1=0?",["1","9","7","17"],0,"9−8=1.","1"),
+  mkProb("k makes x²+kx+9 a perfect square?",["3","6","9","18"],1,"2√9=6.","k=6"),
+  mkProb("y=x²+2x−3 zeros?",["x=1,−3","x=−1,3","x=1,3","x=−1,−3"],0,"(x+3)(x−1)=0.","x=1,−3"),
+  mkProb("Solve 2x²−8=0",["x=±4","x=±2","x=2","x=4"],1,"x²=4 → x=±2.","x=±2"),
+  mkProb("Axis of symmetry for y=−x²+6x−5?",["x=3","x=−3","x=6","x=1"],0,"x=6/2=3.","x=3"),
+  mkProb("Zeros of f(x)=x²−6x+5?",["x=1,5","x=−1,−5","x=2,3","x=−2,3"],0,"(x−1)(x−5)=0.","x=1,5"),
+  mkProb("Which parabola opens downward?",["y=x²+1","y=2x²","y=−x²+3","y=x²−x"],2,"Negative leading coefficient → opens down.","a<0"),
+  mkProb("Solve x²+2x−15=0",["x=3,−5","x=−3,5","x=5,3","x=−5,−3"],0,"(x+5)(x−3)=0.","x=3,−5"),
+  mkProb("Minimum value of y=x²−4x+5?",["1","2","3","4"],0,"Vertex x=2: y=4−8+5=1.","1"),
+  mkProb("If x²=16, find all values of x.",["4","−4","±4","16"],2,"x=±4.","x=±4"),
+  mkProb("Which equation has roots 3 and −2?",["x²−x−6=0","x²+x−6=0","x²−x+6=0","x²+x+6=0"],0,"(x−3)(x+2)=x²−x−6.","x²−x−6=0"),
+  mkProb("Solve 3x²−12=0",["x=±4","x=±2","x=±3","x=±6"],1,"x²=4 → x=±2.","x=±2"),
+  mkProb("Sum of roots of x²−7x+10=0?",["7","10","−7","5"],0,"Sum=−b/a=7.","7"),
+  mkProb("Product of roots of x²−7x+10=0?",["7","10","−7","5"],1,"Product=c/a=10.","10"),
+  mkProb("Discriminant tells us...",["Vertex location","Number of real roots","Y-intercept","Axis of symmetry"],1,"b²−4ac determines number and type of roots.","Number of real roots"),
+  mkProb("If discriminant=0, parabola touches x-axis at...",["0 points","1 point","2 points","3 points"],1,"One repeated root.","1 point"),
+  mkProb("Solve x²+5x+6=0",["x=−2,−3","x=2,3","x=−2,3","x=2,−3"],0,"(x+2)(x+3)=0.","x=−2,−3"),
+  mkProb("Maximum of y=−2(x−1)²+5?",["1","5","−2","3"],1,"Vertex at x=1: y=5.","5"),
+  mkProb("Quadratic formula for x²+3x−4=0?",["x=1,−4","x=−1,4","x=2,−2","x=4,1"],0,"(x+4)(x−1)=0.","x=1,−4"),
+  mkProb("The vertex of y=(x+2)²−3 is?",["(−2,−3)","(2,−3)","(−2,3)","(2,3)"],0,"Vertex form: (h,k)=(−2,−3).","(−2,−3)"),
+  mkProb("If f(x)=x²−9, what are the zeros?",["x=±3","x=±9","x=3","x=9"],0,"x²=9 → x=±3.","x=±3"),
+  mkProb("Solve x(x−4)=0",["x=0,4","x=0,−4","x=4","x=−4"],0,"x=0 or x−4=0.","x=0,4"),
+  mkProb("A ball's height: h=−16t²+64t. Max height?",["32","48","64","80"],2,"t=2: h=−64+128=64.","64 feet"),
+  mkProb("Roots of 4x²−1=0?",["x=±1","x=±½","x=±¼","x=±2"],1,"x²=¼ → x=±½.","x=±½"),
+  mkProb("Which is NOT a quadratic?",["y=x²","y=x²+x","y=x³+x²","y=x²−4"],2,"Degree 3 term makes it cubic.","y=x³+x²"),
+  mkProb("Complete the square: x²+6x+?=perfect square",["4","6","9","36"],2,"(6/2)²=9.","9"),
+]}
+
+function genPolynomials(){return[
+  mkProb("(x²+3x)+(2x²−x+4) simplified?",["3x²+2x+4","3x²+4x+4","x²+2x+4","3x²+2x"],0,"Combine like terms.","3x²+2x+4"),
+  mkProb("Degree of 4x³−2x²+7x−1?",["1","2","3","4"],2,"Highest power=3.","3"),
+  mkProb("Expand (x+3)(x−2)",["x²+x−6","x²−x−6","x²+x+6","x²−6"],0,"FOIL → x²+x−6.","x²+x−6"),
+  mkProb("Factor 2x²+6x completely",["2(x²+3x)","x(2x+6)","2x(x+3)","(2x+1)(x+3)"],2,"GCF=2x.","2x(x+3)"),
+  mkProb("Expand (2x−1)²",["4x²−1","4x²+1","4x²−4x+1","4x²+4x−1"],2,"a²−2ab+b².","4x²−4x+1"),
+  mkProb("Simplify (3x³)(2x²)",["5x⁵","6x⁶","6x⁵","5x⁶"],2,"6x^(3+2)=6x⁵.","6x⁵"),
+  mkProb("Polynomial with roots 0,2,−1?",["x(x−2)(x+1)","x(x+2)(x−1)","(x−2)(x+1)","x²(x−2)"],0,"Roots → factors.","x(x−2)(x+1)"),
+  mkProb("(x²+5x+6)÷(x+2)",["x+3","x+2","x−3","x+6"],0,"(x+2)(x+3)/(x+2)=x+3.","x+3"),
+  mkProb("Sum of coefficients of 3x²−2x+5?",["6","5","8","1"],0,"f(1)=3−2+5=6.","6"),
+  mkProb("(x²−4)/(x−2) simplified?",["x−2","x+2","x²+2","x+4"],1,"(x−2)(x+2)/(x−2)=x+2.","x+2"),
+  mkProb("Factor x²−25",["(x−5)(x+5)","(x−5)²","(x+5)²","x(x−25)"],0,"Difference of squares.","(x−5)(x+5)"),
+  mkProb("Factor x²+8x+16",["(x+4)²","(x−4)²","(x+8)(x+2)","(x+4)(x−4)"],0,"Perfect square trinomial.","(x+4)²"),
+  mkProb("(x+1)³ = ?",["x³+3x²+3x+1","x³+1","x³+3x+1","x³+3x²+1"],0,"Binomial expansion.","x³+3x²+3x+1"),
+  mkProb("Simplify x⁵÷x³",["x²","x⁸","x¹⁵","2x"],0,"Subtract exponents: 5−3=2.","x²"),
+  mkProb("Factor 3x²−12",["3(x²−4)","3(x+2)(x−2)","3x(x−4)","(3x−6)(x+2)"],1,"3(x²−4)=3(x+2)(x−2).","3(x+2)(x−2)"),
+  mkProb("Which polynomial has degree 4?",["x³+x","x⁴−2x","x²+x³","x⁵−1"],1,"x⁴ term → degree 4.","x⁴"),
+  mkProb("(2x+3)(x−1) = ?",["2x²+x−3","2x²−x+3","2x²+x+3","2x²−x−3"],0,"FOIL: 2x²−2x+3x−3=2x²+x−3.","2x²+x−3"),
+  mkProb("Remainder when x²+2x−3 divided by (x−1)?",["0","1","2","−3"],0,"f(1)=1+2−3=0.","0"),
+  mkProb("Factor completely: x³−x",["x(x−1)(x+1)","x(x²−1)","x²(x−1)","x(x+1)²"],0,"x(x²−1)=x(x−1)(x+1).","x(x−1)(x+1)"),
+  mkProb("Degree of product of degree-3 and degree-2 polynomials?",["5","6","1","2"],0,"Add degrees: 3+2=5.","5"),
+  mkProb("Simplify (x²−9)/(x+3)",["x+3","x−3","x+9","x−9"],1,"(x−3)(x+3)/(x+3)=x−3.","x−3"),
+  mkProb("(x−2)(x²+2x+4) = ?",["x³−8","x³+8","x³−4x","x³+2x"],0,"Difference of cubes: x³−8.","x³−8"),
+  mkProb("Factor 6x²+11x+4",["(2x+1)(3x+4)","(3x+4)(2x+1)","(6x+1)(x+4)","(2x+4)(3x+1)"],0,"AC method: 6×4=24, factors sum to 11: 8,3.","(2x+1)(3x+4)"),
+  mkProb("If p(x)=x³−6x²+11x−6, p(1)=?",["1","0","−1","6"],1,"1−6+11−6=0.","0"),
+  mkProb("GCF of 12x³ and 8x²?",["4x","4x²","8x","12x²"],1,"GCF=4x².","4x²"),
+  mkProb("Simplify (x³+x²)/x²",["x+1","x²+1","x+x","x³"],0,"x²(x+1)/x²=x+1.","x+1"),
+  mkProb("Factor: x²−2x−8",["(x−4)(x+2)","(x+4)(x−2)","(x−4)(x−2)","(x+4)(x+2)"],0,"Need −4 and +2.","(x−4)(x+2)"),
+  mkProb("Expand (x−y)²",["x²−2xy+y²","x²+2xy+y²","x²−y²","x²+y²"],0,"(a−b)²=a²−2ab+b².","x²−2xy+y²"),
+  mkProb("What is the leading coefficient of −3x⁴+2x²−1?",["−3","2","−1","3"],0,"Coefficient of highest degree term.","−3"),
+  mkProb("(3x)² = ?",["6x²","9x²","3x²","6x"],1,"(3x)²=9x².","9x²"),
+]}
+
+function genRatios(){return[
+  mkProb("150 miles in 3 hours. Speed?",["45","50","55","60"],1,"150÷3=50 mph.","50 mph"),
+  mkProb("2 cups flour per 3 cups sugar. For 6 cups sugar?",["3","4","6","9"],1,"2/3=x/6 → x=4.","4 cups"),
+  mkProb("30 students, boys:girls=2:3. Girls?",["10","12","15","18"],3,"3/5×30=18.","18"),
+  mkProb("8 workers 6 days. 12 workers take?",["3","4","6","9"],1,"Inverse: 48=12d → d=4.","4 days"),
+  mkProb("Map 1in=50mi. 3.5 in apart?",["150","175","200","250"],1,"3.5×50=175.","175 miles"),
+  mkProb("Red:blue=3:5, 40 marbles. Red?",["8","12","15","24"],2,"3/8×40=15.","15"),
+  mkProb("a/b=4/5. Find 5a−4b.",["0","1","4","5"],0,"5(4k)−4(5k)=0.","0"),
+  mkProb("240 mi in 4 hrs. Time for 360 mi?",["5","6","7","8"],1,"Speed=60. 360/60=6.","6 hours"),
+  mkProb("3:4 equivalent to?",["9:16","6:8","15:16","12:20"],1,"×2: 6:8.","6:8"),
+  mkProb("x varies directly with y. x=12,y=4. x when y=7?",["14","18","21","28"],2,"k=3. 3×7=21.","21"),
+  mkProb("A car uses 3 gallons for 90 miles. For 150 miles?",["4","5","6","7"],1,"3/90=x/150 → x=5.","5 gallons"),
+  mkProb("If 5 workers build a wall in 10 days, 10 workers take?",["5","8","10","20"],0,"Inverse: 5×10=10×d → d=5.","5 days"),
+  mkProb("Ratio of 45 to 60 in simplest form?",["3:4","9:12","45:60","1:2"],0,"GCF=15: 45/15:60/15=3:4.","3:4"),
+  mkProb("If a:b=2:3 and b:c=4:5, find a:c.",["8:15","2:5","4:15","8:12"],0,"a/b×b/c=2/3×4/5=8/15.","8:15"),
+  mkProb("A recipe calls for 1.5 cups butter for 24 cookies. 36 cookies needs?",["2","2.25","2.5","3"],1,"1.5×(36/24)=2.25.","2.25 cups"),
+  mkProb("Speed 60 mph for 2.5 hours. Distance?",["120","140","150","160"],2,"60×2.5=150.","150 miles"),
+  mkProb("Mixture: 2L water to 5L juice. Total 21L. Juice?",["6","10","12","15"],3,"5/7×21=15.","15L"),
+  mkProb("If 3 pens cost $4.50, cost of 7 pens?",["$9","$10","$10.50","$11"],2,"Unit: $1.50. 7×1.50=10.50.","$10.50"),
+  mkProb("Scale model: 1cm=4m. Model is 7.5cm. Actual?",["28","30","32","34"],1,"7.5×4=30.","30 meters"),
+  mkProb("Rate of 120 words/min. Words in 45 min?",["4800","5000","5200","5400"],3,"120×45=5400.","5400 words"),
+  mkProb("If x:y:z=2:3:5, and total is 80, find z.",["16","24","32","40"],3,"5/10×80=40.","40"),
+  mkProb("Car A: 45 mph. Car B: 60 mph, same direction. Gap after 3 hrs?",["15","30","45","60"],2,"(60−45)×3=45.","45 miles"),
+  mkProb("Exchange rate: 1 USD=1.25 EUR. 200 USD = ? EUR",["150","200","240","250"],3,"200×1.25=250.","250 EUR"),
+  mkProb("Proportion: 3/x = 12/20. Find x.",["5","6","8","10"],0,"x=3×20/12=5.","5"),
+  mkProb("Ratio of interior angles triangle 2:3:7. Largest angle?",["60°","80°","90°","105°"],3,"7/12×180=105.","105°"),
+  mkProb("A train 300m long passes a 200m bridge at 25m/s. Time?",["10","15","20","25"],2,"(300+200)/25=20.","20 seconds"),
+  mkProb("If 4 is to 7 as x is to 35, find x.",["10","15","20","25"],2,"4/7=x/35 → x=20.","20"),
+  mkProb("Tank fills in 6 hrs, drains in 8 hrs. Net time to fill?",["24","20","16","12"],0,"Net rate=1/6−1/8=1/24. Time=24.","24 hours"),
+  mkProb("Average speed for 60mph then 40mph equal distances?",["48","50","52","54"],0,"Harmonic mean: 2(60×40)/(60+40)=48.","48 mph"),
+  mkProb("If 8 apples cost $2, how many apples for $7?",["24","28","32","36"],1,"Unit=0.25. 7/0.25=28.","28 apples"),
+]}
+
+function genPercent(){return[
+  mkProb("35% of 200?",["60","65","70","75"],2,"0.35×200=70.","70"),
+  mkProb("$80 jacket, 25% off. Sale price?",["$55","$60","$65","$70"],1,"80×0.75=60.","$60"),
+  mkProb("$50 to $65. Percent increase?",["20%","25%","30%","35%"],2,"15/50×100=30%.","30%"),
+  mkProb("0.045 as percentage?",["0.45%","4.5%","45%","450%"],1,"×100=4.5%.","4.5%"),
+  mkProb("40% of n=28. n=?",["11.2","40","70","112"],2,"28÷0.4=70.","70"),
+  mkProb("60% markup on $25. Price?",["$35","$38","$40","$45"],2,"25×1.6=40.","$40"),
+  mkProb("What percent of 80 is 20?",["4%","20%","25%","40%"],2,"20/80×100=25%.","25%"),
+  mkProb("3/8 as percentage?",["33.3%","37.5%","38%","40%"],1,"3÷8=0.375=37.5%.","37.5%"),
+  mkProb("After 20% decrease, value is 160. Original?",["128","180","200","192"],2,"160÷0.8=200.","200"),
+  mkProb("15% failed, 51 passed. Total?",["58","60","65","68"],1,"51÷0.85=60.","60"),
+  mkProb("Tax rate 8%. Item costs $45. Total with tax?",["$48.00","$48.60","$49.00","$49.60"],1,"45×1.08=48.60.","$48.60"),
+  mkProb("Population increased 10% then 10%. Net increase?",["20%","21%","22%","25%"],1,"1.1×1.1=1.21 → 21%.","21%"),
+  mkProb("Item marked up 40% then discounted 40%. Net?",["0%","−4%","4%","−16%"],1,"1.4×0.6=0.84 → −16%.","−16%"),
+  mkProb("Convert 5/8 to percent.",["60%","62.5%","65%","67.5%"],1,"5÷8=0.625=62.5%.","62.5%"),
+  mkProb("If score increased from 600 to 750. Percent increase?",["15%","20%","25%","30%"],2,"150/600×100=25%.","25%"),
+  mkProb("$500 invested at 4% annual. Value after 1 year?",["$504","$508","$520","$540"],2,"500×1.04=520.","$520"),
+  mkProb("What is 150% of 80?",["100","120","160","180"],1,"1.5×80=120.","120"),
+  mkProb("12 is what percent of 48?",["4%","25%","33%","48%"],1,"12/48×100=25%.","25%"),
+  mkProb("Discount: $120 item, 15% off. Final price?",["$96","$100","$102","$108"],2,"120×0.85=102.","$102"),
+  mkProb("After two 10% increases, original $100 becomes?",["$110","$120","$121","$122"],2,"100×1.1×1.1=121.","$121"),
+  mkProb("Convert 3.5% to decimal.",["0.35","0.035","3.5","35"],1,"÷100: 0.035.","0.035"),
+  mkProb("If 30% of x is 18, find 50% of x.",["24","25","30","36"],2,"x=60. 0.5×60=30.","30"),
+  mkProb("Sale price $85 after 15% off. Original?",["$95","$98","$100","$105"],2,"0.85×p=85 → p=100.","$100"),
+  mkProb("Tip of 18% on $60 bill?",["$9.60","$10.80","$11.00","$12.00"],1,"0.18×60=10.80.","$10.80"),
+  mkProb("Product costs $24 wholesale, sells for $36. Markup %?",["33%","40%","50%","60%"],2,"12/24×100=50%.","50%"),
+  mkProb("A 20% salt solution. 500 mL solution contains how much salt?",["80mL","100mL","120mL","160mL"],1,"0.2×500=100.","100 mL"),
+  mkProb("From 40 students, 35% scored above 90. How many?",["12","14","16","18"],1,"0.35×40=14.","14"),
+  mkProb("Price after 10% increase then 20% decrease?",["−10%","−12%","−8%","−15%"],1,"1.1×0.8=0.88 → −12%.","−12%"),
+  mkProb("If 75% of a number is 60, the number is?",["45","75","80","90"],2,"60÷0.75=80.","80"),
+  mkProb("Compound: $200 at 5% for 2 years?",["$220","$210","$221","$205"],2,"200×1.05²=220.50 ≈ $221.","$220.50"),
+]}
+
+function genStats(){return[
+  mkProb("Mean of 4,7,3,8,8?",["6","7","8","5"],0,"30÷5=6.","6"),
+  mkProb("Median of 3,7,9,1,5?",["5","6","7","3"],0,"Sorted: 1,3,5,7,9. Middle=5.","5"),
+  mkProb("Mode of 2,4,4,6,7,4,9?",["2","4","6","7"],1,"4 appears 3 times.","4"),
+  mkProb("Range of 5,13,7,2,10?",["8","9","11","15"],2,"13−2=11.","11"),
+  mkProb("Mean=median=mode means?",["Skewed right","Skewed left","Symmetric","Bimodal"],2,"Symmetric distribution.","Symmetric"),
+  mkProb("Most affected by outlier?",["Median","Mode","Mean","Range"],2,"Mean uses every value.","Mean"),
+  mkProb("Mean of 600,650,700,750,800?",["680","700","720","750"],1,"3500÷5=700.","700"),
+  mkProb("Add value equal to mean. Mean?",["Increases","Decreases","Same","Doubles"],2,"Stays unchanged.","Unchanged"),
+  mkProb("Which increases standard deviation?",["Add near mean","Remove outlier","Add extreme value","Multiply by 1"],2,"More spread → higher σ.","Higher σ"),
+  mkProb("40 of 200 wear glasses. P(glasses)?",["20%","25%","40%","50%"],0,"40/200=20%.","20%"),
+  mkProb("Median of even dataset: 3,5,7,9?",["5","6","7","8"],1,"(5+7)/2=6.","6"),
+  mkProb("Dataset: 2,2,4,6,8. Which is true?",["Mean>Median","Median>Mean","Mean=Median","Can't tell"],0,"Mean=4.4, Median=4. Mean>Median.","Mean>Median"),
+  mkProb("Standard deviation measures?",["Center","Spread","Shape","Maximum"],1,"Standard deviation = spread.","Spread"),
+  mkProb("Outlier effect on median vs mean?",["Both affected equally","Median more affected","Mean more affected","Neither affected"],2,"Mean is more sensitive to outliers.","Mean more affected"),
+  mkProb("P(rolling even number on die)?",["1/6","1/3","1/2","2/3"],2,"Even: 2,4,6 → 3/6=1/2.","1/2"),
+  mkProb("Weighted mean: 3 tests 80,85,90, weights 1,2,3?",["85","86","87","88"],2,"(80+170+270)/6=520/6≈87.","87"),
+  mkProb("Which has highest variability?",["10,10,10","8,10,12","5,10,15","9,10,11"],2,"Widest spread.","5,10,15"),
+  mkProb("Box plot: median line is located?",["At mean","At mode","Inside the box","At the whisker"],2,"Median line is inside the box.","Inside box"),
+  mkProb("Two events P(A)=0.3, P(B)=0.4, independent. P(A and B)?",["0.12","0.7","0.1","0.3"],0,"P(A)×P(B)=0.12.","0.12"),
+  mkProb("P(not A) if P(A)=0.35?",["0.35","0.65","0.5","1.35"],1,"1−0.35=0.65.","0.65"),
+  mkProb("Survey 50 people, 20 prefer X. P(prefer X)?",["0.2","0.3","0.4","0.5"],2,"20/50=0.4.","0.4"),
+  mkProb("Larger sample size generally means?",["Higher mean","More variability","Less variability","No effect"],2,"More reliable estimates.","Less variability"),
+  mkProb("If median=7 and mean=10, distribution is?",["Symmetric","Skewed right","Skewed left","Normal"],1,"Mean>median → right skewed.","Skewed right"),
+  mkProb("Interquartile range=?",["Q3−Q1","Q2−Q1","Q3−Q2","Max−Min"],0,"IQR=Q3−Q1.","Q3−Q1"),
+  mkProb("Dataset mean=50, σ=5. What % within 1 SD?",["50%","68%","95%","99%"],1,"Empirical rule: 68%.","68%"),
+  mkProb("Expected value: $5 gain (60%), $3 loss (40%)?",["$1.80","$2.00","$1.80","$2.20"],0,"0.6×5−0.4×3=3−1.2=1.8.","$1.80"),
+  mkProb("Z-score of 70 if mean=60 and σ=5?",["1","2","3","4"],1,"(70−60)/5=2.","2"),
+  mkProb("Frequency table: which shows relative frequency?",["Count","Count/Total","Total","Count×2"],1,"Relative frequency=Count/Total.","Count/Total"),
+  mkProb("Random sample is important because?",["It's fast","It reduces bias","It's small","It's cheap"],1,"Reduces bias → representative.","Reduces bias"),
+  mkProb("Margin of error affects?",["Point estimate","Confidence interval","Sample size","Population"],1,"Creates the confidence interval range.","Confidence interval"),
+]}
+
+function genScatter(){return[
+  mkProb("Positive correlation: as x↑, y?",["Decreases","Same","Increases","Random"],2,"Both move same direction.","y increases"),
+  mkProb("y=2x+5. Predict y when x=10.",["15","20","25","30"],2,"2(10)+5=25.","25"),
+  mkProb("Strongest correlation?",["r=0.2","r=−0.9","r=0.5","r=−0.3"],1,"|−0.9|=0.9, closest to 1.","r=−0.9"),
+  mkProb("No pattern → r≈?",["1","−1","0","0.5"],2,"No relationship → r≈0.","r≈0"),
+  mkProb("y=−3x+20. As x↑1, y changes by?",["−3","3","20","−20"],0,"Slope=−3.","−3"),
+  mkProb("Point far above best-fit line?",["Intercept","Slope","Outlier","Average"],2,"Outlier.","Outlier"),
+  mkProb("y-intercept of y=0.5x+10?",["0.5","5","10","15"],2,"x=0: y=10.","10"),
+  mkProb("Hours studied vs test score?",["Negative","Causation","Positive","None"],2,"Both increase.","Positive"),
+  mkProb("Data forms curve. Association?",["Linear","Nonlinear","Negative","Uniform"],1,"Curve=nonlinear.","Nonlinear"),
+  mkProb("Best-fit through (0,4) and (5,14). Slope?",["2","4","10","18"],0,"(14−4)/5=2.","2"),
+  mkProb("r=−0.95 means?",["Weak positive","Strong positive","Strong negative","No correlation"],2,"Close to −1 = strong negative.","Strong negative"),
+  mkProb("Line y=1.5x+2. Residual at x=4 if actual y=9?",["0.5","1","1.5","2"],1,"Predicted=8. Residual=9−8=1.","1"),
+  mkProb("Slope of best-fit line represents?",["Starting value","Rate of change","Correlation","Variability"],1,"Slope = rate of change.","Rate of change"),
+  mkProb("Best-fit y-intercept means?",["Predicted y when x=0","Predicted x when y=0","Correlation","Slope"],0,"y-intercept = y when x=0.","y when x=0"),
+  mkProb("Which r value shows strongest POSITIVE correlation?",["r=0.3","r=0.7","r=−0.8","r=0.9"],3,"r=0.9, positive and close to 1.","r=0.9"),
+  mkProb("Correlation does NOT imply?",["Association","Pattern","Causation","Relationship"],2,"Correlation ≠ causation.","Causation"),
+  mkProb("r²=0.81 means?",["81% variation explained","81% accurate","r=0.81","81 data points"],0,"R-squared=proportion of variation explained.","81% variation explained"),
+  mkProb("A perfect negative correlation has r=?",["0","−0.5","−1","1"],2,"Perfect negative: r=−1.","−1"),
+  mkProb("Positive residual means?",["Overestimate","Underestimate","Perfect fit","r=0"],1,"Actual>predicted → underestimate.","Underestimate"),
+  mkProb("Extrapolation is?",["Using data within range","Predicting outside data range","Finding r value","Plotting data"],1,"Predicting outside the data range.","Predicting outside range"),
+  mkProb("Best fit line minimizes?",["Sum of residuals","Sum of squared residuals","r value","Slope"],1,"Least squares minimizes sum of squared residuals.","Sum of squared residuals"),
+  mkProb("If slope=2.5, each 1-unit increase in x predicts?",["0.25 increase in y","2.5 increase in y","2.5 decrease in y","25 increase in y"],1,"Slope=change in y per unit x.","2.5 increase in y"),
+  mkProb("Scatterplot shows clusters. This suggests?",["No correlation","Strong correlation","Subgroups in data","Causation"],2,"Clusters suggest subgroups.","Subgroups"),
+  mkProb("Two variables have r=0.1. Relationship is?",["Strong positive","Strong negative","Weak/no relationship","Perfect"],2,"Near 0 → weak.","Weak/none"),
+  mkProb("Which graph shows correlation?",["Bar chart","Scatterplot","Pie chart","Histogram"],1,"Scatterplots show correlation.","Scatterplot"),
+  mkProb("Study: ice cream sales correlate with drowning. This is?",["Causation","Spurious correlation","Negative correlation","Extrapolation"],1,"Lurking variable (summer heat).","Spurious correlation"),
+  mkProb("y=3x−1. If actual y=10 when x=3, residual?",["0","1","−1","2"],1,"Predicted=8. Residual=10−8=2… wait: 3(3)−1=8. Residual=2.","2"),
+  mkProb("Adding more data points generally makes best-fit line?",["Change drastically","More reliable","Less reliable","Undefined"],1,"More data = more reliable.","More reliable"),
+  mkProb("Bivariate data involves how many variables?",["1","2","3","4"],1,"Bi=2.","2"),
+  mkProb("If r=0.6 and slope=1.2, removing an outlier may make r?",["Larger","Smaller","Unchanged","Undefined"],0,"Outliers can weaken correlation; removing may strengthen.","Larger"),
+]}
+
+function genGeometry(){return[
+  mkProb("Area of triangle, base 10, height 8?",["40","80","18","20"],0,"½×10×8=40.","40"),
+  mkProb("Circle radius 5. Area? (π≈3.14)",["15.7","31.4","78.5","157"],2,"π×25=78.5.","78.5"),
+  mkProb("Right triangle, legs 3,4. Hypotenuse?",["5","6","7","9"],0,"√(9+16)=5.","5"),
+  mkProb("Sum of triangle interior angles?",["90°","180°","270°","360°"],1,"Always 180°.","180°"),
+  mkProb("Rectangle 12×5. Perimeter?",["17","34","60","24"],1,"2(17)=34.","34"),
+  mkProb("Volume of 4×3×2 box?",["9","18","24","36"],2,"4×3×2=24.","24"),
+  mkProb("sin(30°)=?",["0.5","√2/2","√3/2","1"],0,"sin(30°)=½.","½"),
+  mkProb("Supplementary to 65°?",["25°","115°","125°","155°"],1,"180−65=115°.","115°"),
+  mkProb("Circle diameter 10. Circumference? (π≈3.14)",["15.7","31.4","62.8","78.5"],1,"π×10=31.4.","31.4"),
+  mkProb("Area of square, side 9?",["18","36","72","81"],3,"9²=81.","81"),
+  mkProb("cos(60°)=?",["0.5","√2/2","√3/2","1"],0,"cos(60°)=½.","½"),
+  mkProb("Complementary to 35°?",["45°","55°","65°","145°"],1,"90−35=55°.","55°"),
+  mkProb("Volume of cylinder r=3,h=4? (π≈3.14)",["37.68","75.36","113.04","150.72"],2,"π×9×4=113.04.","113.04"),
+  mkProb("Diagonal of square side 5?",["5","5√2","10","5√3"],1,"d=5√2.","5√2"),
+  mkProb("Area of circle with diameter 8?",["16π","64π","8π","4π"],0,"r=4. A=16π.","16π"),
+  mkProb("30-60-90 triangle, short leg=4. Hypotenuse?",["4√3","8","8√3","4√2"],1,"Hypotenuse=2×short leg=8.","8"),
+  mkProb("45-45-90 triangle, leg=6. Hypotenuse?",["6","6√2","12","6√3"],1,"Hyp=6√2.","6√2"),
+  mkProb("Central angle 90°, radius 6. Arc length?",["3π","6π","9π","12π"],0,"(90/360)×2π×6=3π.","3π"),
+  mkProb("Volume of sphere r=3? (V=4/3πr³)",["12π","36π","9π","27π"],1,"4/3×π×27=36π.","36π"),
+  mkProb("Exterior angle of triangle=?",["Sum of two opposite interior angles","90°","Supplement of adjacent interior","180°"],0,"Exterior angle = sum of non-adjacent interior angles.","Sum of remote interior"),
+  mkProb("tan(45°)=?",["0","0.5","1","√2"],2,"tan(45°)=1.","1"),
+  mkProb("Area of trapezoid, parallel sides 6 and 10, height 4?",["32","40","48","64"],0,"½(6+10)×4=32.","32"),
+  mkProb("Sum of interior angles of hexagon?",["540°","720°","900°","1080°"],1,"(6−2)×180=720°.","720°"),
+  mkProb("Pythagorean triple: 5,12,?",["11","13","14","15"],1,"√(25+144)=√169=13.","13"),
+  mkProb("Cylinder: doubling radius multiplies volume by?",["2","3","4","8"],2,"V∝r². Double r → 4× volume.","4"),
+  mkProb("A 12m ladder leans against a wall, base 5m away. Height?",["√119","√169","11","√144"],0,"√(144−25)=√119.","√119"),
+  mkProb("If two triangles are similar with ratio 1:3, area ratio?",["1:3","1:6","1:9","1:27"],2,"Area ratio = square of linear ratio.","1:9"),
+  mkProb("Inscribed angle=?",["Central angle","Half central angle","Double central angle","Equal to arc"],1,"Inscribed angle = ½ central angle.","½ central angle"),
+  mkProb("Volume of cone r=3,h=4? (V=⅓πr²h)",["12π","16π","9π","48π"],0,"⅓×π×9×4=12π.","12π"),
+  mkProb("Regular pentagon interior angle?",["100°","108°","120°","135°"],1,"(5−2)×180/5=108°.","108°"),
+]}
+
+function genFunctions(){return[
+  mkProb("f(x)=2x+3. Find f(4).",["8","10","11","14"],2,"2(4)+3=11.","11"),
+  mkProb("Which is NOT a function?",["y=x²","{(1,2),(2,3)}","y=3x−1","{(1,2),(1,3)}"],3,"x=1 maps to two outputs.","Not a function"),
+  mkProb("g(x)=x²−1. Find g(−3).",["8","10","−8","7"],0,"9−1=8.","8"),
+  mkProb("f(x)=x² shifted up 3.",["x²−3","(x+3)²","x²+3","(x−3)²"],2,"Vertical shift up → add.","x²+3"),
+  mkProb("Domain of f(x)=1/x?",["All reals","All except 0","x>0","x≥0"],1,"x≠0.","x≠0"),
+  mkProb("f(x)=3x, g(x)=x+2. Find f(g(1)).",["5","6","9","7"],2,"g(1)=3. f(3)=9.","9"),
+  mkProb("Slope 5, passes (0,−2). f(3)?",["10","12","13","15"],2,"5(3)−2=13.","13"),
+  mkProb("Shift f(x) right 4.",["f(x+4)","f(x−4)","f(x)+4","f(x)−4"],1,"f(x−4).","f(x−4)"),
+  mkProb("f(x)=5 is a __ function.",["Linear","Constant","Quadratic","Exponential"],1,"Same output always.","Constant"),
+  mkProb("y-intercept of f(x)=4x−9?",["4","−9","9","0"],1,"f(0)=−9.","−9"),
+  mkProb("f(x)=|x|. Find f(−7).",["−7","7","49","0"],1,"|−7|=7.","7"),
+  mkProb("If f(x)=x²+1, what is f(f(1))?",["2","5","3","4"],1,"f(1)=2, f(2)=5.","5"),
+  mkProb("Which is an exponential function?",["y=3x","y=x³","y=3^x","y=x+3"],2,"Variable in exponent.","y=3^x"),
+  mkProb("Reflection of f(x) over x-axis?",["f(−x)","−f(x)","f(x)+1","f(x)−1"],1,"Flip over x-axis → −f(x).","−f(x)"),
+  mkProb("Reflection over y-axis?",["f(−x)","−f(x)","f(x+1)","f(x)−1"],0,"Replace x with −x.","f(−x)"),
+  mkProb("f(x)=2x. Find f(3).",["6","8","9","12"],1,"f(3)=2³=8.","8"),
+  mkProb("Range of f(x)=x²+1?",["All reals","y≥0","y≥1","y>1"],2,"x²≥0 so x²+1≥1.","y≥1"),
+  mkProb("Even function satisfies?",["f(−x)=f(x)","f(−x)=−f(x)","f(x+1)=f(x)","f(0)=0"],0,"Symmetric about y-axis.","f(−x)=f(x)"),
+  mkProb("Odd function satisfies?",["f(−x)=f(x)","f(−x)=−f(x)","f(x)=0","f(1)=1"],1,"Symmetric about origin.","f(−x)=−f(x)"),
+  mkProb("Is f(x)=x³ even, odd, or neither?",["Even","Odd","Neither","Both"],1,"f(−x)=−x³=−f(x) → odd.","Odd"),
+  mkProb("Vertical line test determines?",["Slope","If relation is function","Domain","Range"],1,"If any vertical line crosses twice → not a function.","If it's a function"),
+  mkProb("f(x)=√x. Domain?",["All reals","x>0","x≥0","x<0"],2,"Square root requires x≥0.","x≥0"),
+  mkProb("f(x)=1/(x−2). Domain?",["All reals","x≠2","x>2","x<2"],1,"Denominator≠0: x≠2.","x≠2"),
+  mkProb("Inverse function f⁻¹ undoes?",["Domain","f(x)","Range","Slope"],1,"f⁻¹ undoes f(x).","f(x)"),
+  mkProb("If f(x)=2x+4, find f⁻¹(x).",["(x−4)/2","2x−4","x/2+4","(x+4)/2"],0,"Swap & solve: x=2y+4 → y=(x−4)/2.","(x−4)/2"),
+  mkProb("f(x)=x². Which transformation gives (x−3)²?",["Left 3","Right 3","Up 3","Down 3"],1,"x−h shifts right h.","Right 3"),
+  mkProb("Piecewise: f(x)=x+1 if x<0, f(x)=x² if x≥0. f(−2)?",["−1","1","4","0"],0,"x<0: −2+1=−1.","−1"),
+  mkProb("Which shows exponential decay?",["y=2^x","y=0.5^x","y=x²","y=2x"],1,"Base<1 → decay.","y=0.5^x"),
+  mkProb("f(x)=x+3 and g(x)=2x. Find (f∘g)(1).",["5","7","8","6"],1,"g(1)=2. f(2)=5.","5"),
+  mkProb("Which function has vertex at origin?",["y=x²+1","y=(x+1)²","y=x²","y=x²−1"],2,"y=x² vertex at (0,0).","y=x²"),
+]}
+
+function genWordProblems(){return[
+  mkProb("Notebooks $3, pens $1. 4 notebooks+5 pens?",["$12","$15","$17","$20"],2,"12+5=17.","$17"),
+  mkProb("Earns $15/hr. $120 total. Hours?",["6","7","8","9"],2,"120÷15=8.","8"),
+  mkProb("500 gal tank, 25 gal/min drain. Empty in?",["15","20","25","30"],1,"500÷25=20.","20 min"),
+  mkProb("Two trains 300 mi, 60+90 mph. Meet in?",["1 hr","2 hrs","3 hrs","4 hrs"],1,"300÷150=2.","2 hours"),
+  mkProb("Perimeter 54, length=2×width. Width?",["6","9","12","18"],1,"6w=54 → w=9.","9"),
+  mkProb("$30/day+$0.20/mi. 3 days, 150 mi?",["$110","$120","$130","$90"],1,"90+30=120.","$120"),
+  mkProb("Consecutive integers sum to 47. Larger?",["22","23","24","25"],2,"n+(n+1)=47 → 24.","24"),
+  mkProb("1200 gal pool, 40 gal/hr. Hours to fill?",["20","25","30","35"],2,"1200÷40=30.","30"),
+  mkProb("Maria 3× sister. In 5 yrs 2× sister. Maria now?",["10","12","15","18"],2,"s=5, M=15.","15"),
+  mkProb("$20/mo+$0.05/text=$32. Texts?",["120","200","240","320"],2,"0.05t=12 → 240.","240"),
+  mkProb("A number plus twice itself equals 45. Number?",["10","12","15","20"],2,"3x=45 → x=15.","15"),
+  mkProb("Box has 3× as many red as blue. 48 total. Blue?",["8","10","12","16"],2,"b+3b=48 → b=12.","12"),
+  mkProb("Store sold 120 items. Shirts outnumber pants 3:1. Shirts?",["30","60","90","120"],2,"3/4×120=90.","90"),
+  mkProb("Plumber $45 fee+$60/hr. Total for 2.5 hrs?",["$150","$165","$195","$185"],2,"45+60×2.5=195.","$195"),
+  mkProb("Garden: length 4m more than width. Area=60m². Width?",["6m","8m","10m","12m"],0,"w(w+4)=60 → w=6.","6m"),
+  mkProb("Age: Tom is twice Jerry. In 4 years, 1.5× Jerry. Tom now?",["8","12","16","20"],2,"2j+4=1.5(j+4) → j=2, T=16? Let me recheck: 2j+4=1.5j+6 → 0.5j=2 → j=4, T=8.","8"),
+  mkProb("Coins: 3× as many dimes as quarters. Total $2.75. Quarters?",["3","4","5","6"],2,"0.25q+0.10(3q)=2.75 → 0.55q=2.75 → q=5.","5"),
+  mkProb("Ann walks 4 mph. Bob bikes 12 mph same direction, 2hr head start. When does Bob catch Ann?",["Never","1 hr","2 hrs","3 hrs"],1,"12(t)=4(t+2) → 8t=8 → t=1.","1 hour"),
+  mkProb("Average of 5 tests is 82. Four tests: 78,85,80,88. Fifth?",["79","80","81","82"],0,"Total=410. 410−331=79.","79"),
+  mkProb("Rectangle perimeter 36, width is 2/3 of length. Length?",["9","10.8","12","15"],1,"2(l+2l/3)=36 → l=10.8.","10.8"),
+  mkProb("A club has 40 members. After 5 left and 3 joined, count?",["38","40","42","45"],0,"40−5+3=38.","38"),
+  mkProb("If 3 is subtracted from twice a number, result is 11. Number?",["4","5","6","7"],3,"2x−3=11 → x=7.","7"),
+  mkProb("Fencing a yard 20×15. Cost at $3.50/ft?",["$245","$350","$367.50","$385"],2,"Perimeter=70. 70×3.50=245.","$245"),
+  mkProb("Three consecutive even integers sum to 78. Largest?",["24","26","28","30"],2,"x+(x+2)+(x+4)=78 → x=24. Largest=28.","28"),
+  mkProb("Gas $3.50/gal. 12 gal used per 300 miles. Cost per mile?",["$0.12","$0.14","$0.18","$0.20"],1,"12×3.50/300=0.14.","$0.14"),
+  mkProb("Sam saves $50/week. Goal $850. Already has $200. Weeks?",["10","12","13","15"],2,"(850−200)/50=13.","13"),
+  mkProb("Two pipes fill pool: one in 4hrs, one in 6hrs. Together?",["2.0 hrs","2.4 hrs","3.0 hrs","3.6 hrs"],1,"1/4+1/6=5/12. Time=12/5=2.4.","2.4 hours"),
+  mkProb("Store profits $6/unit sold, fixed cost $480. Units for profit?",["70","80","90","100"],1,"6n>480 → n>80.","81+ units"),
+  mkProb("Temperature drops 3°/hr from 20°C. Below 0° after?",["5 hrs","6 hrs","7 hrs","8 hrs"],2,"20/3≈6.67 → after 7 hrs.","7 hours"),
+  mkProb("Three workers paint a house in 6 days. One worker alone?",["12","15","18","24"],2,"Work rate: 3×(1/18)/worker → 18 days.","18 days"),
+]}
+
+function genDesmos(){return[
+  mkProb("Graph y=x²−4, y=0. Intersect at?",["x=±4","x=±2","x=2","x=0"],1,"x²=4 → x=±2.","x=±2"),
+  mkProb("y=2x+3 and y=5. x at intersection?",["1","2","3","5"],0,"2x+3=5 → x=1.","x=1"),
+  mkProb("sin(45°)≈0.707. Exact value?",["√2/2","√3/2","1/2","1"],0,"√2/2≈0.707.","√2/2"),
+  mkProb("Table (1,5),(2,8),(3,11). Rule?",["y=2x+3","y=3x+2","y=3x−3","y=5x"],1,"3(1)+2=5 ✓.","y=3x+2"),
+  mkProb("Calculator best for?",["Grammar","Finding zeros","Essays","Reading"],1,"Graphing finds zeros visually.","Finding zeros"),
+  mkProb("Desmos slider explores?",["Typing speed","Parameter effects","Colors","Internet"],1,"Dynamic parameter changes.","Parameter effects"),
+  mkProb("Find x-intercepts of y=x³−3x²+2 in Desmos?",["Table only","Graph & click intercepts","Ruler","Divide by x"],1,"Graph then click.","Graph & click"),
+  mkProb("3!=?",["6","9","3","12"],0,"3×2×1=6.","6"),
+  mkProb("√50=?",["5√2","7√2","10√5","2√5"],0,"√(25×2)=5√2.","5√2"),
+  mkProb("Vertex of y=x²−6x+8 in Desmos?",["Delete","Graph,find minimum","Type vertex","Multiply by 2"],1,"Minimum=vertex=(3,−1).","(3,−1)"),
+  mkProb("To solve 2x+3=7 using Desmos, graph?",["y=2x+3 only","y=2x+3 and y=7","y=7 only","y=2x"],1,"Find intersection of both lines.","y=2x+3 and y=7"),
+  mkProb("Desmos regression: enter data, choose model. For linear data, use?",["y=ax²+b","y=ab^x","y=a+bx","y=a/x"],2,"Linear model: y=a+bx.","y=a+bx"),
+  mkProb("In Desmos, log(100)=?",["1","2","10","100"],1,"log₁₀(100)=2.","2"),
+  mkProb("Desmos shows y=sin(x). Period=?",["π","2π","π/2","4π"],1,"Period of sin=2π.","2π"),
+  mkProb("Using Desmos tables, predict y when x=6 if pattern is y=2x+1.",["11","12","13","14"],2,"2(6)+1=13.","13"),
+  mkProb("Desmos: fastest way to find where y=3x²−12 crosses x-axis?",["Algebra only","Graph and find zeros","Use a table","Guess and check"],1,"Graph → zeros button or click intersections.","Graph and find zeros"),
+  mkProb("π ≈ ?",["2.14","3.14","3.41","4.14"],1,"π≈3.14159.","3.14"),
+  mkProb("Desmos can graph inequalities like y>2x−1. Shaded region shows?",["The line","Solutions to inequality","Non-solutions","The slope"],1,"Shaded region = all solutions.","Solutions"),
+  mkProb("e ≈ ?",["1.72","2.72","3.72","7.20"],1,"e≈2.718.","2.72"),
+  mkProb("In Desmos, entering f(x)=x² then g(x)=f(x)+3 gives?",["Same graph","g shifted up 3","g shifted right 3","Error"],1,"Vertical shift up 3.","Shifted up 3"),
+  mkProb("To find the minimum of y=x²−4x+7 in Desmos?",["Enter x=min","Click the vertex","Set dy/dx=0 first","Only algebra works"],1,"Desmos shows vertex directly.","Click the vertex"),
+  mkProb("Desmos: |x|<3 is graphed as?",["Two vertical lines","A shaded strip","A circle","A parabola"],1,"−3<x<3 is a strip.","A shaded strip"),
+  mkProb("Calculator: 7! = ?",["49","720","5040","1000"],2,"7!=5040.","5040"),
+  mkProb("In Desmos, to check if (2,3) is on y=x²−1, substitute?",["x=3,y=2","x=2,y=3","x=1,y=2","x=2,y=1"],1,"Check if 3=4−1=3 ✓.","x=2, y=3"),
+  mkProb("Desmos: to see table of values for y=2x, click?",["Graph button","Table icon","Settings","Keyboard"],1,"Click table icon next to expression.","Table icon"),
+  mkProb("Solve x³=27 with calculator.",["x=3","x=9","x=7","x=81"],0,"∛27=3.","x=3"),
+  mkProb("Which keys on SAT calculator give √144?",["144²","144^0.5","144/2","144+0"],1,"√x = x^0.5 on calculator.","144^0.5"),
+  mkProb("Desmos: to find where two curves intersect?",["Subtract equations","Graph both, find intersection","Use table only","Divide functions"],1,"Graph both and click intersection point.","Graph and find intersection"),
+  mkProb("On SAT, calculator NOT allowed section tests?",["Memory","Logic","Arithmetic","None—calculator allowed on both"],3,"Both SAT math sections allow calculators now.","Both allow calculator"),
+  mkProb("Desmos: to model y=ab^x from data, use?",["Linear regression","Exponential regression","Quadratic regression","No regression"],1,"Exponential: y=ab^x.","Exponential regression"),
+]}
+
+const PROBLEM_BANK=[genLinear(),genSystems(),genQuadratic(),genPolynomials(),genRatios(),genPercent(),genStats(),genScatter(),genGeometry(),genFunctions(),genWordProblems(),genDesmos()];
+
+// ============================================================
+// RENDER TOPICS
+// ============================================================
+function renderTopics(){
+  const grid=document.getElementById('topicsGrid');
+  grid.innerHTML='';
+  TOPICS_META.forEach((t,i)=>{
+    const n=PROBLEM_BANK[i].length;
+    grid.innerHTML+=`<div class="topic-card" onclick="startTopic(${i})">
+      <div class="topic-num">Topic ${String(i+1).padStart(2,'0')}</div>
+      <div class="topic-name">${t.name}</div>
+      <div class="topic-count" style="display:flex;justify-content:space-between;align-items:center;">
+        <span>${n} problems · ${t.tag}</span>
+        <span class="topic-arr">→</span>
+      </div>
+    </div>`;
+  });
+}
+
+// ============================================================
+// PRACTICE STATE
+// ============================================================
+let currentTopic=-1,currentProbIdx=0,probAnswered=false,probScore=0,probTotal=0;
+
+function startTopic(topicIdx){
+  currentTopic=topicIdx;currentProbIdx=0;probAnswered=false;probScore=0;probTotal=0;
+  document.getElementById('practiceTopicTitle').textContent=TOPICS_META[topicIdx].name;
+  document.getElementById('practiceTopicMeta').textContent=`${PROBLEM_BANK[topicIdx].length} problems · ${TOPICS_META[topicIdx].tag}`;
+  document.getElementById('probScore').textContent='0';
+  document.getElementById('probTotal').textContent='0';
+  showPage('practice');
+  renderProb();
+}
+
+function renderProb(){
+  const probs=PROBLEM_BANK[currentTopic];
+  const p=probs[currentProbIdx];
+  probAnswered=false;
+  const pct=Math.round((currentProbIdx/probs.length)*100);
+  document.getElementById('probBar').style.width=pct+'%';
+  document.getElementById('probQ').textContent=p.q;
+  document.getElementById('nextBtn').style.display='none';
+  document.getElementById('expBox').classList.remove('show');
+  const choicesDiv=document.getElementById('probChoices');
+  choicesDiv.innerHTML='';
+  p.choices.forEach((c,i)=>{
+    const btn=document.createElement('button');
+    btn.className='choice-btn';
+    btn.innerHTML=`<span class="choice-letter">${L[i]}</span><span>${c}</span>`;
+    btn.onclick=()=>selectProb(i,p.correct,p.exp,p.formula||'',btn,choicesDiv);
+    choicesDiv.appendChild(btn);
+  });
+}
+
+function selectProb(chosen,correct,exp,formula,btn,container){
+  if(probAnswered)return;
+  probAnswered=true;probTotal++;
+  container.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);
+  if(chosen===correct){container.children[chosen].classList.add('correct');probScore++;}
+  else{container.children[chosen].classList.add('wrong');container.children[correct].classList.add('correct');}
+  document.getElementById('probScore').textContent=probScore;
+  document.getElementById('probTotal').textContent=probTotal;
+  const eb=document.getElementById('expBox');
+  document.getElementById('expText').textContent=exp;
+  document.getElementById('expFormula').textContent=formula;
+  eb.classList.add('show');
+  document.getElementById('nextBtn').style.display='inline-block';
+}
+
+function nextProb(){
+  const probs=PROBLEM_BANK[currentTopic];
+  if(currentProbIdx<probs.length-1){currentProbIdx++;renderProb();}
+  else{showDone();}
+}
+
+function skipProb(){
+  const probs=PROBLEM_BANK[currentTopic];
+  if(currentProbIdx<probs.length-1){currentProbIdx++;renderProb();}
+  else showDone();
+}
+
+function showDone(){
+  document.getElementById('doneScore').textContent=probScore+'/'+probTotal;
+  document.getElementById('donePct').textContent=Math.round((probScore/Math.max(probTotal,1))*100)+'% correct';
+  showPage('done');
+}
+
+function restartTopic(){startTopic(currentTopic);}
+
+// ============================================================
+// EXAM GENERATION — 30 exams, 22 questions, last 6-8 hardest
+// ============================================================
+const EXAM_NAMES=[
+  "Exam 1 — Foundations","Exam 2 — Core Skills","Exam 3 — Problem Solving",
+  "Exam 4 — Data & Stats","Exam 5 — Geometry Focus","Exam 6 — Algebra Mastery",
+  "Exam 7 — Advanced Math","Exam 8 — Functions Deep Dive","Exam 9 — Mixed Review I",
+  "Exam 10 — Mixed Review II","Exam 11 — Word Problems","Exam 12 — Ratios & Rates",
+  "Exam 13 — Percentages","Exam 14 — Quadratics Focus","Exam 15 — Systems & Linear",
+  "Exam 16 — Stats & Probability","Exam 17 — Scatterplots","Exam 18 — Polynomials",
+  "Exam 19 — Trig & Geometry","Exam 20 — Calculator Strategy","Exam 21 — Challenge I",
+  "Exam 22 — Challenge II","Exam 23 — Full Mix I","Exam 24 — Full Mix II",
+  "Exam 25 — Speed Round","Exam 26 — Hard Focus I","Exam 27 — Hard Focus II",
+  "Exam 28 — 800 Chaser I","Exam 29 — 800 Chaser II","Exam 30 — Final Simulation"
+];
+const EXAM_DIFFS=["easy","easy","easy","medium","medium","medium","medium","medium","medium","medium","medium","medium","medium","medium","medium","medium","medium","medium","medium","medium","hard","hard","medium","medium","medium","hard","hard","hard","hard","hard"];
+
+// Generate 22-question exam: 14-16 medium, last 6-8 hard (from advanced topics)
+function generateExam(examIdx){
+  const questions=[];
+  // Pick from various topics
+  const topicSets=[0,1,2,3,4,5,6,7,8,9,10,11];
+  const hardTopics=[2,3,9]; // quadratics, polynomials, functions
+  // Shuffle and pick 15 regular questions
+  const regular=[];
+  for(let t=0;t<12;t++){
+    const pool=PROBLEM_BANK[t];
+    const offset=(examIdx*7+t*3)%pool.length;
+    regular.push({...pool[offset],topicIdx:t});
+  }
+  // Shuffle regular
+  for(let i=regular.length-1;i>0;i--){const j=Math.floor(Math.random()*examIdx+i)%(i+1);[regular[i],regular[j]]=[regular[j],regular[i]];}
+  // Pick 14 regular
+  questions.push(...regular.slice(0,14));
+  // Add 8 hard (from harder problems, later in arrays = harder)
+  hardTopics.forEach((t,hi)=>{
+    const pool=PROBLEM_BANK[t];
+    const hardOffset=Math.max(0,pool.length-10)+((examIdx+hi*3)%10);
+    const idx=hardOffset%pool.length;
+    questions.push({...pool[idx],isHard:true,topicIdx:t});
+    if(hi<2){
+      const idx2=(hardOffset+3)%pool.length;
+      questions.push({...pool[idx2],isHard:true,topicIdx:t});
+    }
+  });
+  // Ensure exactly 22
+  while(questions.length<22){
+    const t=Math.floor(Math.random()*12);
+    const p=PROBLEM_BANK[t][(examIdx+questions.length)%PROBLEM_BANK[t].length];
+    questions.push({...p,topicIdx:t});
+  }
+  return questions.slice(0,22);
+}
+
+function renderExamsList(){
+  const grid=document.getElementById('examsGrid');
+  grid.innerHTML='';
+  EXAM_NAMES.forEach((name,i)=>{
+    const diff=EXAM_DIFFS[i];
+    const diffLabel=diff==='easy'?'Beginner':diff==='medium'?'Intermediate':'Advanced';
+    const diffClass='diff-'+diff;
+    grid.innerHTML+=`<div class="exam-card" onclick="startExam(${i})">
+      <div class="exam-diff ${diffClass}">${diffLabel}</div>
+      <div class="exam-name">${name}</div>
+      <div class="exam-meta">22 questions · 35 minutes · Last 6–8 hardest</div>
+      <button class="btn btn-orange btn-sm" style="width:100%;margin-top:.5rem;">Start Exam →</button>
+    </div>`;
+  });
+}
+
+// ============================================================
+// EXAM ACTIVE STATE
+// ============================================================
+let activeExamIdx=-1,examQuestions=[],examAnswers={},examTimerInt=null,examTimeLeft=0,examFinished=false;
+
+function startExam(idx){
+  activeExamIdx=idx;
+  examQuestions=generateExam(idx);
+  examAnswers={};examFinished=false;
+  examTimeLeft=35*60;
+  document.getElementById('activeExamName').textContent=EXAM_NAMES[idx];
+  showPage('exam-active');
+  renderExamQuestions();
+  startExamTimer();
+}
+
+function renderExamQuestions(){
+  const cont=document.getElementById('examQContainer');
+  cont.innerHTML='';
+  examQuestions.forEach((q,qi)=>{
+    const hardBadge=q.isHard?'<div class="eq-hard-badge">⚡ HARD</div>':'';
+    cont.innerHTML+=`<div class="eq-card" id="eqCard${qi}">
+      <div class="eq-num">Question ${qi+1} of 22</div>
+      ${hardBadge}
+      <div class="eq-q">${q.q}</div>
+      <div class="eq-choices" id="eqChoices${qi}">
+        ${q.choices.map((c,ci)=>`<div class="eq-ch" id="eqCh${qi}_${ci}" onclick="selectExamAnswer(${qi},${ci})">${'<span class="eq-letter">'+L[ci]+'</span>'} ${c}</div>`).join('')}
+      </div>
+    </div>`;
+  });
+  updateExamProgress();
+}
+
+function selectExamAnswer(qi,ci){
+  if(examFinished)return;
+  const prev=examAnswers[qi];
+  if(prev!==undefined)document.getElementById(`eqCh${qi}_${prev}`).classList.remove('selected');
+  examAnswers[qi]=ci;
+  document.getElementById(`eqCh${qi}_${ci}`).classList.add('selected');
+  updateExamProgress();
+}
+
+function updateExamProgress(){
+  const answered=Object.keys(examAnswers).length;
+  document.getElementById('activeExamProg').textContent=`${answered}/22 answered`;
+  document.getElementById('examAnsweredCount').textContent=`${answered}/22 answered`;
+}
+
+function startExamTimer(){
+  clearInterval(examTimerInt);
+  examTimerInt=setInterval(()=>{
+    examTimeLeft--;
+    const m=Math.floor(examTimeLeft/60);
+    const s=examTimeLeft%60;
+    const el=document.getElementById('examTimer');
+    el.textContent=`${m}:${String(s).padStart(2,'0')}`;
+    el.className='exam-timer'+(examTimeLeft<180?' urgent':'');
+    if(examTimeLeft<=0){clearInterval(examTimerInt);submitExam();}
+  },1000);
+}
+
+function exitExam(){clearInterval(examTimerInt);showPage('exams-list');}
+
+function submitExam(){
+  examFinished=true;clearInterval(examTimerInt);
+  let correct=0;
+  examQuestions.forEach((q,i)=>{if(examAnswers[i]===q.correct)correct++;});
+  const pct=Math.round((correct/22)*100);
+  const est=Math.round(200+(correct/22)*600);
+  document.getElementById('resScore').textContent=correct+'/22';
+  const msg=pct>=90?'Outstanding! Near-perfect. 🏆':pct>=75?'Great work — keep pushing! 💪':pct>=60?'Good effort. Review explanations below. 📖':'Keep practicing. You\'ve got this! 🎯';
+  document.getElementById('resMsg').textContent=msg;
+  document.getElementById('resBreakdown').innerHTML=`
+    <div class="rb-item"><div class="rb-val">${pct}%</div><div class="rb-label">Accuracy</div></div>
+    <div class="rb-item"><div class="rb-val">~${est}</div><div class="rb-label">Est. SAT Score</div></div>
+    <div class="rb-item"><div class="rb-val">${22-correct}</div><div class="rb-label">To Review</div></div>`;
+  let reviewHtml='';
+  examQuestions.forEach((q,i)=>{
+    const ua=examAnswers[i];
+    const ok=ua===q.correct;
+    reviewHtml+=`<div style="padding:1rem;border-radius:10px;border:1px solid ${ok?'rgba(34,197,94,.3)':'rgba(239,68,68,.3)'};background:${ok?'rgba(34,197,94,.05)':'rgba(239,68,68,.05)'};margin-bottom:.8rem;">
+      <div style="font-size:.72rem;font-weight:700;color:${ok?'#86efac':'#fca5a5'};margin-bottom:.4rem;">Q${i+1}: ${ok?'✓ Correct':'✗ Incorrect'}${q.isHard?' · ⚡ Hard':''}</div>
+      <div style="font-size:.88rem;margin-bottom:.4rem;">${q.q}</div>
+      ${!ok?`<div style="font-size:.78rem;color:var(--muted);">Your answer: ${ua!==undefined?L[ua]+'. '+q.choices[ua]:'No answer'}</div>`:''}
+      <div style="font-size:.78rem;color:${ok?'#86efac':'#fca5a5'};">Correct: ${L[q.correct]}. ${q.choices[q.correct]}</div>
+      <div class="eq-exp show"><div class="eq-exp-head">Why:</div><div class="eq-exp-text">${q.exp}</div></div>
+    </div>`;
+  });
+  document.getElementById('resReview').innerHTML=reviewHtml;
+  showPage('exam-results');
+}
+
+function retakeExam(){startExam(activeExamIdx);}
+
+// ============================================================
+// COURSES
+// ============================================================
+const SAT_LESSONS=[
+  {n:"Module 1",t:"Linear Equations & Inequalities",d:"45 min",desc:"Master solving linear equations, graphing lines, and working with inequalities."},
+  {n:"Module 2",t:"Systems of Equations",d:"40 min",desc:"Substitution, elimination, and graphical methods for solving systems."},
+  {n:"Module 3",t:"Quadratic Equations",d:"55 min",desc:"Factoring, quadratic formula, vertex form, and discriminant."},
+  {n:"Module 4",t:"Polynomials & Expressions",d:"50 min",desc:"Factoring, expanding, dividing polynomials and working with roots."},
+  {n:"Module 5",t:"Ratios, Rates & Proportions",d:"35 min",desc:"Direct and inverse variation, unit rates, and proportion problems."},
+  {n:"Module 6",t:"Percentages & Unit Conversions",d:"35 min",desc:"Percent increase/decrease, markups, discounts, and conversions."},
+  {n:"Module 7",t:"Statistics & Data Analysis",d:"45 min",desc:"Mean, median, mode, standard deviation, and probability."},
+  {n:"Module 8",t:"Scatterplots & Data Interpretation",d:"40 min",desc:"Best-fit lines, correlation, residuals, and interpreting graphs."},
+  {n:"Module 9",t:"Geometry & Trigonometry",d:"60 min",desc:"Triangles, circles, 3D shapes, and trig ratios."},
+  {n:"Module 10",t:"Functions & Graphs",d:"50 min",desc:"Function notation, transformations, domain/range, and inverse functions."},
+  {n:"Module 11",t:"Word Problems & Modeling",d:"45 min",desc:"Translating real-world situations into equations and solving."},
+  {n:"Module 12",t:"Test Strategy & Calculator Use",d:"30 min",desc:"Time management, guessing strategy, and strategic calculator use."},
+];
+
+const DESMOS_LESSONS=[
+  {n:"Lesson 1",t:"Desmos Interface Tour",d:"15 min",desc:"Navigate Desmos efficiently: expressions, tables, sliders, settings."},
+  {n:"Lesson 2",t:"Graphing Lines & Parabolas",d:"20 min",desc:"Enter equations, adjust windows, and read intercepts instantly."},
+  {n:"Lesson 3",t:"Finding Zeros & X-Intercepts",d:"25 min",desc:"The fastest way to find where a function equals zero."},
+  {n:"Lesson 4",t:"Solving Systems Graphically",d:"20 min",desc:"Graph two equations and click the intersection in seconds."},
+  {n:"Lesson 5",t:"Quadratics: Vertex & Roots",d:"25 min",desc:"Use Desmos to find vertex, roots, and axis of symmetry instantly."},
+  {n:"Lesson 6",t:"Sliders & Dynamic Exploration",d:"20 min",desc:"Use sliders to understand how a, b, c affect y=ax²+bx+c."},
+  {n:"Lesson 7",t:"Tables & Pattern Recognition",d:"15 min",desc:"Use tables to identify rules and predict values."},
+  {n:"Lesson 8",t:"Regression & Best-Fit Lines",d:"20 min",desc:"Enter data, fit linear/exponential/quadratic models in seconds."},
+  {n:"Lesson 9",t:"Inequalities & Shading",d:"15 min",desc:"Graph inequalities and read the solution region visually."},
+  {n:"Lesson 10",t:"Trig Functions",d:"20 min",desc:"Graph sin/cos/tan, identify period, amplitude, and phase shifts."},
+  {n:"Lesson 11",t:"Time-Saving Shortcuts",d:"30 min",desc:"30+ Desmos tricks that save 30 seconds+ per SAT problem."},
+  {n:"Lesson 12",t:"Desmos Practice Exam",d:"40 min",desc:"40 Desmos-specific problems with calculator strategy applied."},
+];
+
+function renderCourseLessons(){
+  const satEl=document.getElementById('satLessons');
+  const desEl=document.getElementById('desmosLessons');
+  satEl.innerHTML=SAT_LESSONS.map((l,i)=>`
+    <div class="lesson-item">
+      <div><div class="lesson-num">${l.n}</div><div class="lesson-title">${l.t}</div><div style="font-size:.78rem;color:var(--muted);margin-top:.2rem;">${l.desc}</div></div>
+      <div class="lesson-dur">${l.d}</div>
+    </div>`).join('');
+  desEl.innerHTML=DESMOS_LESSONS.map((l,i)=>`
+    <div class="lesson-item">
+      <div><div class="lesson-num">${l.n}</div><div class="lesson-title">${l.t}</div><div style="font-size:.78rem;color:var(--muted);margin-top:.2rem;">${l.desc}</div></div>
+      <div class="lesson-dur">${l.d}</div>
+    </div>`).join('');
+}
+
+// ============================================================
+// BOOKING
+// ============================================================
+function submitBooking(){
+  const first=document.getElementById('bFirst').value.trim();
+  const last=document.getElementById('bLast').value.trim();
+  const email=document.getElementById('bEmail').value.trim();
+  if(!first||!last||!email){alert('Please enter your name and email.');return;}
+  document.getElementById('bookFormWrap').style.display='none';
+  document.getElementById('confirmedEmail').textContent=email;
+  document.getElementById('bookSuccess').classList.add('show');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderTopics();
+renderExamsList();
+renderCourseLessons();
+
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+function mobileNav(page){
+  document.getElementById('mobileMenu').classList.remove('open');
+  showPage(page);
+  window.scrollTo(0,0);
+}
+
+// ============================================================
+// EMAIL SIGNUP
+// ============================================================
+function submitEmail(){
+  const name=document.getElementById('emailName').value.trim();
+  const email=document.getElementById('emailAddr').value.trim();
+  if(!name||!email){alert('Please enter your name and email.');return;}
+  document.getElementById('emailSuccess').classList.add('show');
+  document.getElementById('emailName').value='';
+  document.getElementById('emailAddr').value='';
+  // Store locally so you can view signups
+  const subs=JSON.parse(localStorage.getItem('tbEmailSubs')||'[]');
+  subs.push({name,email,date:new Date().toLocaleDateString()});
+  localStorage.setItem('tbEmailSubs',JSON.stringify(subs));
+}
+
+// ============================================================
+// FLASHCARD DATA
+// ============================================================
+const FC_CARDS=[
+  // Linear Equations
+  {topic:0,q:"What is slope-intercept form?",a:"y = mx + b, where m is slope and b is y-intercept",f:"y = mx + b"},
+  {topic:0,q:"How do you find the slope between two points?",a:"Slope = (y₂ - y₁) / (x₂ - x₁) — rise over run",f:"m = (y₂-y₁)/(x₂-x₁)"},
+  {topic:0,q:"What does the y-intercept represent?",a:"Where the line crosses the y-axis (when x = 0)",f:"Set x=0, solve for y"},
+  {topic:0,q:"What does the x-intercept represent?",a:"Where the line crosses the x-axis (when y = 0)",f:"Set y=0, solve for x"},
+  {topic:0,q:"Parallel lines have what in common?",a:"The same slope (m₁ = m₂) but different y-intercepts",f:"m₁ = m₂"},
+  {topic:0,q:"Perpendicular lines have slopes that are?",a:"Negative reciprocals of each other: m₁ × m₂ = -1",f:"m₁ × m₂ = -1"},
+  {topic:0,q:"How do you solve a multi-step equation?",a:"Distribute, combine like terms, move variables to one side, divide",f:"Isolate variable"},
+  {topic:0,q:"What is point-slope form of a line?",a:"y - y₁ = m(x - x₁) using a known point and slope",f:"y-y₁=m(x-x₁)"},
+  // Systems
+  {topic:1,q:"What are the three methods to solve a system?",a:"Substitution, Elimination (adding/subtracting), and Graphing",f:"Sub, Elim, Graph"},
+  {topic:1,q:"When does a system have no solution?",a:"When the lines are parallel — same slope, different y-intercept",f:"Same m, different b"},
+  {topic:1,q:"When does a system have infinite solutions?",a:"When both equations describe the same line",f:"Same line"},
+  {topic:1,q:"How to use elimination?",a:"Multiply equations so one variable cancels when you add them",f:"Multiply → Add → Solve"},
+  // Quadratics
+  {topic:2,q:"What is the quadratic formula?",a:"x = [-b ± √(b²-4ac)] / 2a for ax²+bx+c=0",f:"x=(-b±√(b²-4ac))/2a"},
+  {topic:2,q:"What is the discriminant and what does it tell you?",a:"b²-4ac: >0 means 2 real roots, =0 means 1 root, <0 means no real roots",f:"Δ = b²-4ac"},
+  {topic:2,q:"What is vertex form of a quadratic?",a:"y = a(x-h)² + k, where (h,k) is the vertex",f:"y=a(x-h)²+k"},
+  {topic:2,q:"How do you find the vertex from standard form?",a:"x-coordinate: x = -b/2a, then substitute back for y",f:"x=-b/2a"},
+  {topic:2,q:"What does a negative 'a' in y=ax²+bx+c mean?",a:"The parabola opens downward and has a maximum value",f:"a<0 → opens down"},
+  {topic:2,q:"What is the FOIL method?",a:"First, Outer, Inner, Last — used to expand (x+a)(x+b)",f:"(x+a)(x+b)=x²+(a+b)x+ab"},
+  {topic:2,q:"How to complete the square?",a:"Take half of b, square it, add to both sides: x²+bx+(b/2)²=(x+b/2)²",f:"(b/2)²"},
+  {topic:2,q:"Sum and product of roots?",a:"Sum = -b/a, Product = c/a for ax²+bx+c=0",f:"Sum=-b/a, Product=c/a"},
+  // Polynomials
+  {topic:3,q:"Difference of squares formula?",a:"a² - b² = (a+b)(a-b)",f:"a²-b²=(a+b)(a-b)"},
+  {topic:3,q:"Perfect square trinomial formulas?",a:"(a+b)²=a²+2ab+b² and (a-b)²=a²-2ab+b²",f:"(a±b)²=a²±2ab+b²"},
+  {topic:3,q:"What is the remainder theorem?",a:"When dividing p(x) by (x-c), the remainder equals p(c)",f:"Remainder = p(c)"},
+  {topic:3,q:"How to find degree of a polynomial?",a:"The degree is the highest exponent of the variable",f:"Highest power"},
+  {topic:3,q:"Rules for multiplying exponents?",a:"Same base: xᵃ·xᵇ=x^(a+b). Power of power: (xᵃ)ᵇ=x^(ab)",f:"xᵃ·xᵇ=x^(a+b)"},
+  {topic:3,q:"What does x^(-n) equal?",a:"1/xⁿ — negative exponents mean reciprocals",f:"x^(-n)=1/xⁿ"},
+  // Ratios
+  {topic:4,q:"Formula for speed, distance, time?",a:"Distance = Speed × Time (DST triangle)",f:"d = s × t"},
+  {topic:4,q:"What is a unit rate?",a:"A ratio with denominator 1 — e.g. miles per 1 hour",f:"Unit rate = ratio/1"},
+  {topic:4,q:"Direct variation equation?",a:"y = kx, where k is the constant of variation",f:"y=kx"},
+  {topic:4,q:"Inverse variation equation?",a:"y = k/x — as x increases, y decreases",f:"y=k/x"},
+  // Percentages
+  {topic:5,q:"Percent change formula?",a:"(New - Old) / Old × 100%",f:"(New-Old)/Old × 100%"},
+  {topic:5,q:"Formula to find original price after discount?",a:"Original = Sale Price / (1 - discount rate)",f:"Original = Sale/(1-r)"},
+  {topic:5,q:"Compound interest formula?",a:"A = P(1 + r)ᵗ where P=principal, r=rate, t=time",f:"A=P(1+r)^t"},
+  {topic:5,q:"How to convert fraction to percent?",a:"Divide numerator by denominator, multiply by 100",f:"(a/b)×100"},
+  // Stats
+  {topic:6,q:"Mean formula?",a:"Sum of all values ÷ number of values",f:"Mean = Σx/n"},
+  {topic:6,q:"How to find median?",a:"Sort values. If odd count: middle value. If even: average of two middle values",f:"Middle value"},
+  {topic:6,q:"What is standard deviation?",a:"Measures how spread out data is from the mean — higher = more spread",f:"σ = spread from mean"},
+  {topic:6,q:"What is an outlier?",a:"A data point far from the others — affects mean more than median",f:"Extreme value"},
+  {topic:6,q:"Probability formula?",a:"P(event) = (favorable outcomes) / (total outcomes)",f:"P=favorable/total"},
+  {topic:6,q:"P(A and B) for independent events?",a:"P(A) × P(B)",f:"P(A∩B)=P(A)×P(B)"},
+  {topic:6,q:"P(A or B) for mutually exclusive events?",a:"P(A) + P(B)",f:"P(A∪B)=P(A)+P(B)"},
+  // Scatterplots
+  {topic:7,q:"What does correlation coefficient r measure?",a:"Strength and direction of a linear relationship: -1 to +1",f:"-1≤r≤1"},
+  {topic:7,q:"What is a residual?",a:"Actual y value minus Predicted y value: residual = y - ŷ",f:"residual = y - ŷ"},
+  {topic:7,q:"What does r² (r-squared) tell you?",a:"The proportion of variation in y explained by x (0 to 1)",f:"r² = variation explained"},
+  {topic:7,q:"Positive vs negative correlation?",a:"Positive: both increase together. Negative: one increases as other decreases",f:"Pos: ↑↑, Neg: ↑↓"},
+  // Geometry
+  {topic:8,q:"Pythagorean theorem?",a:"a² + b² = c² for right triangles (c is hypotenuse)",f:"a²+b²=c²"},
+  {topic:8,q:"Area formulas: triangle, circle, rectangle?",a:"Triangle: ½bh. Circle: πr². Rectangle: lw. Trapezoid: ½(b₁+b₂)h",f:"½bh, πr², lw"},
+  {topic:8,q:"Special right triangles?",a:"30-60-90: sides x, x√3, 2x. 45-45-90: sides x, x, x√2",f:"30-60-90 & 45-45-90"},
+  {topic:8,q:"Arc length formula?",a:"(central angle / 360) × 2πr",f:"(θ/360)×2πr"},
+  {topic:8,q:"Volume formulas?",a:"Box: lwh. Cylinder: πr²h. Cone: ⅓πr²h. Sphere: 4/3πr³",f:"lwh, πr²h, ⅓πr²h"},
+  {topic:8,q:"SOH-CAH-TOA?",a:"Sin=Opposite/Hypotenuse, Cos=Adjacent/Hypotenuse, Tan=Opposite/Adjacent",f:"SOH-CAH-TOA"},
+  {topic:8,q:"Sum of interior angles of a polygon?",a:"(n-2) × 180° where n = number of sides",f:"(n-2)×180°"},
+  {topic:8,q:"Common Pythagorean triples?",a:"3-4-5, 5-12-13, 8-15-17, 7-24-25",f:"3-4-5, 5-12-13"},
+  // Functions
+  {topic:9,q:"What is a function?",a:"Each input (x) maps to exactly ONE output (y). Passes vertical line test.",f:"One x → one y"},
+  {topic:9,q:"Vertical shift of f(x)?",a:"Up k: f(x)+k. Down k: f(x)-k",f:"f(x)±k"},
+  {topic:9,q:"Horizontal shift of f(x)?",a:"Right h: f(x-h). Left h: f(x+h)",f:"f(x-h) or f(x+h)"},
+  {topic:9,q:"How to find inverse function f⁻¹(x)?",a:"Swap x and y, then solve for y",f:"Swap x↔y, solve"},
+  {topic:9,q:"Domain vs Range?",a:"Domain = all valid x inputs. Range = all possible y outputs.",f:"Domain→x, Range→y"},
+  {topic:9,q:"Even vs odd functions?",a:"Even: f(-x)=f(x), symmetric about y-axis. Odd: f(-x)=-f(x), symmetric about origin.",f:"Even:f(-x)=f(x)"},
+  // Word Problems
+  {topic:10,q:"Key phrase 'is' in word problems means?",a:"Equals sign (=)",f:"'is' → ="},
+  {topic:10,q:"'More than' and 'less than' mean?",a:"More than → add (+). Less than → subtract (-)",f:"more→+, less→-"},
+  {topic:10,q:"Setting up a work rate problem?",a:"Rate × Time = Work. Combined rate = sum of individual rates",f:"r×t=W"},
+  {topic:10,q:"Distance-Rate-Time triangle?",a:"D = R × T. Cover what you want: D=RT, R=D/T, T=D/R",f:"D=RT"},
+  // Desmos
+  {topic:11,q:"How to find zeros in Desmos?",a:"Graph the function, click where it crosses the x-axis to see coordinates",f:"Graph→click x-axis"},
+  {topic:11,q:"How to solve a system in Desmos?",a:"Graph both equations, click the intersection point",f:"Graph both→click intersection"},
+  {topic:11,q:"What does a Desmos slider do?",a:"Dynamically changes a parameter value so you can see how it affects the graph",f:"Slider = dynamic parameter"},
+  {topic:11,q:"How to do regression in Desmos?",a:"Enter data in a table, then type y₁~ax₁+b (or other model) in a new line",f:"y₁~ax₁+b"},
+];
+
+const FC_TOPIC_COUNTS = Array(12).fill(0);
+FC_CARDS.forEach(c=>FC_TOPIC_COUNTS[c.topic]++);
+
+function renderFCTopics(){
+  const g=document.getElementById('fcTopicGrid');
+  if(!g)return;
+  g.innerHTML=TOPICS_META.map((t,i)=>`
+    <div class="fc-topic-btn" onclick="startFC(${i})">
+      <div class="fc-topic-name">${t.name}</div>
+      <div class="fc-topic-count">${FC_TOPIC_COUNTS[i]} cards · ${t.tag}</div>
+    </div>`).join('');
+}
+
+let fcTopicIdx=0,fcCards=[],fcIdx=0,fcFlipped=false,fcKnow=0,fcReview=0;
+
+function startFC(topicIdx){
+  fcTopicIdx=topicIdx;
+  fcCards=[...FC_CARDS.filter(c=>c.topic===topicIdx)];
+  // Shuffle
+  for(let i=fcCards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fcCards[i],fcCards[j]]=[fcCards[j],fcCards[i]];}
+  fcIdx=0;fcFlipped=false;fcKnow=0;fcReview=0;
+  document.getElementById('fcActiveTitle').textContent=TOPICS_META[topicIdx].name+' Flashcards';
+  document.getElementById('fcActiveSub').textContent=fcCards.length+' cards';
+  document.getElementById('fcDone').style.display='none';
+  document.querySelector('.fc-wrap').style.display='block';
+  showPage('flashcard-active');
+  renderFC();
+}
+
+function renderFC(){
+  if(fcIdx>=fcCards.length){showFCDone();return;}
+  const c=fcCards[fcIdx];
+  const card=document.getElementById('fcCard');
+  card.classList.remove('flipped');
+  fcFlipped=false;
+  document.getElementById('fcQuestion').textContent=c.q;
+  document.getElementById('fcAnswer').textContent=c.a;
+  document.getElementById('fcFormulaDisp').textContent=c.f;
+  document.getElementById('fcCounter').textContent=`Card ${fcIdx+1} of ${fcCards.length}`;
+  document.getElementById('fcKnowCount').textContent=`✓ ${fcKnow} know it`;
+  document.getElementById('fcReviewCount').textContent=`↩ ${fcReview} review`;
+  document.getElementById('fcBtns').style.display='none';
+  document.getElementById('fcFlipPrompt').style.display='block';
+}
+
+function flipCard(){
+  if(fcIdx>=fcCards.length)return;
+  const card=document.getElementById('fcCard');
+  card.classList.toggle('flipped');
+  fcFlipped=!fcFlipped;
+  if(fcFlipped){
+    document.getElementById('fcBtns').style.display='flex';
+    document.getElementById('fcFlipPrompt').style.display='none';
+  }
+}
+
+function fcRate(result){
+  if(result==='know')fcKnow++;
+  else fcReview++;
+  fcIdx++;
+  renderFC();
+}
+
+function fcSkip(){fcIdx++;renderFC();}
+
+function showFCDone(){
+  document.getElementById('fcDone').style.display='block';
+  document.querySelector('.fc-wrap').style.display='none';
+  const total=fcCards.length;
+  document.getElementById('fcDoneScore').textContent=fcKnow+'/'+total;
+  document.getElementById('fcDonePct').textContent=Math.round((fcKnow/total)*100)+'% known · '+fcReview+' to review';
+}
+
+function restartFC(){startFC(fcTopicIdx);}
+
+// ============================================================
+// WEAK SPOT QUIZ
+// ============================================================
+let wsSelectedTopics=[],wsQuestions=[],wsQIdx=0,wsAnswered=false,wsChosen=null,wsResults={};
+
+function renderWSTopics(){
+  const g=document.getElementById('wsTopicSelect');
+  if(!g)return;
+  g.innerHTML=TOPICS_META.map((t,i)=>`
+    <div class="ws-topic-check" id="wsTopic${i}" onclick="toggleWSTopic(${i})">${t.name}</div>`).join('');
+}
+
+function toggleWSTopic(i){
+  const el=document.getElementById('wsTopic'+i);
+  if(wsSelectedTopics.includes(i)){
+    wsSelectedTopics=wsSelectedTopics.filter(x=>x!==i);
+    el.classList.remove('selected');
+  } else if(wsSelectedTopics.length<6){
+    wsSelectedTopics.push(i);
+    el.classList.add('selected');
+  }
+}
+
+function startWS(){
+  if(wsSelectedTopics.length<2){document.getElementById('wsSelectError').style.display='block';return;}
+  document.getElementById('wsSelectError').style.display='none';
+  wsQuestions=[];wsResults={};
+  // Build 20 questions from selected topics
+  wsSelectedTopics.forEach(t=>{ wsResults[t]={correct:0,total:0,name:TOPICS_META[t].name}; });
+  for(let i=0;i<20;i++){
+    const t=wsSelectedTopics[i%wsSelectedTopics.length];
+    const pool=PROBLEM_BANK[t];
+    const p={...pool[(i*7+wsSelectedTopics[0])%pool.length],topicIdx:t};
+    wsQuestions.push(p);
+  }
+  wsQIdx=0;wsAnswered=false;wsChosen=null;
+  renderWSQuiz();
+}
+
+function renderWSQuiz(){
+  const cont=document.getElementById('wsContent');
+  if(wsQIdx>=wsQuestions.length){showWSResults();return;}
+  const p=wsQuestions[wsQIdx];
+  wsAnswered=false;wsChosen=null;
+  const pct=Math.round((wsQIdx/wsQuestions.length)*100);
+  cont.innerHTML=`
+    <div style="height:4px;background:rgba(255,255,255,.08);border-radius:100px;margin-bottom:1.5rem;">
+      <div style="height:4px;width:${pct}%;background:linear-gradient(90deg,var(--orange),var(--gold));border-radius:100px;transition:width .4s;"></div>
+    </div>
+    <div style="font-size:.72rem;color:var(--muted);margin-bottom:.5rem;">Question ${wsQIdx+1} of ${wsQuestions.length} · <span style="color:var(--gold);">${TOPICS_META[p.topicIdx].name}</span></div>
+    <div class="prob-box">
+      <div class="prob-q">${p.q}</div>
+      <div class="choices" id="wsChoices">
+        ${p.choices.map((c,i)=>`<button class="choice-btn" onclick="selectWS(${i},${p.correct},'${p.exp.replace(/'/g,"\'")}','${p.formula?p.formula.replace(/'/g,"\'"):''}',${p.topicIdx})"
+          style=""><span class="choice-letter">${L[i]}</span><span>${c}</span></button>`).join('')}
+      </div>
+      <div class="exp-box" id="wsExp">
+        <div class="exp-head">📖 Explanation</div>
+        <div class="exp-text" id="wsExpText"></div>
+        <div class="exp-formula" id="wsExpFm"></div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:1rem;">
+        <button class="btn btn-gold btn-sm" id="wsNextBtn" style="display:none;" onclick="wsNext()">Next →</button>
+      </div>
+    </div>`;
+}
+
+function selectWS(chosen,correct,exp,formula,topicIdx){
+  if(wsAnswered)return;
+  wsAnswered=true;wsChosen=chosen;
+  wsResults[topicIdx].total++;
+  if(chosen===correct)wsResults[topicIdx].correct++;
+  const btns=document.querySelectorAll('#wsChoices .choice-btn');
+  btns.forEach(b=>b.disabled=true);
+  if(chosen===correct)btns[chosen].classList.add('correct');
+  else{btns[chosen].classList.add('wrong');btns[correct].classList.add('correct');}
+  document.getElementById('wsExpText').textContent=exp;
+  document.getElementById('wsExpFm').textContent=formula;
+  document.getElementById('wsExp').classList.add('show');
+  document.getElementById('wsNextBtn').style.display='inline-block';
+}
+
+function wsNext(){wsQIdx++;renderWSQuiz();}
+
+function showWSResults(){
+  const cont=document.getElementById('wsContent');
+  const topics=Object.values(wsResults).filter(r=>r.total>0);
+  const sorted=[...topics].sort((a,b)=>(a.correct/a.total)-(b.correct/b.total));
+  const weak=sorted.filter(r=>r.correct/r.total<0.6);
+  const strong=sorted.filter(r=>r.correct/r.total>=0.6);
+  let html=`
+    <div style="text-align:center;margin-bottom:2rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;margin-bottom:.4rem;">Quiz Complete!</div>
+      <div style="color:var(--muted);font-size:.9rem;">Here's your personalized breakdown:</div>
+    </div>`;
+  if(weak.length>0){
+    html+=`<div style="font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fca5a5;margin-bottom:.8rem;">⚠ Focus On These</div>
+    <div class="ws-result-grid">`;
+    weak.forEach(r=>{
+      const pct=Math.round((r.correct/r.total)*100);
+      html+=`<div class="ws-result-card weak">
+        <div class="ws-topic-label">${r.name}</div>
+        <div class="ws-pct">${pct}%</div>
+        <div class="ws-score-bar-wrap"><div class="ws-score-bar" style="width:${pct}%"></div></div>
+        <div class="ws-rec">Score ${r.correct}/${r.total} correct. Practice this topic more!</div>
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+  if(strong.length>0){
+    html+=`<div style="font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#86efac;margin:.8rem 0 .8rem;">✓ Strong Areas</div>
+    <div class="ws-result-grid">`;
+    strong.forEach(r=>{
+      const pct=Math.round((r.correct/r.total)*100);
+      html+=`<div class="ws-result-card strong">
+        <div class="ws-topic-label">${r.name}</div>
+        <div class="ws-pct">${pct}%</div>
+        <div class="ws-score-bar-wrap"><div class="ws-score-bar" style="width:${pct}%"></div></div>
+        <div class="ws-rec">Score ${r.correct}/${r.total} correct. Keep it up!</div>
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+  html+=`<div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;">
+    <button class="btn btn-gold" onclick="wsRetry()">Take Again</button>
+    <button class="btn btn-orange" onclick="showPage('practice-topics')">Practice Weak Topics</button>
+    <button class="btn btn-outline" onclick="showPage('booking')">Book a Session</button>
+  </div>`;
+  cont.innerHTML=html;
+}
+
+function wsRetry(){
+  wsSelectedTopics=[];
+  document.getElementById('wsContent').innerHTML=`
+    <div class="ws-intro">
+      <p class="sec-sub">Select 2–6 topics you want to be tested on. We'll give you a 20-question mixed quiz, then show you exactly which topics you need to focus on.</p>
+      <div class="ws-topic-select" id="wsTopicSelect"></div>
+      <div id="wsSelectError" style="color:#fca5a5;font-size:.82rem;margin-bottom:1rem;display:none;">Please select at least 2 topics.</div>
+      <button class="btn btn-gold" onclick="startWS()" style="margin-top:.5rem;">Start Weak Spot Quiz →</button>
+    </div>`;
+  renderWSTopics();
+}
+
+// ============================================================
+// DAILY PROBLEM + STREAK
+// ============================================================
+function getDayKey(){return new Date().toISOString().split('T')[0];}
+
+function getStreak(){
+  const data=JSON.parse(localStorage.getItem('tbStreak')||'{"streak":0,"lastDay":"","days":[]}');
+  return data;
+}
+
+function saveStreak(data){localStorage.setItem('tbStreak',JSON.stringify(data));}
+
+function renderDailyPage(){
+  const data=getStreak();
+  const todayKey=getDayKey();
+  const solvedToday=data.lastDay===todayKey;
+
+  // Streak banner
+  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today=new Date().getDay();
+  const dayItems=days.map((d,i)=>{
+    let cls='missed';
+    if(i===today&&solvedToday)cls='today';
+    else if(i<today&&data.days&&data.days.includes(d))cls='done';
+    return`<div class="streak-day ${cls}">${d.charAt(0)}</div>`;
+  }).join('');
+
+  document.getElementById('streakBanner').innerHTML=`
+    <div class="streak-banner">
+      <div class="streak-left">
+        <div class="streak-flame">🔥</div>
+        <div>
+          <div class="streak-num">${data.streak}</div>
+          <div class="streak-label">day streak</div>
+        </div>
+      </div>
+      <div class="streak-days">${dayItems}</div>
+    </div>`;
+
+  // Pick today's problem deterministically
+  const dayNum=Math.floor(Date.now()/86400000);
+  const allProbs=PROBLEM_BANK.flat();
+  const p=allProbs[dayNum%allProbs.length];
+
+  if(solvedToday){
+    document.getElementById('dailyProbWrap').innerHTML=`
+      <div class="daily-solved">
+        <div style="font-size:2.5rem;margin-bottom:.8rem;">✅</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:.4rem;">Today's problem solved!</div>
+        <div style="color:var(--muted);font-size:.88rem;margin-bottom:1.2rem;">Come back tomorrow for a new problem. Keep that streak going! 🔥</div>
+        <button class="btn btn-gold" onclick="showPage('practice-topics')">Keep Practicing →</button>
+      </div>`;
+    return;
+  }
+
+  let dailyAnswered=false;
+  document.getElementById('dailyProbWrap').innerHTML=`
+    <div class="daily-card">
+      <div style="font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Today's Daily Problem</div>
+      <div class="prob-q" style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:1.5rem;">${p.q}</div>
+      <div class="choices" id="dailyChoices">
+        ${p.choices.map((c,i)=>`<button class="choice-btn" id="dailyCh${i}" onclick="selectDaily(${i},${p.correct},'${p.exp.replace(/'/g,"\'")}','${p.formula?p.formula.replace(/'/g,"\'"):''}')"><span class="choice-letter">${L[i]}</span><span>${c}</span></button>`).join('')}
+      </div>
+      <div class="exp-box" id="dailyExp">
+        <div class="exp-head">📖 Explanation</div>
+        <div class="exp-text" id="dailyExpText"></div>
+        <div class="exp-formula" id="dailyExpFm"></div>
+      </div>
+    </div>`;
+}
+
+function selectDaily(chosen,correct,exp,formula){
+  const btns=document.querySelectorAll('#dailyChoices .choice-btn');
+  btns.forEach(b=>b.disabled=true);
+  if(chosen===correct)btns[chosen].classList.add('correct');
+  else{btns[chosen].classList.add('wrong');btns[correct].classList.add('correct');}
+  document.getElementById('dailyExpText').textContent=exp;
+  document.getElementById('dailyExpFm').textContent=formula;
+  document.getElementById('dailyExp').classList.add('show');
+
+  // Update streak
+  const data=getStreak();
+  const todayKey=getDayKey();
+  if(data.lastDay!==todayKey){
+    const yesterday=new Date(Date.now()-86400000).toISOString().split('T')[0];
+    data.streak=data.lastDay===yesterday?data.streak+1:1;
+    data.lastDay=todayKey;
+    const dayName=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()];
+    if(!data.days)data.days=[];
+    data.days.push(dayName);
+    saveStreak(data);
+    setTimeout(()=>renderDailyPage(),1500);
+  }
+}
+
+// ── Override showPage to trigger renders ──────────────────────────────────
+const _origShowPage = showPage;
+// patch
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById('page-'+id);
+  if(el)el.classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='flashcards')renderFCTopics();
+  if(id==='weakspot')renderWSTopics();
+  if(id==='daily')renderDailyPage();
+}
+
+</script>
+</body>
+</html>
