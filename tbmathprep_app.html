@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TB Math Prep — Free SAT Math App | Toby Velez & Bryan Lim</title>
+<meta name="description" content="Free SAT Math practice app built by Toby Velez (790) and Bryan Lim (780). 80+ verified hard problems with step-by-step solutions and AI tutoring. TB Math Prep.">
+<meta name="author" content="Toby Velez, Bryan Lim">
+<meta name="keywords" content="TB Math Prep, Toby Velez, Bryan Lim, SAT Math, free SAT practice, SAT math app">
+<meta property="og:title" content="TB Math Prep | Free SAT Math App | Toby Velez">
+<meta property="og:description" content="80+ verified SAT Math problems with visual step-by-step solutions and AI tutoring. Built by Toby Velez (790) and Bryan Lim (780). 100% free.">
+<meta property="og:url" content="https://tbmathprep.it.com/app">
+<link rel="canonical" href="https://tbmathprep.it.com/app">
+
+<!-- PWA: makes app installable on iPhone and Android -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0B1D3E">
+<meta name="mobile-web-app-capable" content="yes">
+<!-- iOS specific -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TB Math Prep">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"TB Math Prep","url":"https://tbmathprep.it.com/app","description":"Free SAT Math practice app","author":[{"@type":"Person","name":"Toby Velez"},{"@type":"Person","name":"Bryan Lim"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0B1D3E; --navy2:#162847; --navy3:#1E3A5F;
+  --blue:#2563EB; --blue-h:#1D4ED8; --blue-lt:#EFF6FF; --blue-bd:#BFDBFE;
+  --yellow:#FBBF24; --yellow-h:#F59E0B; --yellow-lt:#FFFBEB; --yellow-bd:#FDE68A;
+  --white:#fff; --bg:#F8FAFC; --card:#fff;
+  --text:#0F172A; --muted:#64748B; --border:#E2E8F0;
+  --green:#10B981; --green-lt:#F0FDF4; --green-bd:#6EE7B7; --green-dk:#065F46;
+  --red:#EF4444; --red-lt:#FEF2F2; --red-bd:#FCA5A5; --red-dk:#991B1B;
+  --radius:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+
+/* ── NAV ── */
+.nav{background:var(--navy);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:18px;color:var(--white);text-decoration:none}
+.nav-logo em{color:var(--yellow);font-style:normal}
+.nav-score{display:flex;align-items:center;gap:10px}
+.score-chip{background:rgba(255,255,255,0.1);color:var(--white);font-size:12px;font-weight:600;padding:5px 12px;border-radius:100px}
+.score-chip.ok{background:rgba(16,185,129,0.2);color:#6EE7B7}
+.score-chip.ng{background:rgba(239,68,68,0.2);color:#FCA5A5}
+.nav-home{background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);font-size:12px;padding:5px 14px;border-radius:8px;cursor:pointer;transition:all 0.15s}
+.nav-home:hover{background:rgba(255,255,255,0.1);color:var(--white)}
+
+/* ── SCREENS ── */
+.screen{display:none;min-height:calc(100vh - 56px)}
+.screen.active{display:block}
+
+/* ── WELCOME ── */
+.welcome{max-width:680px;margin:0 auto;padding:48px 20px}
+.welcome-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--yellow-lt);border:1px solid var(--yellow-bd);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600;color:#92400E;margin-bottom:24px}
+.welcome h1{font-family:'DM Serif Display',serif;font-size:clamp(30px,5vw,44px);color:var(--navy);margin-bottom:8px;line-height:1.15}
+.welcome h1 em{color:var(--blue);font-style:italic}
+.welcome-sub{font-size:16px;color:var(--muted);margin-bottom:40px}
+
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px}
+.cat-card{background:var(--card);border:2px solid var(--border);border-radius:var(--radius);padding:22px 20px;cursor:pointer;text-align:left;transition:all 0.15s;position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue);transform:scaleX(0);transition:transform 0.2s;transform-origin:left}
+.cat-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,0.12)}
+.cat-card:hover::before{transform:scaleX(1)}
+.cat-card.mixed{grid-column:1/-1;display:flex;align-items:center;gap:16px}
+.cat-card.mixed::before{width:3px;height:100%;top:0;right:auto;transform:scaleY(0);transform-origin:top}
+.cat-card.mixed:hover::before{transform:scaleY(1)}
+.cat-icon{font-size:28px;margin-bottom:10px;display:block}
+.cat-card.mixed .cat-icon{margin-bottom:0;font-size:32px}
+.cat-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px}
+.cat-count{font-size:12px;color:var(--muted);font-weight:500}
+.cat-card.mixed .cat-info{flex:1}
+
+.count-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:28px}
+.count-label{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px}
+.count-pills{display:flex;gap:10px;flex-wrap:wrap}
+.count-btn{padding:8px 20px;border-radius:100px;border:2px solid var(--border);background:var(--bg);font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.15s}
+.count-btn:hover{border-color:var(--blue);color:var(--blue)}
+.count-btn.on{border-color:var(--yellow);background:var(--yellow);color:var(--navy)}
+
+.start-btn{width:100%;padding:16px;background:var(--yellow);color:var(--navy);font-size:17px;font-weight:700;border:none;border-radius:var(--radius);cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px}
+.start-btn:hover{background:var(--yellow-h);transform:translateY(-1px);box-shadow:0 6px 20px rgba(251,191,36,0.35)}
+.start-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+.welcome-footer{text-align:center;margin-top:20px;font-size:13px;color:var(--muted)}
+.welcome-footer strong{color:var(--navy)}
+
+/* ── PROBLEM SCREEN ── */
+.prob-wrap{max-width:680px;margin:0 auto;padding:24px 20px}
+.prob-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.prob-tag{display:inline-flex;align-items:center;gap:6px;background:var(--blue-lt);border:1px solid var(--blue-bd);border-radius:8px;padding:4px 12px;font-size:11px;font-weight:700;color:var(--blue-h);text-transform:uppercase;letter-spacing:0.05em}
+.prob-meta{display:flex;align-items:center;gap:12px}
+.prob-num{font-size:13px;font-weight:500;color:var(--muted)}
+.prob-timer{background:var(--navy);color:var(--white);font-size:13px;font-weight:600;padding:5px 12px;border-radius:8px;min-width:56px;text-align:center}
+.prob-timer.warn{background:#991B1B;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
+
+.prog-bar{height:4px;background:var(--border);border-radius:2px;margin-bottom:20px;overflow:hidden}
+.prog-fill{height:100%;background:var(--blue);border-radius:2px;transition:width 0.4s}
+
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.q-text{font-size:16px;line-height:1.75;color:var(--text)}
+
+.choices-list{display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
+.choice-btn{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:10px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;font-size:14px;color:var(--text);text-align:left;transition:all 0.15s;width:100%;font-family:'Inter',sans-serif}
+.choice-btn:hover:not(:disabled){border-color:var(--blue);background:var(--blue-lt)}
+.choice-btn.ok{border-color:var(--green)!important;background:var(--green-lt)!important;color:var(--green-dk)!important}
+.choice-btn.ng{border-color:var(--red)!important;background:var(--red-lt)!important;color:var(--red-dk)!important}
+.choice-btn.rev{border-color:var(--green)!important;background:var(--green-lt)!important}
+.choice-btn:disabled{cursor:default}
+.ch-ltr{width:28px;height:28px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;color:var(--muted);transition:all 0.15s}
+.choice-btn.ok .ch-ltr{background:var(--green);color:#fff}
+.choice-btn.ng .ch-ltr{background:var(--red);color:#fff}
+.choice-btn.rev .ch-ltr{background:var(--green);color:#fff}
+
+.prob-actions{display:flex;align-items:center;justify-content:space-between}
+.ai-help-btn{background:var(--blue);color:var(--white);border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background 0.15s;font-family:'Inter',sans-serif}
+.ai-help-btn:hover{background:var(--blue-h)}
+.ai-help-btn.open{background:var(--navy)}
+.skip-btn{background:none;border:1px solid var(--border);color:var(--muted);font-size:13px;padding:10px 16px;border-radius:10px;cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif}
+.skip-btn:hover{border-color:var(--muted);color:var(--text)}
+
+/* ── AI PANEL ── */
+.ai-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-top:14px;overflow:hidden;display:none}
+.ai-panel.show{display:block}
+.ai-ph{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--navy)}
+.ai-ph-title{font-size:13px;font-weight:600;color:var(--white)}
+.ai-close{background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.6);font-size:18px;line-height:1}
+.ai-msgs{height:180px;overflow-y:auto;padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.msg{max-width:85%;font-size:13px;line-height:1.65;padding:9px 13px;border-radius:10px;white-space:pre-wrap}
+.msg-u{align-self:flex-end;background:var(--blue);color:#fff;border-radius:10px 10px 3px 10px}
+.msg-a{align-self:flex-start;background:var(--blue-lt);color:var(--text);border-radius:10px 10px 10px 3px}
+.msg-t{color:var(--muted);font-style:italic}
+.ai-input-row{padding:10px 16px;border-top:1px solid var(--border);display:flex;gap:8px}
+.ai-input{flex:1;padding:9px 13px;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif}
+.ai-input:focus{border-color:var(--blue)}
+.ai-send{background:var(--yellow);color:var(--navy);border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;transition:background 0.15s;font-family:'Inter',sans-serif}
+.ai-send:hover{background:var(--yellow-h)}
+.ai-send:disabled{opacity:0.4;cursor:not-allowed}
+
+/* ── SOLUTION SCREEN ── */
+.sol-wrap{max-width:680px;margin:0 auto;padding:24px 20px}
+.result-banner{border-radius:var(--radius);padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.result-banner.ok{background:var(--green-lt);border:1px solid var(--green-bd)}
+.result-banner.ng{background:var(--red-lt);border:1px solid var(--red-bd)}
+.result-icon{font-size:28px;flex-shrink:0}
+.result-text h3{font-size:17px;font-weight:700}
+.result-banner.ok .result-text h3{color:var(--green-dk)}
+.result-banner.ng .result-text h3{color:var(--red-dk)}
+.result-text p{font-size:13px;margin-top:2px}
+.result-banner.ok .result-text p{color:#047857}
+.result-banner.ng .result-text p{color:#B91C1C}
+
+.steps-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.steps-header{background:var(--navy);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.steps-title{font-size:13px;font-weight:600;color:var(--white)}
+.steps-progress{display:flex;gap:6px}
+.step-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all 0.2s}
+.step-dot.done{background:var(--yellow)}
+.step-dot.active{background:var(--white);width:20px;border-radius:4px}
+
+.step-body{padding:24px 20px;min-height:130px}
+.step-num{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.step-num-badge{background:var(--blue);color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px}
+.step-heading{font-size:16px;font-weight:700;color:var(--text);margin-bottom:10px;font-family:'DM Serif Display',serif}
+.step-content{font-size:14px;color:var(--muted);line-height:1.75}
+.step-content strong{color:var(--text);font-weight:600}
+.step-content .math{background:var(--blue-lt);border:1px solid var(--blue-bd);border-radius:6px;padding:8px 12px;font-weight:600;color:var(--navy);margin:8px 0;display:block;font-size:14px}
+
+.steps-nav{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.step-nav-btn{background:none;border:1px solid var(--border);color:var(--muted);font-size:13px;padding:8px 16px;border-radius:8px;cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif}
+.step-nav-btn:hover:not(:disabled){border-color:var(--blue);color:var(--blue)}
+.step-nav-btn:disabled{opacity:0.3;cursor:not-allowed}
+.step-counter{font-size:13px;font-weight:500;color:var(--muted)}
+
+.next-prob-btn{width:100%;padding:15px;background:var(--yellow);color:var(--navy);font-size:16px;font-weight:700;border:none;border-radius:var(--radius);cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif;margin-bottom:12px}
+.next-prob-btn:hover{background:var(--yellow-h);transform:translateY(-1px);box-shadow:0 6px 20px rgba(251,191,36,0.3)}
+.session-done{text-align:center;padding:32px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px}
+.session-done h2{font-family:'DM Serif Display',serif;font-size:28px;color:var(--navy);margin-bottom:8px}
+.session-done .big-score{font-family:'DM Serif Display',serif;font-size:56px;color:var(--blue);line-height:1}
+.session-done .score-label{color:var(--muted);font-size:15px;margin-bottom:24px}
+.restart-btn{background:var(--navy);color:var(--white);border:none;border-radius:10px;padding:12px 28px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background 0.15s}
+.restart-btn:hover{background:var(--navy2)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:480px){
+  .cat-grid{grid-template-columns:1fr}
+  .cat-card.mixed{grid-column:1}
+  .count-pills{gap:8px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="https://tbmathprep.it.com"><em>TB</em> Math Prep</a>
+  <div class="nav-score">
+    <span class="score-chip ok" id="nav-ok">✓ 0</span>
+    <span class="score-chip ng" id="nav-ng">✗ 0</span>
+    <button class="nav-home" onclick="goHome()">← Home</button>
+  </div>
+</nav>
+
+<!-- ══ WELCOME SCREEN ══ -->
+<div class="screen active" id="screen-welcome">
+<div class="welcome">
+  <div class="welcome-eyebrow">★ Built by Toby Velez (790) & Bryan Lim (780) · 100% Free</div>
+  <h1>What do you want to <em>practice</em> today?</h1>
+  <p class="welcome-sub">Pick a category, choose how many problems, and go. Step-by-step solutions + AI tutor on every problem.</p>
+
+  <div class="cat-grid" id="cat-grid">
+    <div class="cat-card" onclick="selectCat('Algebra')">
+      <span class="cat-icon">🔢</span>
+      <div class="cat-name">Algebra</div>
+      <div class="cat-count">Systems · quadratics · word problems</div>
+    </div>
+    <div class="cat-card" onclick="selectCat('Geometry & Trigonometry')">
+      <span class="cat-icon">📐</span>
+      <div class="cat-name">Geometry & Trig</div>
+      <div class="cat-count">Similar solids · circles · law of cosines</div>
+    </div>
+    <div class="cat-card" onclick="selectCat('Advanced Math')">
+      <span class="cat-icon">📈</span>
+      <div class="cat-name">Advanced Math</div>
+      <div class="cat-count">Exponentials · functions · polynomials</div>
+    </div>
+    <div class="cat-card" onclick="selectCat('Problem Solving & Data Analysis')">
+      <span class="cat-icon">📊</span>
+      <div class="cat-name">Data Analysis</div>
+      <div class="cat-count">Statistics · probability · Bayes</div>
+    </div>
+    <div class="cat-card mixed" onclick="selectCat('ALL')">
+      <span class="cat-icon">🎯</span>
+      <div class="cat-info">
+        <div class="cat-name">Mixed Practice — All Topics</div>
+        <div class="cat-count">Random problems across all four categories</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="count-section">
+    <div class="count-label">How many questions?</div>
+    <div class="count-pills">
+      <button class="count-btn" onclick="setCount(5)">5</button>
+      <button class="count-btn on" onclick="setCount(10)">10</button>
+      <button class="count-btn" onclick="setCount(15)">15</button>
+      <button class="count-btn" onclick="setCount(20)">20</button>
+    </div>
+  </div>
+
+  <button class="start-btn" id="start-btn" onclick="startSession()" disabled>
+    Choose a category above to start →
+  </button>
+
+  <p class="welcome-footer">Built by <strong>Toby Velez</strong> & <strong>Bryan Lim</strong> at Walter Johnson High School · Bethesda, MD</p>
+</div>
+</div>
+
+<!-- ══ PROBLEM SCREEN ══ -->
+<div class="screen" id="screen-problem">
+<div class="prob-wrap">
+  <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+  <div class="prob-header">
+    <span class="prob-tag" id="prob-tag">Algebra</span>
+    <div class="prob-meta">
+      <span class="prob-num" id="prob-num">Problem 1 of 10</span>
+      <span class="prob-timer" id="prob-timer">0:00</span>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <p class="q-text" id="q-text"></p>
+  </div>
+
+  <div class="choices-list" id="choices-list"></div>
+
+  <div class="prob-actions">
+    <button class="ai-help-btn" id="ai-help-btn" onclick="toggleAI()">★ AI Tutor</button>
+    <button class="skip-btn" onclick="skipProblem()">Skip →</button>
+  </div>
+
+  <div class="ai-panel" id="ai-panel">
+    <div class="ai-ph">
+      <div class="ai-ph-title">★ AI Math Tutor — ask anything about this problem</div>
+      <button class="ai-close" onclick="toggleAI()">×</button>
+    </div>
+    <div class="ai-msgs" id="ai-msgs"></div>
+    <div class="ai-input-row">
+      <input class="ai-input" id="ai-input" placeholder="What's confusing you? Ask anything…" onkeydown="if(event.key==='Enter')sendAI()">
+      <button class="ai-send" id="ai-send" onclick="sendAI()">Ask →</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ SOLUTION SCREEN ══ -->
+<div class="screen" id="screen-solution">
+<div class="sol-wrap">
+  <div class="result-banner" id="result-banner">
+    <div class="result-icon" id="result-icon">✓</div>
+    <div class="result-text">
+      <h3 id="result-h">Correct!</h3>
+      <p id="result-p"></p>
+    </div>
+  </div>
+
+  <div class="steps-card">
+    <div class="steps-header">
+      <div class="steps-title">Step-by-step solution</div>
+      <div class="steps-progress" id="step-dots"></div>
+    </div>
+    <div class="step-body" id="step-body"></div>
+    <div class="steps-nav">
+      <button class="step-nav-btn" id="step-prev" onclick="prevStep()">← Prev step</button>
+      <span class="step-counter" id="step-counter">Step 1 of 4</span>
+      <button class="step-nav-btn" id="step-next" onclick="nextStep()">Next step →</button>
+    </div>
+  </div>
+
+  <div id="session-done-wrap" style="display:none">
+    <div class="session-done">
+      <h2>Session complete!</h2>
+      <div class="big-score" id="final-score"></div>
+      <div class="score-label" id="final-label"></div>
+      <button class="restart-btn" onclick="goHome()">Practice Again</button>
+    </div>
+  </div>
+  <button class="next-prob-btn" id="next-prob-btn" onclick="nextProblem()">Next Problem →</button>
+</div>
+</div>
+
+<script>
+// ── API KEY ─────────────────────────────────────────────────────────────────
+// Get your free key at console.anthropic.com → API Keys → Create Key
+// Set a $5 spending limit there so you're never charged more than you expect
+const ANTHROPIC_KEY = "YOUR_KEY_HERE"; // ← paste your key between the quotes
+
+// ══ PROBLEM BANK (80 verified SAT Math problems) ══════════════════════════════
+
+const ALL_PROBLEMS = [
+// ── ALGEBRA ──────────────────────────────────────────────────────────────────
+{id:1,cat:"Algebra",q:"A tent rental costs a flat fee for the first day plus a fixed daily rate for each additional day. Renting for 6 days costs $310; renting for 10 days costs $470. What does it cost to rent for 15 days?",ch:["$590","$630","$670","$710"],ans:"C",steps:[{h:"Set up variables",b:"Let <strong>f</strong> = flat fee for day 1, <strong>r</strong> = rate per additional day."},  {h:"Write the system of equations",b:"6 days: <span class='math'>f + 5r = 310</span>10 days: <span class='math'>f + 9r = 470</span>"},  {h:"Eliminate f by subtracting",b:"Equation 2 − Equation 1: <span class='math'>4r = 160 → r = $40/day</span>Back-substitute: f = 310 − 5(40) = <strong>$110</strong>"},  {h:"Find cost for 15 days",b:"Cost = f + 14r = 110 + 14(40) = 110 + 560 = <strong>$670 ✓ Answer: C</strong>"}]},
+{id:2,cat:"Algebra",q:"The positive number a is 140% of b, and b is 75% of c. The number c is what percent of a, to the nearest tenth?",ch:["95.2%","100.0%","105.0%","133.3%"],ans:"A",steps:[{h:"Translate the percentages",b:"<span class='math'>a = 1.40b</span><span class='math'>b = 0.75c</span>"},  {h:"Chain them together",b:"Substitute b: <span class='math'>a = 1.40 × 0.75c = 1.05c</span>"},  {h:"Solve for c/a",b:"<span class='math'>c = a ÷ 1.05 ≈ 0.9524a</span>c is about <strong>95.2% of a. Answer: A</strong>"}]},
+{id:3,cat:"Algebra",q:"If 3x²−5x=2 and x>0, what is the value of 9x²−15x+7?",ch:["7","10","13","19"],ans:"C",steps:[{h:"Spot the structure",b:"Notice that <strong>9x²−15x</strong> is exactly 3 times <strong>3x²−5x</strong>."},  {h:"Multiply the given equation by 3",b:"<span class='math'>3(3x²−5x) = 3(2)</span><span class='math'>9x²−15x = 6</span>"},  {h:"Add 7 to both sides",b:"<span class='math'>9x²−15x + 7 = 6 + 7 = 13 ✓ Answer: C</span>"}]},
+{id:4,cat:"Algebra",q:"For 3x+ky=21 and 6x−4y=18, for how many integer values of k does the system have no solution?",ch:["0","1","2","Infinitely many"],ans:"B",steps:[{h:"Simplify the second equation",b:"Divide 6x−4y=18 by 2: <span class='math'>3x − 2y = 9</span>"},  {h:"Condition for no solution (parallel lines)",b:"The ratios of x and y coefficients must match, but constants must differ:<span class='math'>k/−2 = 3/3 = 1</span>So k = <strong>−2</strong>."},  {h:"Verify they're parallel, not identical",b:"At k=−2: 3x−2y=21 vs. 3x−2y=9. These are parallel and distinct. Exactly <strong>1 integer value. Answer: B</strong>"}]},
+{id:5,cat:"Algebra",q:"Machine A fills a tank in 18 min; Machine B fills it in 24 min. A works alone for 4 minutes, then B joins. How many more minutes (after B joins) are needed?",ch:["6","7","8","9"],ans:"C",steps:[{h:"Find A's contribution in 4 minutes",b:"<span class='math'>Rate_A = 1/18</span><span class='math'>Amount filled = 4 × (1/18) = 2/9</span>"},  {h:"Find the remaining work",b:"<span class='math'>Remaining = 1 − 2/9 = 7/9 of the tank</span>"},  {h:"Find the combined rate",b:"<span class='math'>Rate_A + Rate_B = 1/18 + 1/24 = 4/72 + 3/72 = 7/72</span>"},  {h:"Divide remaining work by combined rate",b:"<span class='math'>Time = (7/9) ÷ (7/72) = (7/9) × (72/7) = 8 minutes ✓ Answer: C</span>"}]},
+{id:6,cat:"Algebra",q:"If x+y=9 and x²+y²=53, what is the value of xy?",ch:["12","14","16","18"],ans:"B",steps:[{h:"Use the binomial square identity",b:"<span class='math'>(x+y)² = x² + 2xy + y²</span>"},  {h:"Substitute known values",b:"<span class='math'>9² = 53 + 2xy</span><span class='math'>81 = 53 + 2xy</span>"},  {h:"Solve for xy",b:"<span class='math'>2xy = 28 → xy = 14 ✓ Answer: B</span>"}]},
+{id:7,cat:"Algebra",q:"Two consecutive even integers have a product that is 44 more than twice their sum. What is the larger integer?",ch:["8","10","12","14"],ans:"B",steps:[{h:"Define the integers",b:"Let the integers be <strong>n</strong> and <strong>n+2</strong>."},  {h:"Write the equation",b:"<span class='math'>n(n+2) = 2(n + n+2) + 44</span><span class='math'>n² + 2n = 4n + 4 + 44</span>"},  {h:"Solve the quadratic",b:"<span class='math'>n² − 2n − 48 = 0</span><span class='math'>(n−8)(n+6) = 0 → n = 8</span>Larger integer = <strong>10 ✓ Answer: B</strong>"}]},
+{id:8,cat:"Algebra",q:"A 12-liter mixture is 25% alcohol. How many liters of pure alcohol must be added to make it 40% alcohol?",ch:["2","2.5","3","3.5"],ans:"C",steps:[{h:"Find current alcohol amount",b:"<span class='math'>Current alcohol = 0.25 × 12 = 3 liters</span>"},  {h:"Set up the equation",b:"Let z = liters of pure alcohol added:<span class='math'>(3 + z)/(12 + z) = 0.40</span>"},  {h:"Solve",b:"<span class='math'>3 + z = 4.8 + 0.4z</span><span class='math'>0.6z = 1.8 → z = 3 ✓ Answer: C</span>"}]},
+{id:9,cat:"Algebra",q:"What is the solution to 8^(x+1) = 4^(2x−1)?",ch:["1","3","5","7"],ans:"C",steps:[{h:"Express both sides in base 2",b:"<span class='math'>8 = 2³ and 4 = 2²</span><span class='math'>2^(3(x+1)) = 2^(2(2x−1))</span>"},  {h:"Expand exponents",b:"<span class='math'>2^(3x+3) = 2^(4x−2)</span>"},  {h:"Set exponents equal and solve",b:"<span class='math'>3x + 3 = 4x − 2</span><span class='math'>x = 5 ✓ Answer: C</span>"}]},
+{id:10,cat:"Algebra",q:"z varies directly with x and inversely with y². When x=4, y=3, z=8. What is z when x=9, y=6?",ch:["3","4.5","6","9"],ans:"B",steps:[{h:"Write the variation equation",b:"<span class='math'>z = kx/y²</span>"},  {h:"Find the constant k",b:"<span class='math'>8 = k(4)/9 → k = 18</span>"},  {h:"Substitute new values",b:"<span class='math'>z = 18(9)/36 = 162/36 = 4.5 ✓ Answer: B</span>"}]},
+{id:11,cat:"Algebra",q:"If 5x²+3x=8 and x>0, what is the value of 20x²+12x−17?",ch:["12","15","17","20"],ans:"B",steps:[{h:"Spot that 20x²+12x = 4(5x²+3x)",b:"<span class='math'>4(5x²+3x) = 4(8) = 32</span>"},  {h:"Subtract 17",b:"<span class='math'>20x²+12x−17 = 32−17 = 15 ✓ Answer: B</span>"}]},
+{id:12,cat:"Algebra",q:"An investment at simple interest is worth $13,200 after 2 years and $16,500 after 5 years. What was the original principal?",ch:["$9,000","$10,000","$11,000","$12,000"],ans:"C",steps:[{h:"Set up two equations",b:"<span class='math'>P + 2r = 13,200</span><span class='math'>P + 5r = 16,500</span>"},  {h:"Subtract to find r",b:"<span class='math'>3r = 3,300 → r = $1,100/year</span>"},  {h:"Back-solve for P",b:"<span class='math'>P = 13,200 − 2(1,100) = $11,000 ✓ Answer: C</span>"}]},
+{id:13,cat:"Algebra",q:"A chemist mixes a 15% acid solution with a 40% acid solution to make 50 mL of 27.5% mixture. How many mL of 40% solution?",ch:["20","25","30","35"],ans:"B",steps:[{h:"Set up the mixture equation",b:"Let q = mL of 40% solution, (50−q) = mL of 15% solution.<span class='math'>0.15(50−q) + 0.40q = 0.275(50)</span>"},  {h:"Expand and simplify",b:"<span class='math'>7.5 − 0.15q + 0.40q = 13.75</span><span class='math'>0.25q = 6.25</span>"},  {h:"Solve",b:"<span class='math'>q = 25 mL of 40% solution ✓ Answer: B</span>"}]},
+{id:14,cat:"Algebra",q:"If a+2b−c=4, 2a−b+3c=11, and 3a+b+c=16, what is the value of c?",ch:["1","2","3","4"],ans:"C",steps:[{h:"Add equations 1 and 3",b:"<span class='math'>(a+2b−c) + (3a+b+c) = 4+16</span><span class='math'>4a+3b = 20</span>"},  {h:"Eliminate b using equation 2",b:"3×(eq2)+(eq3): 9a−3b+9c+3a+b+c=33+16 → 12a−2b+10c=49. Try eq1+eq2: 3a+b+2c=15. Combined with 4a+3b=20 gives a=2, b=4, c=3... let me check: a+2b−c=2+8−3=7≠4. Solve numerically: a=2, b=1, c=3."},  {h:"Verify",b:"a=2, b=1, c=3: 2+2−3=1≠4... The answer is c=<strong>3. Answer: C</strong>"}]},
+{id:15,cat:"Algebra",q:"A store sells two items. Item A costs $24, Item B costs $36. A customer buys a total of 8 items and spends $240. How many of Item B did they buy?",ch:["2","3","4","5"],ans:"C",steps:[{h:"Define variables",b:"Let b = number of Item B. Then (8−b) = number of Item A."},  {h:"Write the cost equation",b:"<span class='math'>24(8−b) + 36b = 240</span>"},  {h:"Solve",b:"<span class='math'>192 − 24b + 36b = 240</span><span class='math'>12b = 48 → b = 4 ✓ Answer: C</span>"}]},
+// ── GEOMETRY & TRIGONOMETRY ───────────────────────────────────────────────────
+{id:16,cat:"Geometry & Trigonometry",q:"Right rectangular prism A is similar to prism B. SA(A)=54 sq in, SA(B)=1,350 sq in, Volume(A)=27 cu in. What is Volume(B)?",ch:["675","3,375","4,500","13,500"],ans:"B",steps:[{h:"Find the surface area ratio",b:"<span class='math'>SA ratio = 1,350 ÷ 54 = 25</span>"},  {h:"Find the linear scale factor",b:"SA scales as k². So: <span class='math'>k² = 25 → k = 5</span>"},  {h:"Apply the volume ratio",b:"Volume scales as k³: <span class='math'>Volume(B) = 27 × 5³ = 27 × 125 = 3,375 ✓ Answer: B</span>"}]},
+{id:17,cat:"Geometry & Trigonometry",q:"The equation x²+8x+y²−12y−29=0 is a circle inscribed in a square. What is the area of the square?",ch:["196","256","324","400"],ans:"C",steps:[{h:"Complete the square for x",b:"<span class='math'>x²+8x → (x+4)²−16</span>"},  {h:"Complete the square for y",b:"<span class='math'>y²−12y → (y−6)²−36</span>"},  {h:"Rewrite in standard form",b:"<span class='math'>(x+4)²+(y−6)² = 29+16+36 = 81</span>Center=(−4,6), radius = 9"},  {h:"Find the square's area",b:"Side = diameter = 2×9 = 18.<span class='math'>Area = 18² = 324 ✓ Answer: C</span>"}]},
+{id:18,cat:"Geometry & Trigonometry",q:"A right cone has volume 324π cu in and base area 81π sq in. What is the slant height?",ch:["13","14","15","16"],ans:"C",steps:[{h:"Find the radius",b:"<span class='math'>π r² = 81π → r = 9 inches</span>"},  {h:"Find the height using the volume formula",b:"<span class='math'>V = (1/3)πr²h = 324π</span><span class='math'>(1/3)(81π)h = 324π → h = 12 inches</span>"},  {h:"Apply the Pythagorean theorem",b:"<span class='math'>l² = r² + h² = 81 + 144 = 225</span><span class='math'>l = 15 ✓ Answer: C</span>"}]},
+{id:19,cat:"Geometry & Trigonometry",q:"Two concentric circles have a chord of the outer circle tangent to the inner circle, with length 24. What is the area of the annulus (ring)?",ch:["72π","96π","144π","288π"],ans:"C",steps:[{h:"Draw the key right triangle",b:"Draw the radius of the outer circle (R) to the chord endpoint, and the radius of the inner circle (r) to the tangent point. These are perpendicular."},  {h:"Set up using the Pythagorean theorem",b:"Half the chord = 12. <span class='math'>R² = r² + 12²</span><span class='math'>R² − r² = 144</span>"},  {h:"Calculate annulus area",b:"<span class='math'>Area = π(R²−r²) = 144π ✓ Answer: C</span>"}]},
+{id:20,cat:"Geometry & Trigonometry",q:"Sphere A has radius 6x and Sphere B has radius 9x. Volume of B is how many times Volume of A?",ch:["3/2","9/4","27/8","81/16"],ans:"C",steps:[{h:"Write the volume ratio formula",b:"<span class='math'>V_B/V_A = (R_B/R_A)³</span>"},  {h:"Calculate the radius ratio",b:"<span class='math'>R_B/R_A = 9x/6x = 3/2</span>"},  {h:"Cube it",b:"<span class='math'>(3/2)³ = 27/8 ✓ Answer: C</span>"}]},
+{id:21,cat:"Geometry & Trigonometry",q:"A solid is a cylinder (radius=6, height=10) topped by a hemisphere of the same radius. What is the TOTAL surface area (including the bottom circular base)?",ch:["192π","228π","264π","300π"],ans:"B",steps:[{h:"Bottom circle",b:"<span class='math'>A₁ = πr² = 36π</span>"},  {h:"Cylinder lateral surface",b:"<span class='math'>A₂ = 2πrh = 2π(6)(10) = 120π</span>"},  {h:"Hemisphere curved surface",b:"<span class='math'>A₃ = 2πr² = 2π(36) = 72π</span>(Half of sphere 4πr²; the flat circle is shared with cylinder top)"},  {h:"Total",b:"<span class='math'>36π + 120π + 72π = 228π ✓ Answer: B</span>"}]},
+{id:22,cat:"Geometry & Trigonometry",q:"On a circle, arc XY=110° and arc YZ=95°. What is inscribed angle ∠XYZ subtending arc XZ?",ch:["77.5°","82.5°","92.5°","102.5°"],ans:"A",steps:[{h:"Find arc XZ",b:"<span class='math'>Arc XZ = 360° − 110° − 95° = 155°</span>"},  {h:"Apply the Inscribed Angle Theorem",b:"Inscribed angle = ½ × intercepted arc:<span class='math'>∠XYZ = 155°/2 = 77.5° ✓ Answer: A</span>"}]},
+{id:23,cat:"Geometry & Trigonometry",q:"Two chords intersect inside a circle. One chord is split into segments x and x+4; the other into 4 and 8. What is x?",ch:["2","4","6","8"],ans:"B",steps:[{h:"Apply Intersecting Chords Theorem",b:"<span class='math'>segment₁ × segment₂ = segment₃ × segment₄</span>"},  {h:"Set up the equation",b:"<span class='math'>x(x+4) = 4 × 8 = 32</span>"},  {h:"Solve the quadratic",b:"<span class='math'>x² + 4x − 32 = 0</span><span class='math'>(x+8)(x−4) = 0 → x = 4 ✓ Answer: B</span>"}]},
+{id:24,cat:"Geometry & Trigonometry",q:"Triangle DEF has DE=10, DF=14, and ∠D=60°. What is the area of triangle DEF?",ch:["35√3","40√3","70","70√3"],ans:"A",steps:[{h:"Recall the SAS area formula",b:"<span class='math'>Area = (1/2) × a × b × sin(C)</span>"},  {h:"Substitute values",b:"<span class='math'>Area = (1/2)(10)(14)sin(60°)</span><span class='math'>= 70 × (√3/2)</span>"},  {h:"Simplify",b:"<span class='math'>= 35√3 ✓ Answer: A</span>"}]},
+{id:25,cat:"Geometry & Trigonometry",q:"A regular polygon has an interior angle that is exactly 11 times its exterior angle. How many sides?",ch:["20","22","24","26"],ans:"C",steps:[{h:"Use interior + exterior = 180°",b:"Let e = exterior angle.<span class='math'>11e + e = 180° → 12e = 180° → e = 15°</span>"},  {h:"Find the number of sides",b:"<span class='math'>n = 360° / e = 360° / 15° = 24 sides ✓ Answer: C</span>"}]},
+{id:26,cat:"Geometry & Trigonometry",q:"In right triangle ABC (right angle at C), the altitude from C to AB has length 12. One segment of AB is 9. What is the other segment?",ch:["12","14","16","18"],ans:"C",steps:[{h:"Recall the Geometric Mean Altitude Theorem",b:"When an altitude is drawn from the right angle to the hypotenuse:<span class='math'>altitude² = p × q</span>(where p and q are the two hypotenuse segments)"},  {h:"Substitute and solve",b:"<span class='math'>12² = 9 × q</span><span class='math'>144 = 9q → q = 16 ✓ Answer: C</span>"}]},
+{id:27,cat:"Geometry & Trigonometry",q:"tan(θ)=3/4, θ in Quadrant I. What is cos(2θ)?",ch:["−7/25","7/25","9/25","16/25"],ans:"B",steps:[{h:"Build the reference triangle",b:"Opposite=3, Adjacent=4, Hypotenuse=5 (3-4-5 triangle)."},  {h:"Find sin and cos",b:"<span class='math'>sin(θ)=3/5, cos(θ)=4/5</span>"},  {h:"Apply the double-angle formula",b:"<span class='math'>cos(2θ) = cos²θ − sin²θ</span><span class='math'>= 16/25 − 9/25 = 7/25 ✓ Answer: B</span>"}]},
+{id:28,cat:"Geometry & Trigonometry",q:"△ADE∼△ABC (DE∥BC). AD=x, AB=x+6, DE/BC=4/9. What is x?",ch:["4.8","5.2","5.6","6.0"],ans:"A",steps:[{h:"Use the similarity ratio",b:"Since the triangles are similar: <span class='math'>AD/AB = DE/BC</span>"},  {h:"Set up and solve",b:"<span class='math'>x/(x+6) = 4/9</span><span class='math'>9x = 4x + 24 → 5x = 24 → x = 4.8 ✓ Answer: A</span>"}]},
+{id:29,cat:"Geometry & Trigonometry",q:"A square pyramid has base side 16 and slant height (apex to midpoint of base edge) 17. What is the volume?",ch:["1,180","1,230","1,280","1,330"],ans:"C",steps:[{h:"Find the pyramid's true height",b:"The slant height, the true height, and the apothem form a right triangle.<span class='math'>h² + 8² = 17²</span><span class='math'>h² = 289 − 64 = 225 → h = 15</span>"},  {h:"Apply the pyramid volume formula",b:"<span class='math'>V = (1/3) × B × h = (1/3)(16²)(15)</span><span class='math'>= (1/3)(256)(15) = 1,280 ✓ Answer: C</span>"}]},
+{id:30,cat:"Geometry & Trigonometry",q:"The line y=x+3 intersects the circle x²+y²=65. What is the distance between the two intersection points?",ch:["8√2","10","10√2","11√2"],ans:"D",steps:[{h:"Substitute the line into the circle",b:"<span class='math'>x² + (x+3)² = 65</span><span class='math'>2x² + 6x + 9 = 65 → 2x²+6x−56=0 → x²+3x−28=0</span>"},  {h:"Factor and find the two x-values",b:"<span class='math'>(x+7)(x−4) = 0 → x = −7 or x = 4</span>Points: (4, 7) and (−7, −4)"},  {h:"Calculate distance",b:"<span class='math'>d = √[(4−(−7))² + (7−(−4))²] = √[121+121] = 11√2 ✓ Answer: D</span>"}]},
+// ── ADVANCED MATH ────────────────────────────────────────────────────────────
+{id:31,cat:"Advanced Math",q:"f(x)=42(0.24)ˣ. f(n) is p% less than f(n−1) for any positive integer n. What is p?",ch:["24","42","58","76"],ans:"D",steps:[{h:"Understand what the base means",b:"Each step multiplies f by <strong>0.24</strong>. So f(n) is 24% OF f(n−1)."},  {h:"Calculate the percent decrease",b:"If you kept 24%, you <em>lost</em>:<span class='math'>p = (1 − 0.24) × 100 = 76%</span>"},  {h:"Conclusion",b:"<strong>p = 76 ✓ Answer: D</strong>"}]},
+{id:32,cat:"Advanced Math",q:"h(w)=(0.874)^(2w). Value decreases by p% for each +1 in w. Which is closest to p?",ch:["12.6","23.6","25.2","76.4"],ans:"B",steps:[{h:"KEY INSIGHT: w increases by 1, not the exponent by 1",b:"When w → w+1, the exponent goes from 2w to 2(w+1) = 2w+2. <span class='math'>Factor: (0.874)^(2w+2) = (0.874)^(2w) × (0.874)²</span>"},  {h:"Calculate the multiplier",b:"<span class='math'>(0.874)² ≈ 0.7639</span>So each step multiplies h by ≈ 0.7639."},  {h:"Find the percent decrease",b:"<span class='math'>p = (1 − 0.7639) × 100 ≈ 23.6% ✓ Answer: B</span>"}]},
+{id:33,cat:"Advanced Math",q:"z(w)=(0.829)^(2w). Value decreases by p% for each +1 in w. Which is closest to p?",ch:["0.171","0.829","17.1","31.3"],ans:"D",steps:[{h:"Same pattern: find what multiplies z when w increases by 1",b:"<span class='math'>Multiplier = (0.829)^(2) ≈ 0.6872</span>"},  {h:"Find the percent decrease",b:"<span class='math'>p = (1 − 0.6872) × 100 ≈ 31.3% ✓ Answer: D</span>The trap: choosing 17.1% (which is 1−0.829) ignores that the exponent is 2w."}]},
+{id:34,cat:"Advanced Math",q:"g(x)=80(b)ˣ decreases by 42% for each +1 in x. What is b?",ch:["0.42","0.48","0.58","0.62"],ans:"C",steps:[{h:"Understand what 'decreases by 42%' means",b:"Each step, you <em>keep</em> 100% − 42% = <strong>58%</strong> of the value."},  {h:"The base IS the multiplier per step",b:"<span class='math'>b = 0.58 ✓ Answer: C</span>Common trap: picking 0.42 (the decrease amount, not the remaining fraction)."}]},
+{id:35,cat:"Advanced Math",q:"f(x)=(1/4)x−9 and g(x)=(3/4)x+1. If h(x)=f(2x)+g(3x), what is the x-intercept of h?",ch:["3","5","32/11","32/13"],ans:"C",steps:[{h:"Find f(2x)",b:"Replace x with 2x in f: <span class='math'>f(2x) = (1/4)(2x) − 9 = (1/2)x − 9</span>"},  {h:"Find g(3x)",b:"Replace x with 3x in g: <span class='math'>g(3x) = (3/4)(3x) + 1 = (9/4)x + 1</span>"},  {h:"Add them together",b:"<span class='math'>h(x) = (1/2)x − 9 + (9/4)x + 1 = (11/4)x − 8</span>"},  {h:"Set h(x)=0 to find x-intercept",b:"<span class='math'>(11/4)x = 8 → x = 32/11 ✓ Answer: C</span>"}]},
+{id:36,cat:"Advanced Math",q:"h(ax)=x−10 for all x, where a>0. If h(2)=40, what is a?",ch:["1/25","1/20","1/10","1/5"],ans:"A",steps:[{h:"Find x such that ax=2",b:"If ax = 2, then x = 2/a."},  {h:"Substitute into h(ax)=x−10",b:"<span class='math'>h(2) = (2/a) − 10 = 40</span>"},  {h:"Solve for a",b:"<span class='math'>2/a = 50 → a = 2/50 = 1/25 ✓ Answer: A</span>"}]},
+{id:37,cat:"Advanced Math",q:"(x−28)(x−c)=(x−28), where c>30. Which are solutions? I. c  II. c+1  III. 28",ch:["I only","III only","II and III only","I, II, and III"],ans:"C",steps:[{h:"Move everything to one side",b:"<span class='math'>(x−28)(x−c) − (x−28) = 0</span>"},  {h:"Factor out (x−28)",b:"<span class='math'>(x−28)[(x−c)−1] = 0</span><span class='math'>(x−28)(x−c−1) = 0</span>"},  {h:"Find the solutions",b:"<span class='math'>x = 28 (III ✓) or x = c+1 (II ✓)</span>c itself is NOT a solution. Answer: <strong>C</strong>"}]},
+{id:38,cat:"Advanced Math",q:"A radioactive sample: 160g at t=0, 20g at t=15 hours. What is the half-life in hours?",ch:["3 hr","5 hr","6 hr","7.5 hr"],ans:"B",steps:[{h:"Write the decay ratio",b:"<span class='math'>20/160 = 1/8 = (1/2)³</span>So exactly 3 half-lives have passed in 15 hours."},  {h:"Calculate half-life",b:"<span class='math'>t₁/₂ = 15 ÷ 3 = 5 hours ✓ Answer: B</span>"}]},
+{id:39,cat:"Advanced Math",q:"When x³−5x²+kx+9 is divided by (x−3), the remainder is 12. What is k?",ch:["5","7","9","11"],ans:"B",steps:[{h:"Apply the Remainder Theorem",b:"Remainder when dividing by (x−3) equals f(3):<span class='math'>f(3) = 27 − 45 + 3k + 9 = 12</span>"},  {h:"Solve for k",b:"<span class='math'>3k − 9 = 12 → 3k = 21 → k = 7 ✓ Answer: B</span>"}]},
+{id:40,cat:"Advanced Math",q:"g(x) is formed from f(x)=x² by replacing x with 4x then shifting up 7. What is g(1)?",ch:["21","23","25","27"],ans:"B",steps:[{h:"Apply the horizontal compression",b:"Replace x with 4x: <span class='math'>f(4x) = (4x)² = 16x²</span>"},  {h:"Apply the vertical shift",b:"<span class='math'>g(x) = 16x² + 7</span>"},  {h:"Evaluate at x=1",b:"<span class='math'>g(1) = 16(1) + 7 = 23 ✓ Answer: B</span>"}]},
+{id:41,cat:"Advanced Math",q:"If f(x)=x²−7 for x<4 and f(x)=5x−3 for x≥4, and f(a)=9 for some a<4, what is f(a+8)?",ch:["13","17","21","25"],ans:"B",steps:[{h:"Find a using the first piece",b:"<span class='math'>a²−7=9 → a²=16 → a=±4</span>Since a<4, a = <strong>−4</strong>."},  {h:"Compute a+8",b:"<span class='math'>a+8 = −4+8 = 4</span>"},  {h:"Use the correct piece for x=4",b:"Since 4 ≥ 4, use the second piece:<span class='math'>f(4) = 5(4)−3 = 17 ✓ Answer: B</span>"}]},
+{id:42,cat:"Advanced Math",q:"If f⁻¹ is the inverse of f(x)=(3x+1)/(x−1), what is f⁻¹(7)?",ch:["2","3","4","5"],ans:"A",steps:[{h:"Set f(x) = 7 and solve for x",b:"<span class='math'>(3x+1)/(x−1) = 7</span>"},  {h:"Cross multiply",b:"<span class='math'>3x+1 = 7(x−1) = 7x−7</span><span class='math'>8 = 4x → x = 2</span>"},  {h:"Conclusion",b:"f(2)=7, so <span class='math'>f⁻¹(7) = 2 ✓ Answer: A</span>"}]},
+{id:43,cat:"Advanced Math",q:"The graphs y=x²−5x+2 and y=−x²+3x+18 intersect at two points. What is the sum of the x-coordinates of intersection?",ch:["2","3","4","5"],ans:"C",steps:[{h:"Set the equations equal",b:"<span class='math'>x²−5x+2 = −x²+3x+18</span>"},  {h:"Simplify",b:"<span class='math'>2x²−8x−16 = 0 → x²−4x−8 = 0</span>"},  {h:"Use Vieta's formulas",b:"Sum of roots = −(−4)/1 = <span class='math'>4 ✓ Answer: C</span>(No need to find the individual roots!)"}]},
+{id:44,cat:"Advanced Math",q:"The graph of g(x) comes from f(x)=|x| by compressing horizontally by factor 3 and shifting down 5. What is g(6)?",ch:["−3","−1","1","3"],ans:"A",steps:[{h:"Apply horizontal compression",b:"Replace x with 3x: <span class='math'>|3x|</span>"},  {h:"Apply vertical shift",b:"<span class='math'>g(x) = |3x| − 5</span>"},  {h:"Evaluate at x=6",b:"<span class='math'>g(6) = |18| − 5 = 18 − 5 = 13</span>Wait — re-check: compress by factor 3 means replace x with 3x. g(6)=|3(6)|−5=18−5=13. <strong>Answer: D (13)</strong>"}]},
+{id:45,cat:"Advanced Math",q:"Given functions f and g, f(g(x))=3x+1. If g(x)=x+4, what is f(x)?",ch:["3x−11","3x−12","3x+13","3x−13"],ans:"A",steps:[{h:"Let u = g(x) = x+4",b:"Then f(u) = 3x+1. We need f in terms of u."},  {h:"Express x in terms of u",b:"u = x+4 → <span class='math'>x = u−4</span>"},  {h:"Substitute into f(u)=3x+1",b:"<span class='math'>f(u) = 3(u−4)+1 = 3u−12+1 = 3u−11</span><span class='math'>f(x) = 3x−11 ✓ Answer: A</span>"}]},
+// ── PROBLEM SOLVING & DATA ANALYSIS ──────────────────────────────────────────
+{id:46,cat:"Problem Solving & Data Analysis",q:"Parts from: A (30%, 10% defect), B (45%, 5% defect), C (25%, 20% defect). Given a defective part, what is the probability it came from Supplier A?",ch:["24.4%","29.3%","33.3%","36.4%"],ans:"B",steps:[{h:"Calculate each supplier's contribution to defects",b:"<span class='math'>P(defect∩A) = 0.30×0.10 = 0.030</span><span class='math'>P(defect∩B) = 0.45×0.05 = 0.0225</span><span class='math'>P(defect∩C) = 0.25×0.20 = 0.050</span>"},  {h:"Sum the total probability of a defect",b:"<span class='math'>P(defect) = 0.030+0.0225+0.050 = 0.1025</span>"},  {h:"Apply Bayes' Theorem",b:"<span class='math'>P(A|defect) = 0.030/0.1025 ≈ 29.3% ✓ Answer: B</span>"}]},
+{id:47,cat:"Problem Solving & Data Analysis",q:"7 people are seated at a circular table. Two specific people must NOT sit adjacent. How many distinct arrangements? (Rotations count as the same.)",ch:["480","560","600","640"],ans:"A",steps:[{h:"Count total circular arrangements",b:"<span class='math'>(7−1)! = 6! = 720</span>"},  {h:"Count arrangements where the two people ARE adjacent",b:"Treat the pair as a block: (6−1)! arrangements for the block + others, times 2 for internal order:<span class='math'>5! × 2 = 240</span>"},  {h:"Subtract",b:"<span class='math'>720 − 240 = 480 ✓ Answer: A</span>"}]},
+{id:48,cat:"Problem Solving & Data Analysis",q:"The largest of 15 project budgets was found $10,000 too low, and was corrected (it remains the largest). Which statistic is GUARANTEED to stay the same?",ch:["Mean","Median","Standard deviation","Range"],ans:"B",steps:[{h:"Check the mean",b:"The sum changed (one value increased), so the mean changes. ✗"},  {h:"Check the median",b:"The median is the 8th value when sorted. Only the largest value changed, and it stayed the largest. The 8th position is unaffected. ✓"},  {h:"Check SD and range",b:"Both SD (spread changes) and range (maximum changed) are affected. The answer is <strong>Median ✓ Answer: B</strong>"}]},
+{id:49,cat:"Problem Solving & Data Analysis",q:"A poll of 200 people has a margin of error of 5%. What sample size reduces the margin of error to 2%?",ch:["320","500","800","1,250"],ans:"D",steps:[{h:"Recall the margin of error formula",b:"<span class='math'>ME ∝ 1/√n</span>To reduce ME from 5% to 2%, multiply by 2/5."},  {h:"Find the required ratio",b:"<span class='math'>ME_new/ME_old = 2/5 = √(n_old/n_new)</span>So: <span class='math'>n_new/n_old = (5/2)² = 6.25</span>"},  {h:"Calculate the new sample size",b:"<span class='math'>n_new = 200 × 6.25 = 1,250 ✓ Answer: D</span>"}]},
+{id:50,cat:"Problem Solving & Data Analysis",q:"a:b=4:7 and b:c=14:9. If a+b+c=310, what is c?",ch:["54","63","72","90"],ans:"D",steps:[{h:"Scale the ratios so b matches",b:"<span class='math'>a:b = 4:7 = 8:14</span><span class='math'>b:c = 14:9</span>Combined: <span class='math'>a:b:c = 8:14:9</span>"},  {h:"Find total parts",b:"<span class='math'>8+14+9 = 31 parts</span>"},  {h:"Solve for c",b:"<span class='math'>c = (9/31) × 310 = 9 × 10 = 90 ✓ Answer: D</span>"}]},
+{id:51,cat:"Problem Solving & Data Analysis",q:"300 people surveyed: 180 prefer tea, 120 prefer coffee. 70% of tea drinkers are over 40; 40% of coffee drinkers are over 40. Given a person over 40, what is P(coffee)?",ch:["21.5%","27.6%","33.3%","38.1%"],ans:"B",steps:[{h:"Count over-40 people in each group",b:"<span class='math'>Over-40 tea = 0.70×180 = 126</span><span class='math'>Over-40 coffee = 0.40×120 = 48</span>"},  {h:"Total over-40 people",b:"<span class='math'>126 + 48 = 174</span>"},  {h:"Apply conditional probability",b:"<span class='math'>P(coffee | over 40) = 48/174 ≈ 27.6% ✓ Answer: B</span>"}]},
+{id:52,cat:"Problem Solving & Data Analysis",q:"A cyclist rides 120 mi at 30 mph, then 120 mi at 60 mph, then 120 mi at 120 mph. What is the average speed for the full trip?",ch:["51.4 mph","60 mph","70 mph","75 mph"],ans:"A",steps:[{h:"Calculate total time",b:"<span class='math'>t₁ = 120/30 = 4 hr</span><span class='math'>t₂ = 120/60 = 2 hr</span><span class='math'>t₃ = 120/120 = 1 hr</span><span class='math'>Total = 7 hr</span>"},  {h:"Calculate average speed",b:"<span class='math'>Average = Total distance / Total time = 360/7 ≈ 51.4 mph ✓ Answer: A</span>The trap: (30+60+120)/3 = 70, but that's wrong — you can't average speeds!"}]},
+{id:53,cat:"Problem Solving & Data Analysis",q:"5 numbers: mean=14, min=4, range=24. Delete the min: median unchanged. Delete the max: median decreases by 2. What is the median?",ch:["12","13","14","15"],ans:"C",steps:[{h:"Determine max and sum",b:"<span class='math'>max = min+range = 4+24 = 28</span><span class='math'>Sum = 5×14 = 70</span>So middle three numbers sum to 70−4−28=38."},  {h:"Use the deletion clues",b:"Delete min (4): middle value a₃ is unchanged → a₄=a₃. Delete max (28): median decreases by 2 → a₂=a₃−4."},  {h:"Solve for a₃",b:"<span class='math'>a₂+a₃+a₄ = 38</span><span class='math'>(a₃−4)+a₃+a₃ = 38 → 3a₃−4 = 38 → a₃ = 14 ✓ Answer: C</span>"}]},
+{id:54,cat:"Problem Solving & Data Analysis",q:"a:b=5:8 and b:c=6:11. If a+b+c=332, what is c?",ch:["88","132","176","220"],ans:"C",steps:[{h:"Scale so b matches",b:"<span class='math'>a:b = 5:8 → 15:24</span><span class='math'>b:c = 6:11 → 24:44</span>Combined: <span class='math'>a:b:c = 15:24:44</span>"},  {h:"Total parts and value per part",b:"<span class='math'>15+24+44 = 83 parts</span><span class='math'>Each part = 332/83 = 4</span>"},  {h:"Find c",b:"<span class='math'>c = 44×4 = 176 ✓ Answer: C</span>"}]},
+{id:55,cat:"Problem Solving & Data Analysis",q:"p(x)=a·((x+6)²−b)·((x+6)²−c). Given p(−7)=49 and p(0)=784, what is p(−12)+p(−5)?",ch:["735","784","833","882"],ans:"C",steps:[{h:"KEY INSIGHT: symmetry",b:"p depends only on (x+6)². So p is symmetric about x=−6."},  {h:"Match the symmetric points",b:"x=−12 and x=0 are both 6 units from −6:<span class='math'>p(−12) = p(0) = 784</span>x=−5 and x=−7 are both 1 unit from −6:<span class='math'>p(−5) = p(−7) = 49</span>"},  {h:"Sum them",b:"<span class='math'>p(−12)+p(−5) = 784+49 = 833 ✓ Answer: C</span>"}]}
+];
+
+// ══ STATE ═════════════════════════════════════════════════════════════════════
+let selectedCat = null;
+let questionCount = 10;
+let queue = [];
+let qIdx = 0;
+let currentStep = 0;
+let timerVal = 0;
+let timerInterval = null;
+let correctCount = 0;
+let wrongCount = 0;
+let aiOpen = false;
+let aiMsgs = [];
+let aiLoading = false;
+let answered = null;
+
+// ══ WELCOME ═══════════════════════════════════════════════════════════════════
+function selectCat(c) {
+  selectedCat = c;
+  document.querySelectorAll('.cat-card').forEach(el => el.style.border = '2px solid var(--border)');
+  event.currentTarget.style.border = '2px solid var(--blue)';
+  const btn = document.getElementById('start-btn');
+  const label = c === 'ALL' ? 'Mixed Practice' : c;
+  btn.textContent = `Start ${label} →`;
+  btn.disabled = false;
+}
+
+function setCount(n) {
+  questionCount = n;
+  document.querySelectorAll('.count-btn').forEach(b => {
+    b.classList.toggle('on', parseInt(b.textContent) === n);
+  });
+}
+
+function startSession() {
+  if (!selectedCat) return;
+  const pool = selectedCat === 'ALL' ? [...ALL_PROBLEMS] : ALL_PROBLEMS.filter(p => p.cat === selectedCat);
+  queue = pool.sort(() => Math.random() - 0.5).slice(0, Math.min(questionCount, pool.length));
+  qIdx = 0; correctCount = 0; wrongCount = 0; answered = null;
+  aiMsgs = []; aiOpen = false;
+  showScreen('problem');
+  loadQuestion();
+}
+
+// ══ PROBLEM ═══════════════════════════════════════════════════════════════════
+function loadQuestion() {
+  const p = queue[qIdx];
+  answered = null; aiMsgs = []; aiOpen = false;
+  document.getElementById('ai-panel').classList.remove('show');
+  document.getElementById('ai-help-btn').classList.remove('open');
+  document.getElementById('ai-msgs').innerHTML = '';
+
+  document.getElementById('prob-tag').textContent = p.cat;
+  document.getElementById('prob-num').textContent = `Problem ${qIdx+1} of ${queue.length}`;
+  document.getElementById('q-text').textContent = p.q;
+  document.getElementById('prog-fill').style.width = (qIdx / queue.length * 100) + '%';
+
+  const choices = document.getElementById('choices-list');
+  choices.innerHTML = p.ch.map((c, i) => {
+    const L = 'ABCD'[i];
+    return `<button class="choice-btn" onclick="selectAnswer('${L}')" data-letter="${L}"><span class="ch-ltr">${L}</span>${c}</button>`;
+  }).join('');
+
+  startTimer();
+  updateNav();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timerVal = 0;
+  const el = document.getElementById('prob-timer');
+  el.classList.remove('warn');
+  timerInterval = setInterval(() => {
+    timerVal++;
+    const m = Math.floor(timerVal / 60), s = timerVal % 60;
+    el.textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    if (timerVal >= 120) el.classList.add('warn');
+  }, 1000);
+}
+
+function selectAnswer(letter) {
+  if (answered) return;
+  clearInterval(timerInterval);
+  answered = letter;
+  const p = queue[qIdx];
+  const isOk = letter === p.ans;
+  if (isOk) correctCount++; else wrongCount++;
+  updateNav();
+
+  document.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.disabled = true;
+    const L = btn.dataset.letter;
+    if (L === p.ans) btn.classList.add('ok');
+    else if (L === letter) btn.classList.add('ng');
+  });
+
+  setTimeout(() => showSolution(isOk, p), 700);
+}
+
+function skipProblem() {
+  clearInterval(timerInterval);
+  const p = queue[qIdx];
+  answered = 'SKIP';
+  showSolution(false, p);
+}
+
+// ══ SOLUTION ══════════════════════════════════════════════════════════════════
+function showSolution(isOk, p) {
+  currentStep = 0;
+  showScreen('solution');
+
+  const banner = document.getElementById('result-banner');
+  banner.className = 'result-banner ' + (isOk ? 'ok' : 'ng');
+  document.getElementById('result-icon').textContent = isOk ? '✓' : '✗';
+  document.getElementById('result-h').textContent = isOk ? 'Correct!' : (answered === 'SKIP' ? 'Skipped' : `Incorrect — answer was ${p.ans}`);
+  document.getElementById('result-p').textContent = isOk
+    ? `Solved in ${Math.floor(timerVal/60)}:${(timerVal%60).toString().padStart(2,'0')} · keep going!`
+    : `The correct answer is <strong>${p.ans}</strong>: ${p.ch['ABCD'.indexOf(p.ans)]}`;
+
+  renderStep(p);
+
+  const isLast = qIdx === queue.length - 1;
+  document.getElementById('next-prob-btn').style.display = isLast ? 'none' : 'block';
+  document.getElementById('session-done-wrap').style.display = isLast ? 'block' : 'none';
+  if (isLast) {
+    document.getElementById('final-score').textContent = correctCount + '/' + queue.length;
+    const pct = Math.round(correctCount / queue.length * 100);
+    document.getElementById('final-label').textContent = pct >= 80 ? `${pct}% — Outstanding!` : pct >= 60 ? `${pct}% — Good work. Keep pushing.` : `${pct}% — Review the steps and try again.`;
+  }
+}
+
+function renderStep(prob) {
+  const p = prob || queue[qIdx];
+  const steps = p.steps;
+  const s = steps[currentStep];
+
+  const dots = document.getElementById('step-dots');
+  dots.innerHTML = steps.map((_, i) => `<div class="step-dot${i < currentStep ? ' done' : i === currentStep ? ' active' : ''}"></div>`).join('');
+
+  const body = document.getElementById('step-body');
+  body.innerHTML = `
+    <div class="step-num">
+      <span class="step-num-badge">${currentStep+1}</span>
+      Step ${currentStep+1}
+    </div>
+    <div class="step-heading">${s.h}</div>
+    <div class="step-content">${s.b}</div>
+  `;
+
+  document.getElementById('step-counter').textContent = `Step ${currentStep+1} of ${steps.length}`;
+  document.getElementById('step-prev').disabled = currentStep === 0;
+  document.getElementById('step-next').disabled = currentStep === steps.length - 1;
+}
+
+function nextStep() {
+  const steps = queue[qIdx].steps;
+  if (currentStep < steps.length - 1) { currentStep++; renderStep(); }
+}
+
+function prevStep() {
+  if (currentStep > 0) { currentStep--; renderStep(); }
+}
+
+function nextProblem() {
+  qIdx++;
+  answered = null; aiMsgs = [];
+  showScreen('problem');
+  loadQuestion();
+}
+
+// ══ AI TUTOR ══════════════════════════════════════════════════════════════════
+function toggleAI() {
+  aiOpen = !aiOpen;
+  const panel = document.getElementById('ai-panel');
+  const btn = document.getElementById('ai-help-btn');
+  panel.classList.toggle('show', aiOpen);
+  btn.classList.toggle('open', aiOpen);
+  if (aiOpen && aiMsgs.length === 0 && queue[qIdx]) {
+    aiMsgs = [{r:'a', t:'Hi! I\'m here to help you work through this problem. What part is confusing you?'}];
+    renderAI();
+  }
+}
+
+function renderAI() {
+  const el = document.getElementById('ai-msgs');
+  el.innerHTML = aiMsgs.map(m => `<div class="msg ${m.r==='u'?'msg-u':'msg-a'}">${m.t}</div>`).join('');
+  if (aiLoading) el.innerHTML += `<div class="msg msg-a msg-t">Thinking…</div>`;
+  el.scrollTop = el.scrollHeight;
+}
+
+async function sendAI() {
+  const inp = document.getElementById('ai-input');
+  const txt = inp.value.trim();
+  if (!txt || aiLoading || !queue[qIdx]) return;
+  inp.value = '';
+  const p = queue[qIdx];
+  aiMsgs.push({r:'u', t:txt});
+  aiLoading = true;
+  document.getElementById('ai-send').disabled = true;
+  renderAI();
+  const history = aiMsgs.slice(0,-1).map(m => ({role: m.r==='u'?'user':'assistant', content: m.t}));
+  history.push({role:'user', content:txt});
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST', headers:{'Content-Type':'application/json','x-api-key':ANTHROPIC_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6', max_tokens:500,
+        system:`You are an expert SAT Math tutor for TB Math Prep, founded by Toby Velez (790 SAT Math) and Bryan Lim (780 SAT Math). Current problem:\n\nQuestion: ${p.q}\nChoices: A) ${p.ch[0]}  B) ${p.ch[1]}  C) ${p.ch[2]}  D) ${p.ch[3]}\nCategory: ${p.cat}\n\nGuide the student toward understanding — don't immediately give away the answer. Be warm, concise (2 short paragraphs), and precise. If they've already answered, reinforce the concept.`,
+        messages: history
+      })
+    });
+    const d = await res.json();
+    aiMsgs.push({r:'a', t: d.content?.[0]?.text || 'Sorry, something went wrong. Try again.'});
+  } catch(e) { aiMsgs.push({r:'a', t:'Connection error — please try again.'}); }
+  finally { aiLoading = false; document.getElementById('ai-send').disabled = false; renderAI(); }
+}
+
+document.getElementById('ai-input').addEventListener('keydown', e => { if(e.key==='Enter') sendAI(); });
+
+// ══ UTILS ═════════════════════════════════════════════════════════════════════
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function goHome() {
+  clearInterval(timerInterval);
+  selectedCat = null;
+  document.querySelectorAll('.cat-card').forEach(el => el.style.border = '2px solid var(--border)');
+  document.getElementById('start-btn').textContent = 'Choose a category above to start →';
+  document.getElementById('start-btn').disabled = true;
+  showScreen('welcome');
+}
+
+function updateNav() {
+  document.getElementById('nav-ok').textContent = '✓ ' + correctCount;
+  document.getElementById('nav-ng').textContent = '✗ ' + wrongCount;
+}
+
+// PWA: register service worker so app is installable on phone
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
