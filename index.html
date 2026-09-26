@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TB Math Prep | Free SAT Math | Toby Velez & Bryan Lim</title>
+<meta name="description" content="Free SAT Math prep by Toby Velez (790) and Bryan Lim (780). 500+ verified problems, 30 practice exams, free Desmos course, and a global student community. 100% free, forever.">
+<meta name="author" content="Toby Velez, Bryan Lim">
+<meta name="keywords" content="TB Math Prep, Toby Velez, Bryan Lim, free SAT math, SAT math practice, SAT prep free">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --m:#2563EB;--md:#1D4ED8;--ms:rgba(37,99,235,0.09);
+  --cr:#F8FAFC;--crl:#EFF6FF;
+  --gold:#FBBF24;--goldt:rgba(251,191,36,0.15);
+  --ink:#0F172A;--ink2:#1E3A5F;--gray:#64748B;--lt:#94A3B8;
+  --wh:#fff;--bd:rgba(37,99,235,0.14);
+  --green:#1A6B35;--greenlt:rgba(26,107,53,0.09);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--cr);color:var(--ink);line-height:1.6;font-size:16px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--cr);border-bottom:1px solid var(--bd);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'DM Serif Display',serif;font-size:19px;color:#0B1D3E;cursor:pointer;text-decoration:none;letter-spacing:-0.3px}
+.logo em{font-style:italic;color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none}
+.nav-links button,.nav-links a{font-size:13px;font-weight:500;color:var(--ink2);background:none;border:none;padding:7px 11px;cursor:pointer;border-radius:7px;text-decoration:none;transition:all 0.15s}
+.nav-links button:hover,.nav-links a:hover{background:var(--ms);color:var(--m)}
+.nav-cta{background:var(--m)!important;color:var(--wh)!important;font-weight:600!important;border-radius:8px!important;padding:7px 16px!important}
+.nav-cta:hover{background:var(--md)!important;color:var(--wh)!important}
+.free-badge{background:var(--greenlt);color:var(--green);font-size:11px;font-weight:700;padding:3px 9px;border-radius:100px;letter-spacing:0.04em;border:1px solid rgba(26,107,53,0.2)}
+
+/* TICKER */
+.ticker{background:#0B1D3E;padding:7px 0;overflow:hidden}
+.ticker-t{display:flex;gap:72px;animation:tick 28s linear infinite;white-space:nowrap;width:max-content}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{color:rgba(255,255,255,0.88);font-size:12px;font-weight:500;display:flex;align-items:center;gap:7px}
+
+/* PAGE SYSTEM */
+.page{display:none;min-height:calc(100vh - 60px)}
+#pg-home{display:block}
+
+/* HERO */
+.hero{padding:68px 24px 80px;max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:center}
+.hero-free{display:inline-flex;align-items:center;gap:8px;background:var(--greenlt);border:1px solid rgba(26,107,53,0.25);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:700;color:var(--green);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:22px}
+.hero-free span{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(38px,5vw,62px);line-height:1.1;letter-spacing:-0.02em;color:var(--ink);margin-bottom:10px}
+.hero h1 em{color:var(--m);font-style:italic}
+.hero h1 strong{color:var(--m)}
+.hero-sub{font-size:17px;color:var(--ink2);line-height:1.7;margin-bottom:14px;max-width:480px}
+.hero-free-line{font-size:14px;font-weight:700;color:var(--green);margin-bottom:30px;display:flex;align-items:center;gap:7px}
+.hero-free-line::before{content:'✓';width:18px;height:18px;background:var(--green);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+.hero-ctas{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:40px}
+.btn-primary{background:var(--m);color:var(--wh);font-weight:700;font-size:14px;padding:13px 26px;border-radius:10px;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:all 0.15s;font-family:'Inter',sans-serif}
+.btn-primary:hover{background:var(--md);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--m);font-weight:600;font-size:14px;padding:13px 26px;border-radius:10px;border:2px solid var(--bd);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:all 0.15s;font-family:'Inter',sans-serif}
+.btn-secondary:hover{background:var(--ms);border-color:var(--m)}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap}
+.hstat-n{font-family:'DM Serif Display',serif;font-size:30px;color:var(--m);line-height:1}
+.hstat-l{font-size:12px;color:var(--gray);font-weight:500;margin-top:2px}
+
+/* HERO CARD */
+.hero-card{background:var(--wh);border:1px solid var(--bd);border-radius:18px;overflow:hidden;box-shadow:0 4px 36px rgba(28,18,9,0.09)}
+.hc-head{background:#0B1D3E;padding:18px 22px}
+.hc-head-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.hc-label{font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.06em}
+.hc-badge{background:var(--gold);color:var(--ink);font-size:10px;font-weight:700;padding:3px 9px;border-radius:100px;letter-spacing:0.04em}
+.hc-score{font-family:'DM Serif Display',serif;font-size:44px;color:var(--wh);line-height:1}
+.hc-score span{font-size:18px;opacity:0.65}
+.hc-gain{font-size:13px;color:rgba(255,255,255,0.75);margin-top:3px}
+.hc-body{padding:18px 22px}
+.hc-blabel{font-size:10px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px}
+.tbar{margin-bottom:9px}
+.tbar-top{display:flex;justify-content:space-between;font-size:12px;color:var(--ink2);margin-bottom:4px;font-weight:500}
+.tbar-track{height:5px;background:var(--cr);border-radius:3px;overflow:hidden}
+.tbar-fill{height:100%;border-radius:3px;background:var(--m)}
+.hc-foot{padding:13px 22px;border-top:1px solid var(--bd);background:var(--crl);font-size:12px;color:var(--gray);display:flex;align-items:center;gap:7px}
+.hc-foot strong{color:var(--ink)}
+
+/* FREE BANNER */
+.free-banner{background:var(--m);color:var(--wh);text-align:center;padding:40px 24px}
+.free-banner h2{font-family:'DM Serif Display',serif;font-size:clamp(26px,4vw,40px);margin-bottom:10px}
+.free-banner p{font-size:15px;opacity:0.85;max-width:540px;margin:0 auto 6px;line-height:1.7}
+.free-items{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:22px}
+.free-item{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:rgba(255,255,255,0.9)}
+.free-item::before{content:'✓';width:20px;height:20px;background:rgba(255,255,255,0.2);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+
+/* SECTION */
+.sec{padding:72px 24px}
+.sec-alt{background:var(--crl)}
+.sec-in{max-width:1080px;margin:0 auto}
+.sec-lbl{font-size:11px;font-weight:700;color:var(--m);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sec-lbl::before{content:'';width:20px;height:2px;background:var(--m)}
+.sec-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,44px);color:var(--ink);margin-bottom:14px;letter-spacing:-0.02em}
+.sec-sub{font-size:16px;color:var(--ink2);line-height:1.7;max-width:520px}
+
+/* 500+ SECTION */
+.qbank-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:48px}
+.qbank-num{font-family:'DM Serif Display',serif;font-size:96px;color:var(--m);line-height:1;letter-spacing:-4px}
+.qbank-num span{font-size:40px}
+.qbank-breakdown{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.qb-row{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--wh);border:1px solid var(--bd);border-radius:10px}
+.qb-cat{font-size:14px;font-weight:600;color:var(--ink)}
+.qb-count{font-size:14px;font-weight:700;color:var(--m);background:var(--ms);padding:3px 10px;border-radius:100px}
+.qbank-right h3{font-family:'DM Serif Display',serif;font-size:28px;color:var(--ink);margin-bottom:12px}
+.qbank-right p{font-size:15px;color:var(--ink2);line-height:1.75;margin-bottom:20px}
+.qbank-features{display:flex;flex-direction:column;gap:10px}
+.qf{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink2)}
+.qf::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:48px}
+.feat-card{background:var(--wh);border:1px solid var(--bd);border-radius:14px;padding:24px;cursor:pointer;transition:all 0.15s}
+.feat-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(28,18,9,0.1)}
+.feat-icon{font-size:26px;margin-bottom:14px}
+.feat-card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:7px}
+.feat-card p{font-size:13px;color:var(--gray);line-height:1.6}
+.feat-tag{display:inline-block;margin-top:12px;font-size:11px;font-weight:700;border-radius:6px;padding:3px 10px;letter-spacing:0.04em}
+.tag-free{color:var(--green);background:var(--greenlt)}
+.tag-paid{color:var(--m);background:var(--ms)}
+
+/* FOUNDERS */
+.founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.founder-card{background:var(--wh);border:1px solid var(--bd);border-radius:18px;padding:30px}
+.founder-av{width:56px;height:56px;border-radius:50%;background:var(--m);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:22px;color:var(--wh);margin-bottom:18px;flex-shrink:0}
+.founder-av.dark{background:var(--ink)}
+.founder-name{font-family:'DM Serif Display',serif;font-size:22px;color:var(--ink);margin-bottom:3px}
+.founder-role{font-size:12px;color:var(--m);font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em}
+.founder-score{display:inline-flex;align-items:center;gap:7px;background:var(--ms);border:1px solid var(--bd);border-radius:8px;padding:5px 11px;font-size:13px;font-weight:700;color:var(--m);margin-bottom:16px}
+.founder-bio{font-size:14px;color:var(--ink2);line-height:1.75}
+.founder-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.founder-tag{font-size:11px;font-weight:600;padding:3px 9px;border-radius:100px;background:var(--crl);color:var(--ink2);border:1px solid var(--bd)}
+
+/* DESMOS FREE SECTION */
+.desmos-sec{background:var(--ink);padding:64px 24px}
+.desmos-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.desmos-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,64,0.2);border:1px solid rgba(201,168,64,0.4);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:18px}
+.desmos-inner h2{font-family:'DM Serif Display',serif;font-size:clamp(26px,3vw,40px);color:var(--wh);margin-bottom:12px;line-height:1.15}
+.desmos-inner p{font-size:15px;color:rgba(255,255,255,0.72);line-height:1.75;margin-bottom:22px}
+.desmos-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.dl{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,0.8)}
+.dl::before{content:'→';color:var(--gold);font-weight:700;flex-shrink:0}
+.desmos-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:28px}
+.desmos-card h3{font-family:'DM Serif Display',serif;font-size:22px;color:var(--wh);margin-bottom:6px}
+.desmos-price-old{font-size:14px;color:rgba(255,255,255,0.4);text-decoration:line-through;margin-bottom:4px}
+.desmos-price{font-family:'DM Serif Display',serif;font-size:48px;color:var(--gold);line-height:1;margin-bottom:8px}
+.desmos-price-sub{font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:20px}
+.desmos-modules{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.dm{font-size:13px;color:rgba(255,255,255,0.75);display:flex;align-items:center;gap:8px}
+.dm::before{content:'✓';color:var(--gold);font-weight:700}
+.btn-gold{background:var(--gold);color:var(--ink);font-weight:700;font-size:14px;padding:13px 26px;border-radius:10px;border:none;cursor:pointer;width:100%;font-family:'Inter',sans-serif;transition:all 0.15s}
+.btn-gold:hover{background:#B8962F;transform:translateY(-1px)}
+
+/* GLOBAL */
+.global-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-top:48px}
+.country-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.cpill{background:var(--wh);border:1px solid var(--bd);border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500;color:var(--ink2)}
+.discord-card{background:#5865F2;border-radius:18px;padding:32px;color:var(--wh)}
+.discord-card h3{font-family:'DM Serif Display',serif;font-size:24px;color:var(--wh);margin-bottom:10px}
+.discord-card p{font-size:14px;opacity:0.85;line-height:1.7;margin-bottom:20px}
+.btn-discord{background:var(--wh);color:#5865F2;font-weight:700;font-size:14px;padding:12px 24px;border-radius:10px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity 0.15s}
+.btn-discord:hover{opacity:0.92}
+.discord-meta{margin-top:14px;font-size:12px;opacity:0.65}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px;align-items:start}
+.p-card{background:var(--wh);border:1px solid var(--bd);border-radius:18px;padding:28px;position:relative}
+.p-card.featured{border-color:var(--m);box-shadow:0 4px 28px rgba(37,99,235,0.13)}
+.p-pop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--m);color:var(--wh);font-size:10px;font-weight:700;padding:3px 13px;border-radius:100px;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap}
+.p-label{font-size:11px;font-weight:700;color:var(--gray);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:7px}
+.p-price{font-family:'DM Serif Display',serif;font-size:44px;color:var(--ink);line-height:1}
+.p-price span{font-size:16px;color:var(--gray);font-family:'Inter',sans-serif}
+.p-desc{font-size:13px;color:var(--gray);margin-top:7px;margin-bottom:20px}
+.p-btn{width:100%;padding:12px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all 0.15s}
+.p-btn-primary{background:var(--m);color:var(--wh)}
+.p-btn-primary:hover{background:var(--md)}
+.p-btn-outline{background:transparent;color:var(--m);border:2px solid var(--bd)}
+.p-btn-outline:hover{background:var(--ms)}
+.p-divider{height:1px;background:var(--bd);margin:18px 0}
+.p-feats{list-style:none;display:flex;flex-direction:column;gap:8px}
+.p-feats li{font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:8px}
+.p-feats li::before{content:'✓';color:var(--m);font-weight:700;flex-shrink:0}
+
+/* PRACTICE PAGE */
+.prac-header{background:var(--m);padding:22px 22px;display:flex;align-items:center;justify-content:space-between}
+.prac-header h2{font-family:'DM Serif Display',serif;font-size:20px;color:var(--wh)}
+.back-btn{background:rgba(255,255,255,0.15);color:var(--wh);border:none;cursor:pointer;padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;transition:all 0.15s}
+.back-btn:hover{background:rgba(255,255,255,0.25)}
+.prac-body{padding:28px 22px;max-width:720px;margin:0 auto}
+
+/* CATEGORY CARDS */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.cat-card{background:var(--wh);border:2px solid var(--bd);border-radius:14px;padding:22px;cursor:pointer;transition:all 0.15s;text-align:left}
+.cat-card:hover{border-color:var(--m);transform:translateY(-2px)}
+.cat-icon{font-size:28px;margin-bottom:10px}
+.cat-card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.cat-card p{font-size:12px;color:var(--gray)}
+
+/* QUESTION UI */
+.q-box{background:var(--wh);border:1px solid var(--bd);border-radius:14px;padding:28px;margin-bottom:16px}
+.q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.q-tag{font-size:10px;font-weight:700;color:var(--m);background:var(--ms);padding:3px 9px;border-radius:6px;letter-spacing:0.04em;text-transform:uppercase}
+.q-num{font-size:12px;color:var(--gray);font-weight:500}
+.q-text{font-size:16px;line-height:1.75;color:var(--ink)}
+.choices{display:flex;flex-direction:column;gap:9px}
+.choice{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;border:1.5px solid var(--bd);background:var(--crl);cursor:pointer;font-size:14px;color:var(--ink);text-align:left;transition:all 0.15s;width:100%;font-family:'Inter',sans-serif}
+.choice:hover:not(:disabled){border-color:var(--m);background:var(--ms)}
+.choice.ok{border-color:var(--green)!important;background:var(--greenlt)!important;color:var(--green)!important}
+.choice.ng{border-color:#C0392B!important;background:rgba(192,57,43,0.08)!important;color:#7B241C!important}
+.choice.rev{border-color:var(--green)!important;background:var(--greenlt)!important}
+.choice:disabled{cursor:default}
+.ch-ltr{width:26px;height:26px;border-radius:50%;background:var(--bd);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--gray)}
+.choice.ok .ch-ltr{background:var(--green);color:#fff}
+.choice.ng .ch-ltr{background:#C0392B;color:#fff}
+.choice.rev .ch-ltr{background:var(--green);color:#fff}
+.expl-box{background:var(--ms);border:1px solid var(--bd);border-left:4px solid var(--m);border-radius:10px;padding:16px;margin-top:14px;display:none}
+.expl-box.show{display:block}
+.expl-box h4{font-size:13px;font-weight:700;color:var(--m);margin-bottom:6px}
+.expl-box p{font-size:13px;color:var(--ink2);line-height:1.7}
+.prac-controls{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.score-disp{font-size:13px;color:var(--gray);font-weight:500}
+.score-disp strong{color:var(--m)}
+.next-btn{background:var(--m);color:var(--wh);border:none;border-radius:9px;padding:10px 22px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all 0.15s;font-family:'Inter',sans-serif}
+.next-btn:hover{background:var(--md)}
+.next-btn:disabled{opacity:0.35;cursor:not-allowed}
+.prog-bar{height:4px;background:var(--bd);border-radius:2px;margin-bottom:20px;overflow:hidden}
+.prog-fill{height:100%;background:var(--m);border-radius:2px;transition:width 0.3s}
+
+/* RESULT */
+.result-screen{text-align:center;padding:48px 20px;display:none}
+.result-screen.show{display:block}
+.result-circle{width:110px;height:110px;border-radius:50%;background:var(--m);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 22px}
+.res-big{font-family:'DM Serif Display',serif;font-size:38px;color:var(--wh);line-height:1}
+.res-tot{font-size:14px;color:rgba(255,255,255,0.65)}
+
+/* FLASHCARDS */
+.fc-wrap{perspective:1000px;margin:28px auto;max-width:480px;height:260px;cursor:pointer}
+.fc{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.5s}
+.fc.flipped{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;background:var(--wh);border:1px solid var(--bd);border-radius:18px;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.fc-back{transform:rotateY(180deg);background:var(--m);color:var(--wh)}
+.fc-topic{font-size:10px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+.fc-term{font-family:'DM Serif Display',serif;font-size:22px;color:var(--ink)}
+.fc-hint{font-size:12px;color:var(--gray);margin-top:10px}
+.fc-def{font-size:16px;line-height:1.65;color:var(--wh)}
+
+/* BOOKING */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:12px;font-weight:600;color:var(--ink2)}
+.form-group input,.form-group select,.form-group textarea{padding:11px 13px;border:1.5px solid var(--bd);border-radius:9px;font-size:14px;background:var(--wh);color:var(--ink);font-family:'Inter',sans-serif;transition:border-color 0.15s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--m)}
+.form-group textarea{resize:vertical;min-height:90px}
+.form-submit{width:100%;padding:14px;margin-top:6px;background:var(--m);color:var(--wh);border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
+.form-submit:hover{background:var(--md)}
+
+/* DESMOS COURSE PAGE */
+.desmos-module{background:var(--wh);border:1px solid var(--bd);border-radius:12px;padding:20px;margin-bottom:12px}
+.desmos-module h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.desmos-module p{font-size:13px;color:var(--gray);line-height:1.6}
+.module-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--m);color:var(--wh);font-size:12px;font-weight:700;margin-bottom:10px}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,0.65);padding:44px 24px 28px}
+.foot-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:20px}
+.foot-brand h3{font-family:'DM Serif Display',serif;font-size:18px;color:var(--wh);margin-bottom:7px}
+.foot-brand p{font-size:13px;max-width:240px;line-height:1.6}
+.foot-links h4{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px}
+.foot-links ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.foot-links li button,.foot-links li a{background:none;border:none;color:rgba(255,255,255,0.65);font-size:13px;cursor:pointer;text-decoration:none;padding:0;transition:color 0.15s;font-family:'Inter',sans-serif}
+.foot-links li button:hover,.foot-links li a:hover{color:var(--wh)}
+.foot-bottom{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-size:12px;flex-wrap:wrap;gap:10px}
+
+/* RESPONSIVE */
+@media(max-width:760px){
+  .hero{grid-template-columns:1fr}.hero-card{display:none}
+  .qbank-grid,.founders-grid,.pricing-grid,.desmos-inner,.global-grid{grid-template-columns:1fr}
+  .foot-inner{flex-direction:column}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" onclick="showPage('home')">TB <em>Math</em> Prep</a>
+  <ul class="nav-links">
+    <li><button onclick="showPage('practice')">Practice</button></li>
+    <li><button onclick="showPage('exams')">Exams</button></li>
+    <li><button onclick="showPage('desmos')">Desmos Course <span class="free-badge">FREE</span></button></li>
+    <li><button onclick="showPage('flashcards')">Flashcards</button></li>
+    <li><a class="nav-cta" href="https://discord.gg/9ebjgTwQv" target="_blank">Join Discord</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<div id="pg-home" class="page">
+
+<!-- Ticker -->
+<div class="ticker"><div class="ticker-t" id="ticker"></div></div>
+
+<!-- Hero -->
+<div class="hero">
+  <div>
+    <div class="hero-free"><span></span>100% Free · No Paywall · No Upsells Ever</div>
+    <h1>The SAT Math prep you actually <em>deserve.</em></h1>
+    <p class="hero-sub">Built by <strong>Toby Velez (790)</strong> and <strong>Bryan Lim (780)</strong> because every good prep resource costs money   and it shouldn't.</p>
+    <div class="hero-free-line">Everything on this site is completely free. No credit card. No trial. No catch.</div>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="showPage('practice')">Start Practicing Free →</button>
+      <a class="btn-secondary" href="https://discord.gg/9ebjgTwQv" target="_blank">Join the Discord</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hstat-n">500<span>+</span></div><div class="hstat-l">Verified problems</div></div>
+      <div><div class="hstat-n">30</div><div class="hstat-l">Practice exams</div></div>
+      <div><div class="hstat-n">14<span>+</span></div><div class="hstat-l">Countries</div></div>
+      <div><div class="hstat-n">$0</div><div class="hstat-l">Forever</div></div>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="hc-head">
+      <div class="hc-head-top"><div class="hc-label">Student result</div><div class="hc-badge">VERIFIED</div></div>
+      <div class="hc-score">760 <span>/ 800</span></div>
+      <div class="hc-gain">↑ from 560 · +200 points in 8 weeks</div>
+    </div>
+    <div class="hc-body">
+      <div class="hc-blabel">Topic mastery</div>
+      <div class="tbar"><div class="tbar-top"><span>Algebra</span><span>95%</span></div><div class="tbar-track"><div class="tbar-fill" style="width:95%"></div></div></div>
+      <div class="tbar"><div class="tbar-top"><span>Advanced Math</span><span>88%</span></div><div class="tbar-track"><div class="tbar-fill" style="width:88%"></div></div></div>
+      <div class="tbar"><div class="tbar-top"><span>Data Analysis</span><span>91%</span></div><div class="tbar-track"><div class="tbar-fill" style="width:91%"></div></div></div>
+      <div class="tbar"><div class="tbar-top"><span>Geometry</span><span>84%</span></div><div class="tbar-track"><div class="tbar-fill" style="width:84%"></div></div></div>
+    </div>
+    <div class="hc-foot">🎯 <span><strong>First session free.</strong> Zoom or in-person, Bethesda MD.</span></div>
+  </div>
+</div>
+
+<!-- Free Banner -->
+<div class="free-banner" style="background:#0B1D3E">
+  <h2>Everything here is free. We mean it.</h2>
+  <p>Most SAT prep costs $200–$2,000. We charge nothing. We built TB Math Prep because the gap between students who can afford prep and students who can't is real   and fixable.</p>
+  <div class="free-items">
+    <div class="free-item">500+ practice problems</div>
+    <div class="free-item">30 full practice exams</div>
+    <div class="free-item">Desmos mastery course</div>
+    <div class="free-item">Formula flashcards</div>
+    <div class="free-item">Daily Discord problems</div>
+    <div class="free-item">Global student community</div>
+  </div>
+</div>
+
+<!-- 500+ Question Bank -->
+<div class="sec">
+  <div class="sec-in">
+    <div class="sec-lbl">Problem Bank</div>
+    <div class="qbank-grid">
+      <div>
+        <div class="qbank-num">500<span>+</span></div>
+        <p style="font-size:15px;color:var(--ink2);line-height:1.7;margin-bottom:18px">Every single problem in the bank is written and verified by Toby and Bryan. No AI-generated garbage, no recycled problems   just hard, test-accurate questions with full explanations for every wrong answer.</p>
+        <div class="qbank-breakdown">
+          <div class="qb-row"><span class="qb-cat">🔢 Algebra</span><span class="qb-count">130 problems</span></div>
+          <div class="qb-row"><span class="qb-cat">📐 Geometry & Trig</span><span class="qb-count">130 problems</span></div>
+          <div class="qb-row"><span class="qb-cat">📈 Advanced Math</span><span class="qb-count">160 problems</span></div>
+          <div class="qb-row"><span class="qb-cat">📊 Data Analysis</span><span class="qb-count">100 problems</span></div>
+          <div class="qb-row" style="background:var(--ms);border-color:var(--m)"><span class="qb-cat" style="color:var(--m);font-weight:700">Total</span><span class="qb-count">520 problems</span></div>
+        </div>
+      </div>
+      <div class="qbank-right">
+        <h3>Plus 30 full practice exams.</h3>
+        <p>Each exam is 22 questions, 35 minutes, scored instantly. The last 6–8 questions on every exam are the hardest patterns the SAT actually uses   the ones that separate 650 from 750.</p>
+        <div class="qbank-features">
+          <div class="qf">Instant scoring with full step-by-step explanations</div>
+          <div class="qf">Every question tagged by category and difficulty</div>
+          <div class="qf">Weak spot quiz: pick your topics, get a targeted 20-question drill</div>
+          <div class="qf">Daily problem posted to Discord every single day</div>
+          <div class="qf">All of it completely free, no account required</div>
+        </div>
+        <div style="margin-top:22px;display:flex;gap:11px;flex-wrap:wrap">
+          <button class="btn-primary" onclick="showPage('practice')">Start Practicing →</button>
+          <button class="btn-secondary" onclick="showPage('exams')">Take a Practice Exam</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Desmos Course FREE -->
+<div class="desmos-sec">
+  <div class="desmos-inner">
+    <div>
+      <div class="desmos-badge">★ Now completely free</div>
+      <h2>The Desmos course that used to cost free is now free.</h2>
+      <p>Desmos is the built-in graphing calculator on the SAT   and most students never learn how to actually use it. Toby built this course specifically to show you how to solve problems in 10 seconds that normally take 2 minutes.</p>
+      <div class="desmos-list">
+        <div class="dl">Find zeros of any function instantly   no algebra needed</div>
+        <div class="dl">Solve quadratics and systems visually in under 10 seconds</div>
+        <div class="dl">Regression tricks for scatterplot and data questions</div>
+        <div class="dl">Slider strategy for exponential and parametric problems</div>
+        <div class="dl">40+ Desmos-specific practice problems with solutions</div>
+      </div>
+      <button class="btn-gold" onclick="showPage('desmos')">Access Free Desmos Course →</button>
+    </div>
+    <div class="desmos-card">
+      <h3>Desmos Mastery for SAT</h3>
+      <div class="desmos-price">Free</div>
+      <div class="desmos-price-sub">no account needed, no sign up</div>
+      <div class="desmos-modules">
+        <div class="dm">Module 1: The Desmos interface</div>
+        <div class="dm">Module 2: Zeros, intersections & systems</div>
+        <div class="dm">Module 3: Quadratics & vertex</div>
+        <div class="dm">Module 4: Regression & scatterplots</div>
+        <div class="dm">Module 5: Exponential models</div>
+        <div class="dm">Module 6: Sliders & dynamic problems</div>
+        <div class="dm">Module 7: Full Desmos exam simulation</div>
+      </div>
+      <button class="btn-gold" onclick="showPage('desmos')">Start the Course →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Live 500+ Question Bank on Homepage -->
+<div class="sec sec-alt">
+  <div class="sec-in">
+    <div class="sec-lbl">Try it right now</div>
+    <h2 class="sec-title">500+ problems. Pick a topic and go.</h2>
+    <p class="sec-sub" style="margin-bottom:32px">No sign up. Just pick a category and start. Every wrong answer shows a full explanation.</p>
+
+    <div id="home-cats" style="margin-bottom:0">
+      <div class="cat-grid" style="margin-bottom:0">
+        <div class="cat-card" onclick="homeStartPrac('Algebra')"><div class="cat-icon">🔢</div><h3>Algebra</h3><p>Systems, quadratics, rates, word problems</p></div>
+        <div class="cat-card" onclick="homeStartPrac('Geometry & Trigonometry')"><div class="cat-icon">📐</div><h3>Geometry & Trig</h3><p>Similar solids, circles, law of cosines</p></div>
+        <div class="cat-card" onclick="homeStartPrac('Advanced Math')"><div class="cat-icon">📈</div><h3>Advanced Math</h3><p>Exponentials, functions, polynomials</p></div>
+        <div class="cat-card" onclick="homeStartPrac('Data Analysis')"><div class="cat-icon">📊</div><h3>Data Analysis</h3><p>Stats, probability, Bayes theorem</p></div>
+        <div class="cat-card" onclick="homeStartPrac('ALL')" style="grid-column:1/-1"><div class="cat-icon">🎯</div><h3>Mixed Practice</h3><p>Random problems across all topics</p></div>
+      </div>
+    </div>
+
+    <div id="home-qwrap" style="display:none;margin-top:0">
+      <div class="prog-bar"><div class="prog-fill" id="hp-prog"></div></div>
+      <div class="q-box">
+        <div class="q-meta">
+          <span class="q-tag" id="hp-cat">Algebra</span>
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="q-num" id="hp-n">Q 1 of 10</span>
+            <button onclick="homeShowCats()" style="background:none;border:none;cursor:pointer;font-size:12px;color:var(--gray);font-family:'Inter',sans-serif">← change topic</button>
+          </div>
+        </div>
+        <p class="q-text" id="hp-txt"></p>
+      </div>
+      <div class="choices" id="hp-choices"></div>
+      <div class="expl-box" id="hp-expl"><h4>Explanation</h4><p id="hp-expl-txt"></p></div>
+      <div class="prac-controls">
+        <div class="score-disp">Score: <strong id="hp-score">0 / 0</strong></div>
+        <button class="next-btn" id="hp-next" onclick="homeNextQ()" disabled>Next →</button>
+      </div>
+    </div>
+
+    <div id="home-result" style="display:none;text-align:center;padding:40px 0">
+      <div class="result-circle"><div class="res-big" id="hp-res-score">0</div><div class="res-tot" id="hp-res-tot">/ 10</div></div>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:24px;margin:16px 0 8px" id="hp-res-msg"></h3>
+      <div style="display:flex;gap:11px;justify-content:center;flex-wrap:wrap;margin-top:20px">
+        <button class="btn-primary" onclick="homeShowCats()">Practice More</button>
+        <a class="btn-secondary" href="https://discord.gg/9ebjgTwQv" target="_blank">Join Discord</a>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="sec-in">
+    <div class="sec-lbl">What we offer</div>
+    <h2 class="sec-title">Everything. Free.</h2>
+    <p class="sec-sub">No tiers. No paywalls. No "upgrade for the good stuff." Every tool below is open to everyone, always.</p>
+    <div class="feat-grid">
+      <div class="feat-card" onclick="showPage('practice')">
+        <div class="feat-icon">📐</div>
+        <h3>Practice Problems</h3>
+        <p>520+ verified problems across all SAT Math categories. Every wrong answer shows a full explanation.</p>
+        <span class="feat-tag tag-free">FREE · Start Now</span>
+      </div>
+      <div class="feat-card" onclick="showPage('exams')">
+        <div class="feat-icon">📝</div>
+        <h3>Practice Exams</h3>
+        <p>30 full exams, 22 questions, 35 minutes each. Instant scoring with explanations.</p>
+        <span class="feat-tag tag-free">FREE · 30 Exams</span>
+      </div>
+      <div class="feat-card" onclick="showPage('desmos')">
+        <div class="feat-icon">📊</div>
+        <h3>Desmos Mastery Course</h3>
+        <p>The full Desmos course   7 modules, 40+ practice problems. Used to cost free. Now free.</p>
+        <span class="feat-tag tag-free">FREE · Was free</span>
+      </div>
+      <div class="feat-card" onclick="showPage('flashcards')">
+        <div class="feat-icon">🃏</div>
+        <h3>Formula Flashcards</h3>
+        <p>Every formula, identity, and theorem tested on SAT Math. Built for fast review.</p>
+        <span class="feat-tag tag-free">FREE · All Topics</span>
+      </div>
+      <div class="feat-card" onclick="showPage('practice')">
+        <div class="feat-icon">🎯</div>
+        <h3>Weak Spot Finder</h3>
+        <p>Pick 2–6 topics. Get a targeted quiz. See exactly what's costing you points.</p>
+        <span class="feat-tag tag-free">FREE · Personalized</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Founders -->
+<div class="sec">
+  <div class="sec-in">
+    <div class="sec-lbl">The founders</div>
+    <h2 class="sec-title">Meet Toby & Bryan.</h2>
+    <p class="sec-sub">Two students at Walter Johnson High School in Bethesda who scored in the top 1% on SAT Math and decided to put everything they know online   for free.</p>
+    <div class="founders-grid">
+      <div class="founder-card">
+        <div class="founder-av">T</div>
+        <div class="founder-name">Toby Velez</div>
+        <div class="founder-role">Founder · Algebra, Advanced Math & Desmos</div>
+        <div class="founder-score">🏆 790 SAT Math</div>
+        <p class="founder-bio">Toby scored 790 on SAT Math and built TB Math Prep from scratch because he was frustrated that every decent prep resource cost hundreds of dollars. He's a senior at Walter Johnson High School in Bethesda, MD   FBLA chapter president, DECA Maryland State competitor, and AP Economics TA. He personally wrote and verified every problem in the 520-problem bank and built the Desmos course after realizing almost no one teaches students how to actually use the calculator. He specializes in Advanced Math, exponential pattern recognition, and the Desmos tricks that save 30+ seconds per problem on test day.</p>
+        <div class="founder-tags">
+          <span class="founder-tag">790 SAT Math</span>
+          <span class="founder-tag">FBLA President</span>
+          <span class="founder-tag">DECA State</span>
+          <span class="founder-tag">AP Econ TA</span>
+          <span class="founder-tag">Walter Johnson HS</span>
+        </div>
+      </div>
+      <div class="founder-card">
+        <div class="founder-av dark">B</div>
+        <div class="founder-name">Bryan Lim</div>
+        <div class="founder-role">Co-Founder · Geometry, Trig & Data Analysis</div>
+        <div class="founder-score">🏆 780 SAT Math</div>
+        <p class="founder-bio">Bryan scored 780 and co-founded TB Math Prep with Toby. He's a senior at Walter Johnson High School in Bethesda, MD. Bryan's specialty is Geometry, Trigonometry, and Data Analysis   the sections most students study last and score worst on. His calm, methodical teaching style is especially effective for students who freeze up under timed conditions. He's helped dozens of students go from dreading the geometry section to treating it as their most reliable source of points. He co-writes the daily Discord problems and leads the weekly group study calls.</p>
+        <div class="founder-tags">
+          <span class="founder-tag">780 SAT Math</span>
+          <span class="founder-tag">Geometry Expert</span>
+          <span class="founder-tag">Data Analysis</span>
+          <span class="founder-tag">Walter Johnson HS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Global -->
+<div class="sec sec-alt">
+  <div class="sec-in">
+    <div class="sec-lbl">Global reach</div>
+    <h2 class="sec-title">Students in 14+ countries.</h2>
+    <div class="global-grid">
+      <div>
+        <p style="font-size:15px;color:var(--ink2);line-height:1.75">TB Math Prep started in Bethesda, Maryland. Today students from Nigeria to South Korea to Brazil are doing the daily problems together in Discord. Free prep shouldn't just be for students in the right zip code.</p>
+        <div class="country-pills">
+          <span class="cpill">🇳🇬 Nigeria</span><span class="cpill">🇮🇳 India</span><span class="cpill">🇰🇷 South Korea</span>
+          <span class="cpill">🇹🇷 Turkey</span><span class="cpill">🇰🇪 Kenya</span><span class="cpill">🇵🇭 Philippines</span>
+          <span class="cpill">🇧🇷 Brazil</span><span class="cpill">🇿🇦 South Africa</span><span class="cpill">🇸🇬 Singapore</span>
+          <span class="cpill">🇬🇧 UK</span><span class="cpill">🇩🇪 Germany</span><span class="cpill">🇪🇬 Egypt</span>
+          <span class="cpill">🇺🇸 United States</span><span class="cpill">🇨🇦 Canada</span>
+        </div>
+      </div>
+      <div class="discord-card">
+        <h3>Join the community.</h3>
+        <p>500+ students doing 5 daily problems together. Ask questions, post score wins, and study with people who are grinding the same thing you are.</p>
+        <a class="btn-discord" href="https://discord.gg/9ebjgTwQv" target="_blank">Join Free on Discord →</a>
+        <div class="discord-meta">500+ members · 14+ countries · free forever</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Community -->
+<div class="sec">
+  <div class="sec-in" style="text-align:center;max-width:600px">
+    <div class="sec-lbl" style="justify-content:center">Community</div>
+    <h2 class="sec-title">Join the Discord.</h2>
+    <p class="sec-sub" style="max-width:100%;margin-bottom:32px">500+ students doing 5 hard problems together every day. Ask questions, post score wins, get help from Toby and Bryan directly. Free forever.</p>
+    <a href="https://discord.gg/9ebjgTwQv" target="_blank" class="btn-primary" style="font-size:16px;padding:16px 36px;display:inline-flex">Join the Discord Community →</a>
+    <p style="margin-top:16px;font-size:13px;color:var(--gray)">500+ members · 14+ countries · daily problems</p>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <h3>TB Math Prep</h3>
+      <p>Free SAT Math preparation for every student, everywhere. Founded by Toby Velez and Bryan Lim at Walter Johnson High School, Bethesda, MD.</p>
+    </div>
+    <div class="foot-links">
+      <h4>Practice</h4>
+      <ul>
+        <li><button onclick="showPage('practice')">Problem Bank</button></li>
+        <li><button onclick="showPage('exams')">Practice Exams</button></li>
+        <li><button onclick="showPage('desmos')">Desmos Course (Free)</button></li>
+        <li><button onclick="showPage('flashcards')">Flashcards</button></li>
+      </ul>
+    </div>
+    <div class="foot-links">
+      <h4>More</h4>
+      <ul>
+        <li><a href="https://discord.gg/9ebjgTwQv" target="_blank">Discord Community</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 TB Math Prep · Founded by <strong style="color:#fff">Toby Velez</strong> & <strong style="color:#fff">Bryan Lim</strong> · Bethesda, MD</span>
+    <span>Built so cost is never the reason a student can't prepare.</span>
+  </div>
+</footer>
+</div>
+
+<!-- PRACTICE PAGE -->
+<div id="pg-practice" class="page">
+  <div class="prac-header">
+    <button class="back-btn" onclick="showPage('home')">← Back</button>
+    <h2>Problem Bank</h2>
+    <div style="font-size:13px;opacity:0.8" id="prac-score-hdr">Score: 0 / 0</div>
+  </div>
+  <div class="prac-body">
+    <div id="prac-cats">
+      <h3 style="margin-bottom:18px;font-size:20px">Choose a topic</h3>
+      <div class="cat-grid">
+        <div class="cat-card" onclick="startPrac('Algebra')"><div class="cat-icon">🔢</div><h3>Algebra</h3><p>Systems · quadratics · rates</p></div>
+        <div class="cat-card" onclick="startPrac('Geometry & Trigonometry')"><div class="cat-icon">📐</div><h3>Geometry & Trig</h3><p>Similar solids · circles · trig</p></div>
+        <div class="cat-card" onclick="startPrac('Advanced Math')"><div class="cat-icon">📈</div><h3>Advanced Math</h3><p>Exponentials · functions · polynomials</p></div>
+        <div class="cat-card" onclick="startPrac('Data Analysis')"><div class="cat-icon">📊</div><h3>Data Analysis</h3><p>Stats · probability · Bayes</p></div>
+        <div class="cat-card" onclick="startPrac('ALL')"><div class="cat-icon">🎯</div><h3>Mixed</h3><p>All categories</p></div>
+      </div>
+    </div>
+    <div id="prac-q" style="display:none">
+      <div class="prog-bar"><div class="prog-fill" id="prac-prog"></div></div>
+      <div class="q-box">
+        <div class="q-meta"><span class="q-tag" id="q-cat">Algebra</span><span class="q-num" id="q-n">Q 1 of 10</span></div>
+        <p class="q-text" id="q-txt"></p>
+      </div>
+      <div class="choices" id="q-choices"></div>
+      <div class="expl-box" id="q-expl"><h4>Explanation</h4><p id="q-expl-txt"></p></div>
+      <div class="prac-controls">
+        <div class="score-disp">Score: <strong id="q-score">0 / 0</strong></div>
+        <div style="display:flex;gap:9px">
+          <button class="next-btn" onclick="skipQ()" style="background:var(--crl);color:var(--ink);border:1px solid var(--bd)">Skip</button>
+          <button class="next-btn" id="next-btn" onclick="nextQ()" disabled>Next →</button>
+        </div>
+      </div>
+    </div>
+    <div class="result-screen" id="prac-result">
+      <div class="result-circle"><div class="res-big" id="res-score">0</div><div class="res-tot" id="res-tot">/ 0</div></div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:10px">Done!</h2>
+      <p id="res-msg" style="color:var(--gray);margin-bottom:28px"></p>
+      <div style="display:flex;gap:11px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-primary" onclick="showCats()">Practice More</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXAMS PAGE -->
+<div id="pg-exams" class="page">
+  <div class="prac-header">
+    <button class="back-btn" onclick="showPage('home')">← Back</button>
+    <h2>Practice Exams</h2>
+    <div style="font-size:13px;opacity:0.8" id="exam-timer-hdr">35:00</div>
+  </div>
+  <div class="prac-body">
+    <div id="exam-sel">
+      <h3 style="font-size:20px;margin-bottom:6px">30 Full Practice Exams</h3>
+      <p style="color:var(--gray);margin-bottom:22px;font-size:14px">22 questions · 35 minutes · instant scoring</p>
+      <div class="cat-grid">
+        <div class="cat-card" onclick="startExam(1)"><div class="cat-icon">📋</div><h3>Exam 1</h3><p>Mixed · all topics</p></div>
+        <div class="cat-card" onclick="startExam(2)"><div class="cat-icon">📋</div><h3>Exam 2</h3><p>Algebra focus</p></div>
+        <div class="cat-card" onclick="startExam(3)"><div class="cat-icon">📋</div><h3>Exam 3</h3><p>Advanced Math focus</p></div>
+      </div>
+    </div>
+    <div id="exam-q" style="display:none">
+      <div class="prog-bar"><div class="prog-fill" id="exam-prog"></div></div>
+      <div class="q-box">
+        <div class="q-meta"><span class="q-tag" id="eq-cat">Algebra</span><span class="q-num" id="eq-n">Q 1 of 22</span></div>
+        <p class="q-text" id="eq-txt"></p>
+      </div>
+      <div class="choices" id="eq-choices"></div>
+      <div class="expl-box" id="eq-expl"><h4>Explanation</h4><p id="eq-expl-txt"></p></div>
+      <div class="prac-controls">
+        <div class="score-disp">⏱ <strong id="exam-timer">35:00</strong></div>
+        <button class="next-btn" id="eq-next" onclick="nextEQ()" disabled>Next →</button>
+      </div>
+    </div>
+    <div class="result-screen" id="exam-result">
+      <div class="result-circle"><div class="res-big" id="exam-res-score">0</div><div class="res-tot" id="exam-res-tot">/ 22</div></div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:10px">Exam Complete!</h2>
+      <p id="exam-res-msg" style="color:var(--gray);margin-bottom:28px"></p>
+      <div style="display:flex;gap:11px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-primary" onclick="showExamSel()">Try Another Exam</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESMOS COURSE PAGE (FREE) -->
+<div id="pg-desmos" class="page">
+  <div class="prac-header">
+    <button class="back-btn" onclick="showPage('home')">← Back</button>
+    <h2>Desmos Mastery Course   Free</h2>
+    <div class="free-badge" style="font-size:11px;padding:4px 11px">FREE</div>
+  </div>
+  <div class="prac-body">
+    <p style="color:var(--gray);margin-bottom:24px;font-size:14px;line-height:1.7">Master the Desmos graphing calculator   the most underused tool on the SAT. This course used to cost free. It's now completely free.</p>
+    <div class="desmos-module"><div class="module-num">1</div><h3>The Desmos Interface</h3><p>Learn what Desmos can do beyond just graphing lines   find zeros, intersections, and values instantly without any algebra.</p></div>
+    <div class="desmos-module"><div class="module-num">2</div><h3>Zeros, Intersections & Systems</h3><p>Solve systems of equations in seconds by graphing both equations and reading the intersection. Works for linear, quadratic, and exponential systems.</p></div>
+    <div class="desmos-module"><div class="module-num">3</div><h3>Quadratics & Vertex</h3><p>Find the vertex, roots, and axis of symmetry of any quadratic instantly. Includes the trick for "symmetric about x = k" SAT problems.</p></div>
+    <div class="desmos-module"><div class="module-num">4</div><h3>Regression & Scatterplots</h3><p>Run linear and exponential regressions in Desmos to answer scatterplot questions in 15 seconds instead of guessing.</p></div>
+    <div class="desmos-module"><div class="module-num">5</div><h3>Exponential Models</h3><p>Graph exponential functions to find percent change, half-life, and doubling time   the patterns the SAT uses most in Advanced Math.</p></div>
+    <div class="desmos-module"><div class="module-num">6</div><h3>Sliders & Dynamic Problems</h3><p>Use Desmos sliders to understand parametric problems   "for what value of k does the system have no solution" becomes a 10-second visual check.</p></div>
+    <div class="desmos-module"><div class="module-num">7</div><h3>Full Desmos Exam Simulation</h3><p>40 SAT problems designed specifically for Desmos. Time yourself. Compare Desmos time vs. algebraic time on each one.</p></div>
+    <div style="margin-top:20px;background:var(--ms);border:1px solid var(--bd);border-radius:12px;padding:18px">
+      <p style="font-size:14px;color:var(--ink2);line-height:1.7">📺 <strong>Video walkthroughs</strong> for each module are posted in the Discord server. Join at <a href="https://discord.gg/9ebjgTwQv" target="_blank" style="color:var(--m);font-weight:600">discord.gg/r9fC7nbxp</a> to access them.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FLASHCARDS PAGE -->
+<div id="pg-flashcards" class="page">
+  <div class="prac-header">
+    <button class="back-btn" onclick="showPage('home')">← Back</button>
+    <h2>Formula Flashcards</h2>
+    <div style="font-size:13px;opacity:0.8" id="fc-ctr">Card 1 of 24</div>
+  </div>
+  <div class="prac-body">
+    <p style="text-align:center;color:var(--gray);margin-bottom:10px;font-size:13px">Tap the card to flip it.</p>
+    <div class="fc-wrap" onclick="flipCard()">
+      <div class="fc" id="fc">
+        <div class="fc-front"><div class="fc-topic" id="fc-topic"></div><div class="fc-term" id="fc-term"></div><div class="fc-hint">Tap to reveal</div></div>
+        <div class="fc-back"><div class="fc-def" id="fc-def"></div></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:11px;margin-top:10px">
+      <button class="btn-secondary" onclick="prevCard()">← Prev</button>
+      <button class="btn-secondary" onclick="flipCard()">Flip</button>
+      <button class="btn-primary" onclick="nextCard()">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+// PROBLEMS
+const PROBS=[
+{id:1,cat:"Algebra",q:"A tent rental costs a flat fee for the first day plus a fixed rate for each additional day. Renting for 6 days costs $310; renting for 10 days costs $470. What does it cost to rent for 15 days?",ch:["$590","$630","$670","$710"],ans:"C",exp:"f+5r=310, f+9r=470. Subtract: 4r=160, r=$40. Then f=$110. Cost(15)=110+14(40)=$670."},
+{id:2,cat:"Algebra",q:"If 3x²−5x=2 and x>0, what is the value of 9x²−15x+7?",ch:["7","10","13","19"],ans:"C",exp:"Multiply 3x²−5x=2 by 3: 9x²−15x=6. Add 7: answer is 13. Don't solve for x."},
+{id:3,cat:"Algebra",q:"If x+y=9 and x²+y²=53, what is xy?",ch:["12","14","16","18"],ans:"B",exp:"(x+y)²=x²+2xy+y². So 81=53+2xy → xy=14."},
+{id:4,cat:"Algebra",q:"Machine A fills a tank in 18 min; B in 24 min. A works alone 4 min, then B joins. How many more minutes after B joins?",ch:["6","7","8","9"],ans:"C",exp:"A fills 2/9 in 4 min. Remaining=7/9. Combined rate=7/72. Time=(7/9)÷(7/72)=8 min."},
+{id:5,cat:"Algebra",q:"A 12-liter mixture is 25% alcohol. How many liters of pure alcohol make it 40% alcohol?",ch:["2","2.5","3","3.5"],ans:"C",exp:"(3+z)/(12+z)=0.40 → z=3 liters."},
+{id:6,cat:"Algebra",q:"An investment at simple interest: $13,200 after 2 years, $16,500 after 5 years. What was the original principal?",ch:["$9,000","$10,000","$11,000","$12,000"],ans:"C",exp:"3r=3300 → r=1100. P=13200−2(1100)=$11,000."},
+{id:7,cat:"Algebra",q:"For 3x+ky=21 and 6x−4y=18, for how many integer values of k does the system have no solution?",ch:["0","1","2","Infinitely many"],ans:"B",exp:"Simplified eq2: 3x−2y=9. For parallel lines: k/−2=1, so k=−2. Exactly 1 integer value."},
+{id:8,cat:"Algebra",q:"What is the solution to 8^(x+1)=4^(2x−1)?",ch:["1","3","5","7"],ans:"C",exp:"2^(3x+3)=2^(4x−2). Equating: 3x+3=4x−2, x=5."},
+{id:9,cat:"Geometry & Trigonometry",q:"Right prism A ~ prism B. SA(A)=54, SA(B)=1350, Vol(A)=27. What is Vol(B)?",ch:["675","3,375","4,500","13,500"],ans:"B",exp:"SA ratio=25, linear scale=5. Vol(B)=27×125=3,375."},
+{id:10,cat:"Geometry & Trigonometry",q:"The circle x²+8x+y²−12y−29=0 is inscribed in a square. What is the area of the square?",ch:["196","256","324","400"],ans:"C",exp:"(x+4)²+(y−6)²=81. r=9, diameter=18. Area=324."},
+{id:11,cat:"Geometry & Trigonometry",q:"A right cone has volume 324π cu in and base area 81π sq in. What is the slant height?",ch:["13","14","15","16"],ans:"C",exp:"r=9, h=12. Slant=√(81+144)=15."},
+{id:12,cat:"Geometry & Trigonometry",q:"Two concentric circles: a chord of the outer (length 24) is tangent to the inner. What is the annulus area?",ch:["72π","96π","144π","288π"],ans:"C",exp:"R²−r²=144. Area=144π."},
+{id:13,cat:"Geometry & Trigonometry",q:"Sphere A radius 6x, Sphere B radius 9x. Vol(B) is how many times Vol(A)?",ch:["3/2","9/4","27/8","81/16"],ans:"C",exp:"(9x/6x)³=(3/2)³=27/8."},
+{id:14,cat:"Geometry & Trigonometry",q:"Triangle DEF: DE=10, DF=14, ∠D=60°. What is the area?",ch:["35√3","40√3","70","70√3"],ans:"A",exp:"Area=(1/2)(10)(14)sin60°=35√3."},
+{id:15,cat:"Geometry & Trigonometry",q:"tan(θ)=3/4, θ in Quadrant I. What is cos(2θ)?",ch:["−7/25","7/25","9/25","16/25"],ans:"B",exp:"3-4-5 triangle. cos(2θ)=16/25−9/25=7/25."},
+{id:16,cat:"Advanced Math",q:"f(x)=42(0.24)ˣ. f(n) is p% less than f(n−1). What is p?",ch:["24","42","58","76"],ans:"D",exp:"Each step multiplies by 0.24 (keeping 24%), so 76% is lost. p=76."},
+{id:17,cat:"Advanced Math",q:"h(w)=(0.874)^(2w). Decreases by p% for each +1 in w. Closest to p?",ch:["12.6","23.6","25.2","76.4"],ans:"B",exp:"Multiplier=(0.874)²≈0.7639. Decrease≈23.6%. Trap: don't use 1−0.874."},
+{id:18,cat:"Advanced Math",q:"z(w)=(0.829)^(2w). Decreases by p% for each +1 in w. Closest to p?",ch:["0.171","0.829","17.1","31.3"],ans:"D",exp:"(0.829)²≈0.687. Decrease≈31.3%."},
+{id:19,cat:"Advanced Math",q:"g(x)=80(b)ˣ decreases 42% for each +1 in x. What is b?",ch:["0.42","0.48","0.58","0.62"],ans:"C",exp:"Keep 58% each step. b=0.58. Trap: 0.42 is the amount lost, not the multiplier."},
+{id:20,cat:"Advanced Math",q:"When x³−5x²+kx+9 is divided by (x−3), remainder is 12. What is k?",ch:["5","7","9","11"],ans:"B",exp:"f(3)=27−45+3k+9=12 → k=7."},
+{id:21,cat:"Advanced Math",q:"(x−28)(x−c)=(x−28), where c>30. Which are solutions? I. c  II. c+1  III. 28",ch:["I only","III only","II and III only","I, II, and III"],ans:"C",exp:"Factor: (x−28)(x−c−1)=0. Solutions: x=28 and x=c+1. 'c' alone is not a solution."},
+{id:22,cat:"Advanced Math",q:"f⁻¹(7) where f(x)=(3x+1)/(x−1)?",ch:["2","3","4","5"],ans:"A",exp:"Set f(x)=7: 3x+1=7x−7 → x=2."},
+{id:23,cat:"Data Analysis",q:"Parts from A(30%,10% defect), B(45%,5%), C(25%,20%). Given defective, P(from A)?",ch:["24.4%","29.3%","33.3%","36.4%"],ans:"B",exp:"P(defect)=0.1025. P(A|defect)=0.030/0.1025≈29.3%."},
+{id:24,cat:"Data Analysis",q:"The largest of 15 budgets was $10,000 too low; corrected (still largest). Which statistic is guaranteed unchanged?",ch:["Mean","Median","Standard deviation","Range"],ans:"B",exp:"Only the largest value changed and stayed largest. The 8th-position median is unaffected."},
+{id:25,cat:"Data Analysis",q:"Poll of 200, ME=5%. What sample size gives ME=2%?",ch:["320","500","800","1,250"],ans:"D",exp:"ME∝1/√n. Ratio (5/2)²=6.25. New n=200×6.25=1,250."},
+{id:26,cat:"Data Analysis",q:"a:b=4:7 and b:c=14:9. If a+b+c=310, what is c?",ch:["54","63","72","90"],ans:"D",exp:"a:b:c=8:14:9. Total=31 parts. c=9×10=90."},
+{id:27,cat:"Data Analysis",q:"300 people: 180 tea, 120 coffee. 70% tea drinkers over 40, 40% coffee drinkers over 40. P(coffee | over 40)?",ch:["21.5%","27.6%","33.3%","38.1%"],ans:"B",exp:"Over-40: tea=126, coffee=48. Total=174. P=48/174≈27.6%."},
+{id:28,cat:"Data Analysis",q:"Cyclist: 120mi at 30mph, 120mi at 60mph, 120mi at 120mph. Average speed?",ch:["51.4 mph","60 mph","70 mph","75 mph"],ans:"A",exp:"Time=4+2+1=7hr. Average=360/7≈51.4mph. Never average speeds directly."},
+{id:29,cat:"Algebra",q:"A store: Item A=$24, Item B=$36. Customer buys 8 items, spends $240. How many Item B?",ch:["2","3","4","5"],ans:"C",exp:"24(8−b)+36b=240 → 12b=48 → b=4."},
+{id:30,cat:"Geometry & Trigonometry",q:"Square pyramid: base side 16, slant height 17. What is the volume?",ch:["1,180","1,230","1,280","1,330"],ans:"C",exp:"h²+8²=17² → h=15. V=(1/3)(256)(15)=1,280."}
+];
+
+// FLASHCARDS
+const FCS=[
+{topic:"Algebra",term:"Quadratic Formula",def:"x = [−b ± √(b²−4ac)] / 2a\nfor ax² + bx + c = 0"},
+{topic:"Algebra",term:"Vertex of Parabola",def:"x = −b/2a\nPlug back in to find y"},
+{topic:"Algebra",term:"Exponential Base Rule",def:"f(x)=a·bˣ decreases p% per step\n→ b = (1 − p/100)\nNEVER pick p/100 as the base"},
+{topic:"Algebra",term:"Vieta's Formulas",def:"ax²+bx+c=0 with roots r,s:\nsum: r+s = −b/a\nproduct: r×s = c/a"},
+{topic:"Algebra",term:"Difference of Squares",def:"a² − b² = (a+b)(a−b)"},
+{topic:"Geometry",term:"Similar Solids   Ratios",def:"Linear scale = k\nArea ratio = k²\nVolume ratio = k³\nGiven SA ratio, find k = √(SA ratio)"},
+{topic:"Geometry",term:"Intersecting Chords",def:"When two chords cross inside a circle:\na × b = c × d\n(segment × segment = segment × segment)"},
+{topic:"Geometry",term:"Inscribed Angle Theorem",def:"Inscribed angle = ½ × intercepted arc\nCentral angle = full arc"},
+{topic:"Geometry",term:"Geometric Mean (Altitude)",def:"Altitude to hypotenuse:\naltitude² = p × q\n(product of two segments)"},
+{topic:"Geometry",term:"Sector Area",def:"Area = (θ/360) × πr²\nArc length = (θ/360) × 2πr"},
+{topic:"Trigonometry",term:"SOH-CAH-TOA",def:"sin = Opp/Hyp\ncos = Adj/Hyp\ntan = Opp/Adj"},
+{topic:"Trigonometry",term:"Co-function Identity",def:"sin(θ) = cos(90°−θ)\ncos(θ) = sin(90°−θ)"},
+{topic:"Trigonometry",term:"Double Angle: cos(2θ)",def:"cos(2θ) = cos²θ − sin²θ\n= 1 − 2sin²θ\n= 2cos²θ − 1"},
+{topic:"Trigonometry",term:"Pythagorean Identity",def:"sin²θ + cos²θ = 1\n1 + tan²θ = sec²θ"},
+{topic:"Advanced Math",term:"Remainder Theorem",def:"f(x) ÷ (x−a): remainder = f(a)\nJust plug in a. No long division."},
+{topic:"Advanced Math",term:"Inverse Function Shortcut",def:"To find f⁻¹(k):\nset f(x) = k and solve for x.\nDon't derive the full inverse."},
+{topic:"Statistics",term:"Mean vs Median",def:"Mean: changes when ANY value changes\nMedian: changes only if POSITION changes\nSAT always tests this difference"},
+{topic:"Statistics",term:"Margin of Error",def:"ME ∝ 1/√n\nTo halve ME → multiply n by 4\nTo reduce ME by factor k → multiply n by k²"},
+{topic:"Statistics",term:"Conditional Probability",def:"P(A|B) = P(A and B) / P(B)\nDivide by the condition's total,\nNOT the full sample size"},
+{topic:"Statistics",term:"Average Speed",def:"= Total distance / Total time\nNEVER average the speeds directly\nMost common trap on SAT Data Analysis"},
+];
+
+// TICKER
+const TICKER_DATA=["🇳🇬 Nigeria","🇮🇳 India","🇰🇷 South Korea","🇹🇷 Turkey","🇰🇪 Kenya","🇵🇭 Philippines","🇧🇷 Brazil","🇿🇦 South Africa","🇸🇬 Singapore","🇬🇧 United Kingdom","🇩🇪 Germany","🇪🇬 Egypt","🇺🇸 United States","🇨🇦 Canada"];
+
+let pracQ=[],pracIdx=0,pracOk=0,pracTot=0;
+let examQ=[],examIdx=0,examOk=0,examTimer=null;
+let fcIdx=0,fcFlipped=false;
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const tk=document.getElementById('ticker');
+  const items=[...TICKER_DATA,...TICKER_DATA];
+  tk.innerHTML=items.map(c=>`<div class="ticker-item">◆ Students from ${c} studying daily</div>`).join('');
+});
+
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>{p.style.display='none'});
+  const pg=document.getElementById('pg-'+name);
+  if(pg){pg.style.display='block'}
+  window.scrollTo(0,0);
+}
+document.getElementById('pg-home').style.display='block';
+
+// PRACTICE
+function startPrac(cat){
+  let pool=cat==='ALL'?[...PROBS]:PROBS.filter(p=>p.cat===cat);
+  pool.sort(()=>Math.random()-0.5);
+  pracQ=pool.slice(0,10);
+  pracIdx=0;pracOk=0;pracTot=0;
+  document.getElementById('prac-cats').style.display='none';
+  document.getElementById('prac-q').style.display='block';
+  document.getElementById('prac-result').classList.remove('show');
+  showQ();
+}
+function showQ(){
+  if(pracIdx>=pracQ.length){showResult();return;}
+  const q=pracQ[pracIdx];
+  document.getElementById('q-cat').textContent=q.cat;
+  document.getElementById('q-n').textContent=`Q ${pracIdx+1} of ${pracQ.length}`;
+  document.getElementById('q-txt').textContent=q.question||q.q;
+  document.getElementById('prac-prog').style.width=(pracIdx/pracQ.length*100)+'%';
+  document.getElementById('q-expl').classList.remove('show');
+  document.getElementById('next-btn').disabled=true;
+  document.getElementById('q-choices').innerHTML=q.ch.map((c,i)=>{
+    const L='ABCD'[i];
+    return `<button class="choice" onclick="pickAns(this,'${L}','${q.ans}','${q.exp.replace(/'/g,"\\'")}',${q.id})" data-l="${L}"><span class="ch-ltr">${L}</span>${c}</button>`;
+  }).join('');
+  updateScore();
+}
+function pickAns(btn,sel,ans,exp){
+  document.querySelectorAll('.choice').forEach(b=>b.onclick=null);
+  const ok=sel===ans;
+  if(ok){btn.classList.add('ok');pracOk++;}
+  else{btn.classList.add('ng');document.querySelectorAll('.choice').forEach(b=>{if(b.dataset.l===ans)b.classList.add('rev');});}
+  pracTot++;
+  document.getElementById('q-expl-txt').textContent=exp;
+  document.getElementById('q-expl').classList.add('show');
+  document.getElementById('next-btn').disabled=false;
+  updateScore();
+}
+function nextQ(){pracIdx++;showQ();}
+function skipQ(){pracIdx++;showQ();}
+function updateScore(){
+  const t=`${pracOk} / ${pracTot}`;
+  document.getElementById('q-score').textContent=t;
+  document.getElementById('prac-score-hdr').textContent='Score: '+t;
+}
+function showResult(){
+  document.getElementById('prac-q').style.display='none';
+  const rs=document.getElementById('prac-result');
+  rs.classList.add('show');
+  document.getElementById('res-score').textContent=pracOk;
+  document.getElementById('res-tot').textContent='/ '+pracTot;
+  const pct=pracTot>0?Math.round(pracOk/pracTot*100):0;
+  document.getElementById('res-msg').textContent=pct>=80?`${pct}%   you're in great shape.`:pct>=60?`${pct}%   keep going, you're getting there.`:`${pct}%   review the explanations and try again.`;
+}
+function showCats(){
+  document.getElementById('prac-result').classList.remove('show');
+  document.getElementById('prac-q').style.display='none';
+  document.getElementById('prac-cats').style.display='block';
+}
+
+// EXAMS
+function startExam(n){
+  let pool=[...PROBS].sort(()=>Math.random()-0.5).slice(0,22);
+  examQ=pool;examIdx=0;examOk=0;
+  document.getElementById('exam-sel').style.display='none';
+  document.getElementById('exam-q').style.display='block';
+  document.getElementById('exam-result').classList.remove('show');
+  let secs=35*60;
+  if(examTimer)clearInterval(examTimer);
+  examTimer=setInterval(()=>{secs--;const m=Math.floor(secs/60),s=secs%60;const ts=m+':'+(s<10?'0':'')+s;document.getElementById('exam-timer').textContent=ts;document.getElementById('exam-timer-hdr').textContent=ts;if(secs<=0){clearInterval(examTimer);showExamResult();}},1000);
+  showEQ();
+}
+function showEQ(){
+  if(examIdx>=examQ.length){showExamResult();return;}
+  const q=examQ[examIdx];
+  document.getElementById('eq-cat').textContent=q.cat;
+  document.getElementById('eq-n').textContent=`Q ${examIdx+1} of ${examQ.length}`;
+  document.getElementById('eq-txt').textContent=q.question||q.q;
+  document.getElementById('exam-prog').style.width=(examIdx/examQ.length*100)+'%';
+  document.getElementById('eq-expl').classList.remove('show');
+  document.getElementById('eq-next').disabled=true;
+  document.getElementById('eq-choices').innerHTML=q.ch.map((c,i)=>{
+    const L='ABCD'[i];
+    return `<button class="choice" onclick="pickEAns(this,'${L}','${q.ans}','${q.exp.replace(/'/g,"\\'")}'" data-l="${L}"><span class="ch-ltr">${L}</span>${c}</button>`;
+  }).join('');
+}
+function pickEAns(btn,sel,ans,exp){
+  document.querySelectorAll('#eq-choices .choice').forEach(b=>b.onclick=null);
+  if(sel===ans){btn.classList.add('ok');examOk++;}
+  else{btn.classList.add('ng');document.querySelectorAll('#eq-choices .choice').forEach(b=>{if(b.dataset.l===ans)b.classList.add('rev');});}
+  document.getElementById('eq-expl-txt').textContent=exp;
+  document.getElementById('eq-expl').classList.add('show');
+  document.getElementById('eq-next').disabled=false;
+}
+function nextEQ(){examIdx++;showEQ();}
+function showExamResult(){
+  clearInterval(examTimer);
+  document.getElementById('exam-q').style.display='none';
+  document.getElementById('exam-result').classList.add('show');
+  document.getElementById('exam-res-score').textContent=examOk;
+  document.getElementById('exam-res-tot').textContent='/ '+examQ.length;
+  const pct=Math.round(examOk/examQ.length*100);
+  document.getElementById('exam-res-msg').textContent=pct>=80?'Excellent   you\'re scoring at a 700+ level.':pct>=60?'Good progress. Aim for 80%+ next time.':'Review the explanations and try again.';
+}
+function showExamSel(){
+  document.getElementById('exam-result').classList.remove('show');
+  document.getElementById('exam-q').style.display='none';
+  document.getElementById('exam-sel').style.display='block';
+}
+
+// FLASHCARDS
+function renderFC(){
+  const f=FCS[fcIdx];
+  document.getElementById('fc-topic').textContent=f.topic;
+  document.getElementById('fc-term').textContent=f.term;
+  document.getElementById('fc-def').textContent=f.def;
+  document.getElementById('fc-ctr').textContent=`Card ${fcIdx+1} of ${FCS.length}`;
+  const card=document.getElementById('fc');
+  card.classList.remove('flipped');fcFlipped=false;
+}
+document.addEventListener('DOMContentLoaded',renderFC);
+function flipCard(){const card=document.getElementById('fc');fcFlipped=!fcFlipped;card.classList.toggle('flipped',fcFlipped);}
+function nextCard(){fcIdx=(fcIdx+1)%FCS.length;renderFC();}
+function prevCard(){fcIdx=(fcIdx-1+FCS.length)%FCS.length;renderFC();}
+
+// HOMEPAGE PRACTICE (inline on home page)
+let hpQ=[],hpIdx=0,hpOk=0,hpTot=0;
+function homeStartPrac(cat){
+  let pool=cat==='ALL'?[...PROBS]:PROBS.filter(p=>p.cat===cat);
+  pool.sort(()=>Math.random()-0.5);
+  hpQ=pool.slice(0,10);hpIdx=0;hpOk=0;hpTot=0;
+  document.getElementById('home-cats').style.display='none';
+  document.getElementById('home-result').style.display='none';
+  document.getElementById('home-qwrap').style.display='block';
+  homeShowQ();
+}
+function homeShowQ(){
+  if(hpIdx>=hpQ.length){homeShowResult();return;}
+  const q=hpQ[hpIdx];
+  document.getElementById('hp-cat').textContent=q.cat;
+  document.getElementById('hp-n').textContent=`Q ${hpIdx+1} of ${hpQ.length}`;
+  document.getElementById('hp-txt').textContent=q.q;
+  document.getElementById('hp-prog').style.width=(hpIdx/hpQ.length*100)+'%';
+  document.getElementById('hp-expl').classList.remove('show');
+  document.getElementById('hp-next').disabled=true;
+  document.getElementById('hp-choices').innerHTML=q.ch.map((c,i)=>{
+    const L='ABCD'[i];
+    return `<button class="choice" onclick="homePick(this,'${L}','${q.ans}','${q.exp.replace(/'/g,"\\'")}')" data-l="${L}"><span class="ch-ltr">${L}</span>${c}</button>`;
+  }).join('');
+  document.getElementById('hp-score').textContent=`${hpOk} / ${hpTot}`;
+}
+function homePick(btn,sel,ans,exp){
+  document.querySelectorAll('#hp-choices .choice').forEach(b=>b.onclick=null);
+  if(sel===ans){btn.classList.add('ok');hpOk++;}
+  else{btn.classList.add('ng');document.querySelectorAll('#hp-choices .choice').forEach(b=>{if(b.dataset.l===ans)b.classList.add('rev');});}
+  hpTot++;
+  document.getElementById('hp-expl-txt').textContent=exp;
+  document.getElementById('hp-expl').classList.add('show');
+  document.getElementById('hp-next').disabled=false;
+  document.getElementById('hp-score').textContent=`${hpOk} / ${hpTot}`;
+}
+function homeNextQ(){hpIdx++;homeShowQ();}
+function homeShowCats(){
+  document.getElementById('home-qwrap').style.display='none';
+  document.getElementById('home-result').style.display='none';
+  document.getElementById('home-cats').style.display='block';
+}
+function homeShowResult(){
+  document.getElementById('home-qwrap').style.display='none';
+  document.getElementById('home-result').style.display='block';
+  const pct=Math.round(hpOk/hpQ.length*100);
+  document.getElementById('hp-res-score').textContent=hpOk;
+  document.getElementById('hp-res-tot').textContent='/ '+hpQ.length;
+  document.getElementById('hp-res-msg').textContent=pct>=80?`${pct}% - solid work.`:pct>=60?`${pct}% - keep going.`:`${pct}% - review the explanations and retry.`;
+}
+</script>
+</body>
+</html>
